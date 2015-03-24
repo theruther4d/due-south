@@ -1,0 +1,19 @@
+.Leaderboard,
+.TeamLeaderboard {
+  background: $color-lightGrey;
+  color: $color-darkGrey;
+  margin-bottom: $unit-lg;
+
+  .Leaderboard__heading,
+  .TeamLeaderboard__heading {
+    color: $color-darkGrey;
+  }
+}
+
+.LeaderboardItem__skin {
+  background: transparent;
+}
+
+.LeaderboardItem {
+  padding: 0 $unit-sm;
+}

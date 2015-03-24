@@ -1,0 +1,24 @@
+<div class="sidebar">
+
+  <div class="leaderboard" id="topIndividuals"></div>
+  <script>
+    edh.widgets.renderWidget('topIndividuals', 'Leaderboard', {
+      campaignUid: 'us-22',
+      limit: 5,
+      pageSize: 5
+    });
+  </script>
+
+  <div class="leaderboard" id="topTeams"></div>
+  <script>
+    edh.widgets.renderWidget('topTeams', 'TeamLeaderboard', {
+      campaignUid: 'us-22',
+      limit: 5,
+      pageSize: 5
+    });
+  </script>
+
+  <div class="search">
+    {{!-- TODO: Add search widget --}}
+  </div>
+</div>

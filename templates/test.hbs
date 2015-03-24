@@ -1,0 +1,15 @@
+{{> header }}
+  <div class="main-wrapper">
+    {{#each prismic.blog.results }}
+      <p>{{{ data.shortlede.html }}}</p>
+      <small>{{{ data.author.html }}}</small>
+      /{{ data.type.html }}/{{ data.id.html }}/{{ data.slug.html }}.html
+    {{/each}}
+    <div class="home-banner">
+      {{{ prismic.homePage.results.[0].data.banner.html }}}
+    </div>
+    <div class="home-content">
+      {{{ prismic.homePage.results.[0].data.body.html }}}
+    </div>
+  </div>
+{{> footer }}
