@@ -26,7 +26,7 @@ npm install
       "url": "https://your-prismic-repo.cdn.prismic.io/api"
     }
   ```
-  
+
 #### Run Dev
 
 - Run `gulp` in terminal.
@@ -39,6 +39,8 @@ npm install
 
 - Automate uploading to Amazon S3
 - Add share button React widget
-- Add supporter search React widget
 - Organise scss files better
 - Potentially get multi-page set up working
+- Add total donations widget
+- Add total supporters widget
+- Add days remaining widget
