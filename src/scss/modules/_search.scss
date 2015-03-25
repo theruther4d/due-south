@@ -1,0 +1,41 @@
+.search {
+  position: relative;
+  margin-bottom: $unit-lg;
+}
+
+.search__icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.search__input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: $unit-sm $unit-md $unit-sm $unit-xl;
+}
+
+// React widget overrides
+.Overlay-open {
+  position: static;
+}
+
+.SearchInput__input {
+  border-color: $color-mutedGrey;
+}
+
+.SearchPagination__button--right,
+.SearchPagination__button--left {
+  &:hover {
+    border-color: $color-brand1;
+    color: $color-brand1;
+  }
+}
+
+.PageSearchResult__actions {
+  a:hover &,
+  a:focus &,
+  a:hover &:hover {
+    color: $color-brand1;
+  }
+}

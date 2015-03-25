@@ -19,6 +19,13 @@
   </script>
 
   <div class="search">
-    {{!-- TODO: Add search widget --}}
+    <i class="fa fa-search search__icon"></i>
+    <input type="text" class="search__input" id="pageSearchWidget" placeholder="Search for supporters..." />
   </div>
+  <script>
+    edh.widgets.initModal('pageSearchWidget', 'PageSearch', {
+      country: 'us',
+      campaignUid: 'us-22'
+    });
+  </script>
 </div>

@@ -163,6 +163,10 @@ body, html {
 .user-content {
   @extend %left-col;
 
+  > *:first-child {
+    margin-top: 0;
+  }
+
   img, iframe {
     max-width: 100%;
   }
