@@ -37,6 +37,8 @@ npm install
 
 ## TODO
 
+- Update widget library
+- Lock `metalsmith` to 1.3.0 to avoid CLI bug
 - Automate uploading to Amazon S3
 - Add share button React widget
 - Organise scss files better
