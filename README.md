@@ -44,3 +44,5 @@ npm install
 - Add total donations widget
 - Add total supporters widget
 - Add days remaining widget
+- Style blockquotes
+- Remove unused metalsmith npm modules
