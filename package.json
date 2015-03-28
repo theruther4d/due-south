@@ -18,8 +18,6 @@
     "metalsmith-markdown": "^0.2.1",
     "metalsmith-prismic": "^0.7.1",
     "metalsmith-sass": "^0.7.0",
-    "metalsmith-serve": "0.0.3",
-    "metalsmith-templates": "^0.6.0",
-    "metalsmith-watch": "^0.2.0"
+    "metalsmith-templates": "^0.6.0"
   }
 }
