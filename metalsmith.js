@@ -1,7 +1,5 @@
 var _          = require('lodash');
 var Metalsmith = require('metalsmith');
-var serve      = require('metalsmith-serve');
-var watch      = require('metalsmith-watch');
 var templates  = require('metalsmith-templates');
 var Handlebars = require('handlebars');
 var markdown   = require('metalsmith-markdown')
