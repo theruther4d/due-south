@@ -1,0 +1,11 @@
+.ShareButton__btn {
+  background: transparent;
+  border: 1px solid $color-mutedGrey;
+  color: $color-mutedGrey;
+
+  &:hover {
+    background: transparent;
+    color: $color-darkGrey;
+    border-color: $color-darkGrey;
+  }
+}
