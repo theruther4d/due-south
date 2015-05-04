@@ -4,7 +4,10 @@
       {{{ prismic.homePage.results.[0].data.banner.html }}}
     </div>
 
-    {{> funds-raised }}
+    <div class="funds-raised" id="fundsRaisedProgress"></div>
+    <script>
+      edh.widgets.renderWidget('fundsRaisedProgress', 'EntityGoalProgress', { campaignUid: 'us-22', goal: 20000000 });
+    </script>
 
     <div class="row">
       <div class="intro">
@@ -20,9 +23,10 @@
           {{{ prismic.homePage.results.[0].data.short_lede.html }}}
         </div>
         <div class="intro__footer">
-          <a href="#" class="btn btn--tertiary share-btn">
-            <i class="fa fa-share-square-o"></i> Share this campaign
-          </a>
+          <div id="ShareButtonWidget"></div>
+          <script>
+            edh.widgets.renderWidget('ShareButtonWidget', 'ShareButton');
+          </script>
         </div>
       </div>
 
