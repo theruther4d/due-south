@@ -6,7 +6,13 @@ Giving Hubs: Responsive micro-sites created with gulp, metalsmith and prismic.io
 
 #### Install Dependencies
 
-In terminal:
+Install gulp globally if you don't have it already:
+
+```
+npm install -g gulp
+```
+
+Still in terminal:
 
 ```
 git clone https://github.com/everydayhero/metalsmith-prismic-gub.git
@@ -38,7 +44,6 @@ npm install
 ## TODO
 
 - Automate uploading to Amazon S3
-- Add share button React widget
 - Organise scss files better
 - Potentially get multi-page set up working
 - Add total donations widget
