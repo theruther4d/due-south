@@ -44,7 +44,6 @@ npm install
 ## TODO
 
 - Automate uploading to Amazon S3
-- Add share button React widget
 - Organise scss files better
 - Potentially get multi-page set up working
 - Add total donations widget
