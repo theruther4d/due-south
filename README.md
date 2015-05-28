@@ -46,7 +46,4 @@ npm install
 - Automate uploading to Amazon S3
 - Organise scss files better
 - Potentially get multi-page set up working
-- Add total donations widget
-- Add total supporters widget
-- Add days remaining widget
 - Style blockquotes
