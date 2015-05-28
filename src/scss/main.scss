@@ -111,47 +111,6 @@ body, html {
   }
 }
 
-.social-proof {
-  text-align: center;
-
-  > .stat {
-    display: inline-block;
-    padding: $unit-md $unit-sm;
-  }
-
-  .stat__value,
-  .stat__label {
-    display: block;
-  }
-
-  .stat__label {
-    font-size: $size-tiny;
-  }
-
-  .stat__value {
-    font-weight: bold;
-  }
-
-  @include breakpoint(desk) {
-    > .stat {
-      padding: $unit-md $unit-xs;
-    }
-  }
-
-  @include breakpoint(lap) {
-    .stat__value,
-    .stat__label {
-      display: inline;
-    }
-  }
-
-  @include breakpoint(palm) {
-    > .stat {
-      padding: $unit-sm;
-    }
-  }
-}
-
 .donate-btn {
   margin-bottom: $unit-sm;
 }

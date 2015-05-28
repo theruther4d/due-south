@@ -32,18 +32,26 @@
 
       <div class="calls-to-action">
         <div class="social-proof">
-          <div class="donations stat">
-            <div class="stat__value">1,139</div>
-            <div class="stat__label">Donations</div>
-          </div>
-          <div class="supporters stat">
-            <div class="stat__value">882</div>
-            <div class="stat__label">Supporters</div>
-          </div>
-          <div class="days-remaining stat">
-            <div class="stat__value">19</div>
-            <div class="stat__label">Days Remaining</div>
-          </div>
+          <div id="TotalDonationsWidget" class="donations stat"></div>
+          <script>
+            edh.widgets.renderWidget('TotalDonationsWidget', 'TotalDonations', {
+              campaignUid: 'us-22',
+              renderIcon: false
+            });
+          </script>
+          <div id="TotalSupportersWidget" class="supporters stat"></div>
+          <script>
+            edh.widgets.renderWidget('TotalSupportersWidget', 'TotalSupporters', {
+              campaignUid: 'us-22',
+              renderIcon: false
+            });
+          </script>
+          <div id="CountdownWidget" class="countdown stat"></div>
+          <script>
+            edh.widgets.renderWidget('CountdownWidget', 'CountDown', {
+              date: "2017-04-24"
+            });
+          </script>
         </div>
         <a href="#" class="donate-btn btn btn--lg btn--block">Donate Now</a>
         <a href="#" class="register-btn btn btn--lg btn--block btn--tertiary">Register Now</a>
