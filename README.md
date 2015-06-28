@@ -39,11 +39,25 @@ npm install
 - Open `http://localhost:3000` in your browser.
 
 
+#### Publish to S3
+
+- Add a file named `aws.json` to the project root directory. Insert credentials/info based on the following:
+
+  ```json
+    {
+      "key": "YOUR_AWS_KEY",
+      "secret": "YOUR_AWS_SECRET",
+      "bucket": "YOUR_BUCKET_NAME",
+      "region": "YOUR_BUCKET_REGION"
+    }
+  ```
+- Run `gulp publish`
+
+
 ---
 
 ## TODO
 
-- Automate uploading to Amazon S3
 - Organise scss files better
 - Potentially get multi-page set up working
 - Style blockquotes
