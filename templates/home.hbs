@@ -5,9 +5,6 @@
     </div>
 
     <div class="funds-raised" id="fundsRaisedProgress"></div>
-    <script>
-      edh.widgets.renderWidget('fundsRaisedProgress', 'EntityGoalProgress', { campaignUid: 'us-22', goal: 20000000 });
-    </script>
 
     <div class="row">
       <div class="intro">
@@ -24,34 +21,14 @@
         </div>
         <div class="intro__footer">
           <div id="ShareButtonWidget"></div>
-          <script>
-            edh.widgets.renderWidget('ShareButtonWidget', 'ShareButton');
-          </script>
         </div>
       </div>
 
       <div class="calls-to-action">
         <div class="social-proof">
           <div id="TotalDonationsWidget" class="donations stat"></div>
-          <script>
-            edh.widgets.renderWidget('TotalDonationsWidget', 'TotalDonations', {
-              campaignUid: 'us-22',
-              renderIcon: false
-            });
-          </script>
           <div id="TotalSupportersWidget" class="supporters stat"></div>
-          <script>
-            edh.widgets.renderWidget('TotalSupportersWidget', 'TotalSupporters', {
-              campaignUid: 'us-22',
-              renderIcon: false
-            });
-          </script>
           <div id="CountdownWidget" class="countdown stat"></div>
-          <script>
-            edh.widgets.renderWidget('CountdownWidget', 'CountDown', {
-              date: "2017-04-24"
-            });
-          </script>
         </div>
         <a href="#" class="donate-btn btn btn--lg btn--block">Donate Now</a>
         <a href="#" class="register-btn btn btn--lg btn--block btn--tertiary">Register Now</a>

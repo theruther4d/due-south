@@ -1,31 +1,8 @@
 <div class="sidebar">
-
   <div class="leaderboard" id="topIndividuals"></div>
-  <script>
-    edh.widgets.renderWidget('topIndividuals', 'Leaderboard', {
-      campaignUid: 'us-22',
-      limit: 5,
-      pageSize: 5
-    });
-  </script>
-
   <div class="leaderboard" id="topTeams"></div>
-  <script>
-    edh.widgets.renderWidget('topTeams', 'TeamLeaderboard', {
-      campaignUid: 'us-22',
-      limit: 5,
-      pageSize: 5
-    });
-  </script>
-
   <div class="search">
     <i class="fa fa-search search__icon"></i>
     <input type="text" class="search__input" id="pageSearchWidget" placeholder="Search for supporters..." />
   </div>
-  <script>
-    edh.widgets.initModal('pageSearchWidget', 'PageSearch', {
-      country: 'us',
-      campaignUid: 'us-22'
-    });
-  </script>
 </div>

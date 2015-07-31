@@ -6,8 +6,11 @@ var markdown   = require('metalsmith-markdown')
 var prismic    = require('metalsmith-prismic');
 var sass       = require('metalsmith-sass');
 var imagemin   = require('metalsmith-imagemin');
-var fs         = require('fs');
+var webpack    = require('metalsmith-webpack');
+var uglify     = require('metalsmith-uglify');
 var permalinks = require('metalsmith-permalinks');
+var path       = require('path');
+var fs         = require('fs');
 
 // Debug Helper. Type {{ debug }} to log current context.
 Handlebars.registerHelper("debug", function(optionalValue) {
@@ -39,12 +42,23 @@ try {
   };
 }
 
+var webpackConfig = {
+  context: path.resolve(__dirname, './src/js/'),
+  entry: './index.js',
+  output: {
+    path: path.resolve(__dirname, './dist/js/'),
+    filename: 'bundle.js'
+  }
+};
+
 module.exports = function metalSmith(done) {
   Metalsmith(__dirname)
     .clean(false)
     .use(changed())
     .use(prismicTask)
     .use(markdown())
+    .use(webpack(webpackConfig))
+    .use(uglify({ removeOriginal: true }))
     .use(templates('handlebars'))
     .use(sass({
       outputDir: 'css/'
