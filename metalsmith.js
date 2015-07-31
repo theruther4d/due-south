@@ -52,7 +52,7 @@ module.exports = function metalSmith(done) {
         console.log(err);
       } else {
         console.log('Forged!');
-        done();
+        if (typeof done === 'function') done();
       }
     });
 };
