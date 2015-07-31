@@ -10,7 +10,7 @@ var imagemin   = require('metalsmith-imagemin');
 var fs         = require('fs');
 var permalinks = require('metalsmith-permalinks');
 
-module.exports = function metalSmith() {
+module.exports = function metalSmith(done) {
 
   // Debug Helper. Type {{ debug }} to log current context.
   Handlebars.registerHelper("debug", function(optionalValue) {
@@ -52,6 +52,7 @@ module.exports = function metalSmith() {
         console.log(err);
       } else {
         console.log('Forged!');
+        done();
       }
     });
 };

@@ -1,10 +1,12 @@
 {
   "name": "metalsmith-gub",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Giving Hubs: Responsive micro-sites created with gulp, metalsmith and prismic.io.",
   "main": "gulpfile.js",
   "scripts": {
-    "build": "gulp"
+    "start": "gulp",
+    "build": "gulp build",
+    "publish": "gulp publish"
   },
   "author": "everydayhero",
   "license": "ISC",
