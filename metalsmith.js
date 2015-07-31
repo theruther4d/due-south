@@ -1,4 +1,3 @@
-var _          = require('lodash');
 var Metalsmith = require('metalsmith');
 var changed    = require('metalsmith-changed');
 var templates  = require('metalsmith-templates');
@@ -10,8 +9,8 @@ var imagemin   = require('metalsmith-imagemin');
 var fs         = require('fs');
 var permalinks = require('metalsmith-permalinks');
 
-module.exports = function metalSmith(done) {
 
+module.exports = function metalSmith(done) {
   // Debug Helper. Type {{ debug }} to log current context.
   Handlebars.registerHelper("debug", function(optionalValue) {
     console.log("Current Context");
@@ -25,18 +24,27 @@ module.exports = function metalSmith(done) {
   });
 
   // Register all partials in `template/partials`
-  _.each(fs.readdirSync('templates/partials'),function(file) {
+  fs.readdirSync('templates/partials').forEach(function(file) {
     var name = file.split(".")[0];
-    var contents = fs.readFileSync(__dirname+"/templates/partials/"+file).toString();
+    var contents = fs.readFileSync(__dirname + "/templates/partials/" + file).toString();
     Handlebars.registerPartial(name, contents);
   });
 
-  var prismicConfig = JSON.parse(fs.readFileSync('./prismic-config.json'));
+  // If there's a prismic config use it.
+  // Otherwise, run the build without it but show a notice.
+  try {
+    var prismicConfig = JSON.parse(fs.readFileSync('./prismic-config.json'));
+    var prismicTask   = prismic(prismicConfig);
+  } catch(err) {
+    var prismicTask = function() {
+      console.log('Note: Create a prismic-config.json to start pulling content from your Prismic.io repository.');
+    };
+  }
 
   Metalsmith(__dirname)
     .clean(false)
     .use(changed())
-    .use(prismic(prismicConfig))
+    .use(prismicTask)
     .use(markdown())
     .use(templates('handlebars'))
     .use(sass({
