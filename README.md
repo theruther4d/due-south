@@ -1,6 +1,6 @@
 # metalsmith-prismic-gub
 
-Giving Hubs: Responsive micro-sites created with gulp, metalsmith and prismic.io. Build static sites with tools like Handlebars, SASS and Webpack.
+Giving Hubs: Responsive micro-sites created with [Gulp.js](http://gulpjs.com/), [Metalsmith](http://www.metalsmith.io/) and [Prismic.io](https://prismic.io/). Build static sites with [Handlebars](http://handlebarsjs.com/), [SASS](http://sass-lang.com/) and [Webpack](http://webpack.github.io/).
 
 ## Dependencies
 
@@ -35,16 +35,20 @@ Giving Hubs: Responsive micro-sites created with gulp, metalsmith and prismic.io
       "url": "https://your-prismic-repo.cdn.prismic.io/api"
     }
   ```
+4. Use [this gist](https://gist.github.com/slwen/f093c8ac5b6fdd16ecb2) as an example [Document Mask](https://developers.prismic.io/documentation/repository-administrators-manual#document-masks) to get started (or create your own). Refer to [metalsmith-prismic](https://github.com/mbanting/metalsmith-prismic) to learn more working with your own content.
+
+**Note:** If you don't want or need to use Prismic then skip to the next section and feel free to remove references to Prismic from your `metalsmith.js` file and uninstall the Prismic package: `npm uninstall metalsmith-prismic --save-dev`.
 
 #### Run Dev
 
-1. Run the `npm run start` command
+1. Run this command: `npm run start`.
 2. Open `http://localhost:3000` in your browser.
 
-At this point you should have a running site visible in your browser.
-
+At this point you should have a running site visible in your browser. If you skipped the Prismic set up it may be missing content.
 
 ## Publish to S3
+
+This task will automatically upload all of you static files (located in `./dist`) to a designated Amazon S3 bucket. Follow the set up:
 
 1. Add a file named `aws.json` to the project root directory. Insert credentials/info based on the following:
 
@@ -56,7 +60,7 @@ At this point you should have a running site visible in your browser.
       "region": "YOUR_BUCKET_REGION"
     }
   ```
-2. Run `gulp publish`
+2. Run this command `npm run publish`.
 
 **Note:** Keep your AWS key and secret safe! Make sure this file as added to your .gitignore file before pushing your project up to GitHub.
 
