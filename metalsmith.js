@@ -7,7 +7,7 @@ var prismic    = require('metalsmith-prismic');
 var sass       = require('metalsmith-sass');
 var imagemin   = require('metalsmith-imagemin');
 var webpack    = require('metalsmith-webpack');
-var uglify     = require('metalsmith-uglify');
+var optimize   = require('webpack').optimize;
 var permalinks = require('metalsmith-permalinks');
 var path       = require('path');
 var fs         = require('fs');
@@ -24,7 +24,7 @@ Handlebars.registerHelper("debug", function(optionalValue) {
   }
 });
 
-// Register all partials in `template/partials`
+// Register all partials in "./templates/partials".
 fs.readdirSync('templates/partials').forEach(function(file) {
   var name = file.split(".")[0];
   var contents = fs.readFileSync(__dirname + "/templates/partials/" + file).toString();
@@ -48,7 +48,13 @@ var webpackConfig = {
   output: {
     path: path.resolve(__dirname, './dist/js/'),
     filename: 'bundle.js'
-  }
+  },
+  plugins: [
+    new optimize.UglifyJsPlugin({
+      comments: /^remove all comments$/,
+      mangle: true
+    })
+  ]
 };
 
 module.exports = function metalSmith(done) {
@@ -58,7 +64,6 @@ module.exports = function metalSmith(done) {
     .use(prismicTask)
     .use(markdown())
     .use(webpack(webpackConfig))
-    .use(uglify({ removeOriginal: true }))
     .use(templates('handlebars'))
     .use(sass({
       outputDir: 'css/'
