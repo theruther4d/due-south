@@ -1,6 +1,6 @@
 # metalsmith-prismic-gub
 
-Giving Hubs: Responsive micro-sites created with [Gulp.js](http://gulpjs.com/), [Metalsmith](http://www.metalsmith.io/) and [Prismic.io](https://prismic.io/). Build static sites with [Handlebars](http://handlebarsjs.com/), [SASS](http://sass-lang.com/) and [Webpack](http://webpack.github.io/).
+Responsive web sites (or giving hubs) created with [Gulp.js](http://gulpjs.com/), [Metalsmith](http://www.metalsmith.io/) and [Prismic.io](https://prismic.io/). Build static sites with [Handlebars](http://handlebarsjs.com/), [SASS](http://sass-lang.com/) and [Webpack](http://webpack.github.io/).
 
 ## Dependencies
 
@@ -48,7 +48,7 @@ At this point you should have a running site visible in your browser. If you ski
 
 ## Publish to S3
 
-This task will automatically upload all of you static files (located in `./dist`) to a designated Amazon S3 bucket. Follow the set up:
+This task will automatically upload all of your static files (located in `./dist`) to a designated Amazon S3 bucket. Follow the set up:
 
 1. Add a file named `aws.json` to the project root directory. Insert credentials/info based on the following:
 

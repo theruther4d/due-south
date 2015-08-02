@@ -1,7 +1,7 @@
 {
   "name": "metalsmith-gub",
   "version": "0.0.4",
-  "description": "Giving Hubs: Responsive micro-sites created with gulp, metalsmith and prismic.io.",
+  "description": "Responsive web sites (or giving hubs) created with Gulp.js, Metalsmith and Prismic.io.",
   "main": "gulpfile.js",
   "scripts": {
     "setup": "npm install && npm run build",
