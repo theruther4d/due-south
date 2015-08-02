@@ -130,7 +130,7 @@ body, html {
     max-width: 100%;
   }
 
-  // Selects embedded content wrapper div.
+  // Selects embedded content wrapper div (from Prismic.io).
   // Doing this to make video content responsive.
   div[data-oembed-type="embed"] {
     position: relative;

@@ -20,11 +20,11 @@ gulp.task('watch', function(){
   gulp.watch('./templates/**/*', ['build']);
 });
 
-gulp.task('build', function() {
-  require('./metalsmith')();
+gulp.task('build', function(callback) {
+  require('./metalsmith')(callback);
 });
 
-gulp.task('publish', function() {
+gulp.task('publish', ['build'], function() {
   var aws       = JSON.parse(fs.readFileSync('./aws.json'));
   var headers   = { 'Cache-Control': 'max-age=315360000, no-transform, public' };
   var publisher = awspublish.create({
