@@ -35,7 +35,7 @@ Responsive web sites (or giving hubs) created with [Gulp.js](http://gulpjs.com/)
       "url": "https://your-prismic-repo.cdn.prismic.io/api"
     }
   ```
-4. Use [this gist](https://gist.github.com/slwen/f093c8ac5b6fdd16ecb2) as an example [Document Mask](https://developers.prismic.io/documentation/repository-administrators-manual#document-masks) to get started (or create your own). Refer to [metalsmith-prismic](https://github.com/mbanting/metalsmith-prismic) to learn more working with your own content.
+4. Use [this gist](https://gist.github.com/slwen/f093c8ac5b6fdd16ecb2) as an example [Document Mask](https://developers.prismic.io/documentation/repository-administrators-manual#document-masks) to get started (or create your own). Refer to [metalsmith-prismic](https://github.com/mbanting/metalsmith-prismic) to learn more about working with your own content.
 
 **Note:** If you don't want or need to use Prismic then skip to the next section and feel free to remove references to Prismic from your `metalsmith.js` file and uninstall the Prismic package: `npm uninstall metalsmith-prismic --save-dev`.
 
@@ -62,7 +62,7 @@ This task will automatically upload all of your static files (located in `./dist
   ```
 2. Run this command `npm run publish`.
 
-**Note:** Keep your AWS key and secret safe! Make sure this file as added to your .gitignore file before pushing your project up to GitHub.
+**Note:** Keep your AWS key and secret safe! Make sure this file is added to your .gitignore file before pushing your project up to GitHub.
 
 
 ## Commands
