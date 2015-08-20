@@ -1,6 +1,7 @@
 var Metalsmith = require('metalsmith');
 var changed    = require('metalsmith-changed');
 var templates  = require('metalsmith-templates');
+var partials   = require('metalsmith-register-partials');
 var Handlebars = require('handlebars');
 var markdown   = require('metalsmith-markdown')
 var prismic    = require('metalsmith-prismic');
@@ -22,13 +23,6 @@ Handlebars.registerHelper("debug", function(optionalValue) {
     console.log("====================");
     console.log(optionalValue);
   }
-});
-
-// Register all partials in "./templates/partials".
-fs.readdirSync('templates/partials').forEach(function(file) {
-  var name = file.split(".")[0];
-  var contents = fs.readFileSync(__dirname + "/templates/partials/" + file).toString();
-  Handlebars.registerPartial(name, contents);
 });
 
 // If there's a prismic config use it.
@@ -64,6 +58,9 @@ module.exports = function metalSmith(done) {
     .use(prismicTask)
     .use(markdown())
     .use(webpack(webpackConfig))
+    .use(partials({
+      directory: 'templates/partials'
+    }))
     .use(templates('handlebars'))
     .use(sass({
       outputDir: 'css/'
