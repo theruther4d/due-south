@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-gub",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Responsive web sites (or giving hubs) created with Gulp.js, Metalsmith and Prismic.io.",
   "main": "gulpfile.js",
   "scripts": {
