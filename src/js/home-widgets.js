@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var campaignUids = require('./campaigns');
 
@@ -21,6 +21,6 @@ module.exports = function() {
   });
 
   edh.widgets.renderWidget('CountdownWidget', 'CountDown', {
-    date: "2017-04-24"
+    date: '2017-04-24'
   });
 };
