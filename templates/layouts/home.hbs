@@ -1,0 +1,48 @@
+{{> header }}
+  <div class="main-wrapper">
+    <div class="main-banner">
+      {{{ prismic.homePage.results.[0].data.banner.html }}}
+    </div>
+
+    <div class="funds-raised" id="fundsRaisedProgress"></div>
+
+    <div class="row">
+      <div class="intro">
+        <div class="intro__header">
+          <div class="intro__title">
+            {{{ prismic.homePage.results.[0].data.title.html }}}
+          </div>
+          <div class="intro__subtitle">
+            {{{ prismic.homePage.results.[0].data.subtitle.html }}}
+          </div>
+        </div>
+        <div class="intro__body">
+          {{{ prismic.homePage.results.[0].data.short_lede.html }}}
+        </div>
+        <div class="intro__footer">
+          <div id="ShareButtonWidget"></div>
+        </div>
+      </div>
+
+      <div class="calls-to-action">
+        <div class="social-proof">
+          <div id="TotalDonationsWidget" class="donations stat"></div>
+          <div id="TotalSupportersWidget" class="supporters stat"></div>
+          <div id="CountdownWidget" class="countdown stat"></div>
+        </div>
+        <a href="#" class="donate-btn btn btn--lg btn--block">Donate Now</a>
+        <a href="#" class="register-btn btn btn--lg btn--block btn--tertiary">Register Now</a>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="user-content">
+        {{{ prismic.homePage.results.[0].data.content.html }}}
+      </div>
+
+      {{> sidebar }}
+    </div>
+  </div>
+{{> footer }}

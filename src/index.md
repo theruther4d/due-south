@@ -1,6 +1,6 @@
 ---
 title: Home
-template: home.hbs
+layout: home.hbs
 permalink: false
 prismic:
   homePage:

@@ -1,17 +1,18 @@
-var Metalsmith = require('metalsmith');
-var changed    = require('metalsmith-changed');
-var templates  = require('metalsmith-templates');
-var partials   = require('metalsmith-register-partials');
-var Handlebars = require('handlebars');
-var markdown   = require('metalsmith-markdown')
-var prismic    = require('metalsmith-prismic');
-var sass       = require('metalsmith-sass');
-var imagemin   = require('metalsmith-imagemin');
-var webpack    = require('metalsmith-webpack');
-var optimize   = require('webpack').optimize;
-var permalinks = require('metalsmith-permalinks');
-var path       = require('path');
-var fs         = require('fs');
+var Metalsmith  = require('metalsmith');
+var changed     = require('metalsmith-changed');
+var inPlace     = require('metalsmith-in-place');
+var layouts     = require('metalsmith-layouts');
+var collections = require('metalsmith-collections');
+var Handlebars  = require('handlebars');
+var markdown    = require('metalsmith-markdown')
+var prismic     = require('metalsmith-prismic');
+var sass        = require('metalsmith-sass');
+var imagemin    = require('metalsmith-imagemin');
+var webpack     = require('metalsmith-webpack');
+var optimize    = require('webpack').optimize;
+var permalinks  = require('metalsmith-permalinks');
+var path        = require('path');
+var fs          = require('fs');
 
 // Debug Helper. Type {{ debug }} to log current context.
 Handlebars.registerHelper("debug", function(optionalValue) {
@@ -56,17 +57,28 @@ module.exports = function metalSmith(done) {
     .clean(false)
     .use(changed())
     .use(prismicTask)
-    .use(markdown())
     .use(webpack(webpackConfig))
-    .use(partials({
-      directory: 'templates/partials'
+    .use(inPlace({
+      engine: 'handlebars',
+      partials: 'templates/partials',
+      pattern: '**/*.md'
     }))
-    .use(templates('handlebars'))
-    .use(sass({
-      outputDir: 'css/'
+    .use(markdown())
+    .use(collections({
+      pages: {
+        pattern: 'src/pages/*.md'
+      }
+    }))
+    .use(layouts({
+      engine: 'handlebars',
+      directory: 'templates/layouts',
+      partials: 'templates/partials'
     }))
     .use(permalinks({
       pattern: ':title'
+    }))
+    .use(sass({
+      outputDir: 'css/'
     }))
     .use(imagemin())
     .destination('./dist') 

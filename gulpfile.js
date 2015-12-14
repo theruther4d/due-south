@@ -1,10 +1,15 @@
 var gulp        = require("gulp");
 var browserSync = require('browser-sync');
 var awspublish  = require('gulp-awspublish');
+var rimraf      = require('rimraf');
 var fs          = require('fs');
 
-gulp.task('default', ['server', 'watch'], function() {
+gulp.task('default', ['clean', 'server', 'watch'], function() {
   require('./metalsmith')();
+});
+
+gulp.task('clean', function(callback){
+  rimraf('./dist', callback);
 });
 
 gulp.task('server', function () {
@@ -18,9 +23,10 @@ gulp.task('server', function () {
 gulp.task('watch', function(){
   gulp.watch('./src/**/*', ['build']);
   gulp.watch('./templates/**/*', ['build']);
+  gulp.watch('./layouts/**/*', ['build']);
 });
 
-gulp.task('build', function(callback) {
+gulp.task('build', ['clean'], function(callback) {
   require('./metalsmith')(callback);
 });
 
