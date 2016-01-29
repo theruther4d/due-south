@@ -119,7 +119,7 @@ module.exports = function metalSmith(done) {
       outputDir: 'css/'
     }))
     .use(imagemin())
-    .destination('./dist') 
+    .destination('./') 
     .build(function(err, files) {
       if (err) {
         console.log(err);
