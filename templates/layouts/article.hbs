@@ -3,11 +3,8 @@
     <h1>Stuff</h1>
     <ul>
     {{#each prismic.articles.results }}
-        <li>
-            <a href="/articles/{{slug}}">
-                {{{data.title.html}}}
-            </a>
-        </li>
+        {{{data.title.html}}}
+        {{{data.body.html}}}
     {{/each}}
     </ul>
 {{> footer }}

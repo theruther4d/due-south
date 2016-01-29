@@ -4,7 +4,7 @@
   "description": "Responsive web sites (or giving hubs) created with Gulp.js, Metalsmith and Prismic.io.",
   "main": "gulpfile.js",
   "scripts": {
-    "setup": "npm install && npm run build",
+    "setup": "npm install --registry  https://registry.npmjs.org/ && npm run build",
     "start": "gulp",
     "build": "gulp build",
     "publish": "gulp publish"
