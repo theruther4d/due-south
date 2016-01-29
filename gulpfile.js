@@ -13,8 +13,8 @@ gulp.task('clean', function(callback){
 });
 
 gulp.task('server', function () {
-  return browserSync.init(['dist/**/*'], {
-    server: { baseDir: './dist' },
+  return browserSync.init(['./**/*'], {
+    server: { baseDir: './' },
     open: false,
     notify: false
   });
