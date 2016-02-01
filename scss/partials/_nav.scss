@@ -6,6 +6,11 @@ $nav-height: 40px;
 
     &__utilities {
         position: relative;
+        width: 100%;
+        max-width: 1000px;
+        padding: 0 20px;
+        margin: 0 auto;
+        height: 40px;
 
         &__item {
             display: block;
@@ -18,11 +23,11 @@ $nav-height: 40px;
             &--logo {
                 // background: url( '../img/logo.png' ) center center/100% no-repeat;
                 background: url( '../img/logo__icon.png' ) center center/auto 24px no-repeat;
-                left: 0;
+                left: 10px;
             }
 
             &--hamburger {
-                right: 0;
+                right: 12px;
                 background: url( '../img/hamburger.png' ) center center/24px no-repeat;
             }
         }
