@@ -1,0 +1,18 @@
+.h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.8rem;
+}
+
+.h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.4rem;
+    margin-bottom: 20px;
+}
+
+h1 {
+    @extend .h1;
+}
+
+h2 {
+    @extend .h2;
+}
