@@ -1,4 +1,5 @@
 $primary: #bef4d9;
+$primary: #e2bb71;
 $text: darken( $primary, 75 );
 
 *,
@@ -13,12 +14,12 @@ html {
     -webkit-font-smoothing: antialiased;
     font-size: 62.5%;
     color: $text;
+    // background: url( '../img/header.jpg' ) left top/600px auto no-repeat;
 }
 
 html,
 body {
     width: 100%;
-    height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
@@ -29,8 +30,4 @@ body {
     max-width: 1000px;
     padding: 0 20px;
     margin: 0 auto;
-}
-
-.nav {
-    font-size: 1.6rem;
 }
