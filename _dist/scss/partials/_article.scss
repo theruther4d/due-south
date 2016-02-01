@@ -1,0 +1,16 @@
+/*main*/.article {
+
+    &__header {
+
+        &__title {
+            display: block;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    }
+
+    &__content {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+}
