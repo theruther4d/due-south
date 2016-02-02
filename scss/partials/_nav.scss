@@ -6,11 +6,8 @@ $nav-height: 40px;
 
     &__utilities {
         position: relative;
-        width: 100%;
-        max-width: 1000px;
-        padding: 0 20px;
-        margin: 0 auto;
-        height: 40px;
+        height: 40px;        
+        @include contentContainer();
 
         &__item {
             display: block;
