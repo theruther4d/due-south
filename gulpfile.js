@@ -53,12 +53,12 @@ gulp.task( 'default', ['clean'], function() {
             // Loop through each document returned
             // for this collection type:
             res.forEach( function( doc ) {
-
+                
                 // Create the collection files:
                 gulp.src( templateDir + '/' + collection.template )
                     .pipe( include( includeSettings ) )
                     .pipe( ejs({
-                        prismic: doc
+                        prismic: prismic.formatDoc( doc )
                     }))
                     .pipe( rename( 'index.html' ) )
                     .pipe( gulp.dest( './_build/' + collection.linkResolver( null, doc, false ) ) );
