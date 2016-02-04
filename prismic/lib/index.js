@@ -22,43 +22,12 @@ module.exports = {
             });
 
             }, null );
-    },
-
-    /*
-    ** Formats the document so that it's easier to use:
-    **
-    ** @param {object} doc : the document to be formatted
-    */
-    formatDoc: function( doc, linkResolver, htmlSerializer ) {
-        var formattedData       = {},
-            formattedFragments  = {};
-
-        // Format the doc.data object:
-        Object.keys( doc.data ).forEach( function( oldAttributeName ) {
-            // Remove the extra identifier from each attribute in doc.data,
-            // ex: articles.title => title
-            var newAttributeName = oldAttributeName.substr( oldAttributeName.lastIndexOf( '.' ) + 1 );
-            formattedData[newAttributeName] = doc.data[oldAttributeName];
-        });
-
-        // Format the doc.fragments object:
-        Object.keys( doc.fragments ).forEach( function( oldFragmentName ) {
-            // Remove the extra identifier from each attribute in doc.fragments,
-            // ex: articles.body => body
-            var newFragmentName = oldFragmentName.substr( oldFragmentName.lastIndexOf( '.' ) + 1 );
-
-            formattedFragments[newFragmentName] = {
-                json: doc.fragments[oldFragmentName],
-                html: doc.fragments[oldFragmentName].asHtml( linkResolver, htmlSerializer )
-            };
-        });
-
-        // Update the doc:
-        doc.data        = formattedData;
-        doc.fragments   = formattedFragments;
-
-        return doc;
     }
+
+    // TODO:
+    // ~~~~~~
+    // - generate tag files
+    //
 };
 
 // function plugin( config ) {

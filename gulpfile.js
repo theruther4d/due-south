@@ -63,8 +63,6 @@ gulp.task( 'default', ['clean'], function() {
                 gulp.src( templateDir + '/' + collection.template )
                     .pipe( include( includeSettings ) )
                     .pipe( ejs({
-                        // prismic: prismic.formatDoc( doc, linkResolver, htmlSerializer )
-                        // myDoc: doc
                         doc: doc
                     }))
                     .pipe( rename( 'index.html' ) )
