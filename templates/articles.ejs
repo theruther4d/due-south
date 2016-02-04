@@ -1,11 +1,11 @@
 <%- include( 'partials/header.ejs' ) %>
 
     <h1><%= doc.getText( 'articles.title' ); %></h1>
-    <!-- It's a sliceZone!! -->
+
     <div class="body">
         <% ( doc.getSliceZone( 'articles.body' ).slices ).forEach( function( slice, idx ) { %>
-            <% if( slice.sliceType == 'text' ) { %>
-            <% } %>
+            // Automatic slice template includes:
+            <%- include( 'partials/' + slice.sliceType + 'Slice.ejs', { slice: slice } ); %>
         <% }); %>
     </div>
 

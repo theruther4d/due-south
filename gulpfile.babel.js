@@ -15,11 +15,11 @@ var prismicConfig = {
                 return '#broken';
             }
 
-            return '/articles/' + doc.slug;
+            return `/articles/${doc.slug}`;
         },
         htmlSerializer: function( elem, content ) {
             if (elem.type == "paragraph") {
-                return '<p class="test-p-class">' + content + '</p>';
+                return `<p class="test-p-class">${content}</p>`;
             }
         }
     },
@@ -31,7 +31,7 @@ var prismicConfig = {
                 return '#broken'
             }
 
-            return '/my-pages/' + doc.slug;
+            return `/my-pages/${doc.slug}`;
         }
     }
 };
@@ -50,13 +50,14 @@ gulp.task( 'default', ['clean'], function() {
             // Loop through each document returned
             // for this collection type:
             res.forEach( function( doc ) {
+                
                 // Create the collection files:
-                gulp.src( templateDir + '/' + collection.template )
+                gulp.src( `${templateDir}/${collection.template}` )
                     .pipe( ejs({
                         doc: doc
                     }))
                     .pipe( rename( 'index.html' ) )
-                    .pipe( gulp.dest( './_build/' + collection.linkResolver( null, doc, false ) ) );
+                    .pipe( gulp.dest( `./_build/${collection.linkResolver( null, doc, false )}` ) );
             });
         });
     });

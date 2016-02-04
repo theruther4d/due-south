@@ -9,6 +9,8 @@
   "author": "Josh Rutherford <joshua.rutherford1@gmail.com> (http://codepen.io/the_ruther4d)",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
     "del": "^2.2.0",
     "ejs": "^2.4.1",
     "gulp": "^3.9.0",
