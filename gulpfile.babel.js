@@ -63,12 +63,13 @@ gulp.task( 'default', ['clean'], function() {
                 // Create the collection files:
                 gulp.src( `${templateDir}/${collection.template}` )
                     .pipe( ejs({
-                        doc: doc
+                        doc: doc,
+                        makeImgix: function( path ) {
+                            var client  = new ImgixClient( 'duesouth.imgix.net', '6ih02wIhvbKTrQ9t' );
+
+                            return client.path( path ).toUrl().toString();
+                        }
                     }))
-                    .pipe( replace(
-                        /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g,
-                        '<img src="' + createImage( '$1' ) + '" />' // Do the imgix stuff here with the match
-                    ))
                     .pipe( rename( 'index.html' ) )
                     .pipe( gulp.dest( `./_build/${collection.linkResolver( null, doc, false )}` ) );
             });
