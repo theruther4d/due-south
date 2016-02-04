@@ -16,12 +16,14 @@ module.exports = {
     */
     getAllDocuments: function( callback ) {
         Prismic.Api( 'https://due-south.prismic.io/api', function( err, api ) {
+
             // Generate Collections:
             api.form( 'everything' )
                 .ref( api.master() )
                 .submit( function( err, res ) {
+
                     // Get rid of extranneous stuff:
-                    res     = res.results;
+                    res = res.results;
 
                     // Sort the documents:
                     res.forEach( function( doc ) {
@@ -29,10 +31,36 @@ module.exports = {
                         // By Tag:
                         if( doc.tags.length ) {
                             doc.tags.forEach( function( tag ) {
-                                if( module.exports.everything.tags.hasOwnProperty( tag ) ) {
-                                    module.exports.everything.tags[tag].push( doc );
-                                } else {
-                                    module.exports.everything.tags[tag] = [ doc ];
+
+                                // If tags.articles exists
+                                if( module.exports.everything.tags.hasOwnProperty( doc.type ) ) {
+
+                                    // If tags.articles.paint exists
+                                    if( module.exports.everything.tags[doc.type].hasOwnProperty( tag ) ) {
+
+                                        // Put the current doc into tags.articles.paint
+                                        module.exports.everything.tags[doc.type][tag].push( doc );
+                                    }
+
+                                    // If tags.articles.paint doesn't exist:
+                                    else {
+
+                                        // Create tags.articles.paint:
+                                        module.exports.everything.tags[doc.type][tag] = {};
+
+                                        // Put the current doc into tags.articles.paint:
+                                        module.exports.everything.tags[doc.type][tag] = [ doc ];
+                                    }
+                                }
+
+                                // If tags.articles doesn't exist:
+                                else {
+
+                                    // Create tags.articles:
+                                    module.exports.everything.tags[doc.type] = {};
+
+                                    // Put the current doc into tags.articles.paint:
+                                    module.exports.everything.tags[doc.type][tag] = [ doc ];
                                 }
                             });
                         }
@@ -46,7 +74,6 @@ module.exports = {
 
                     });
 
-                    console.log( module.exports.everything );
                     callback( module.exports.everything );
                 });
 
@@ -60,18 +87,21 @@ module.exports = {
     ** @param {function}    callback    :  function to execute on completion
     */
     getDocumentsByType: function( type, callback ) {
-        Prismic.Api( 'https://due-south.prismic.io/api', function( err, api ) {
+        module.exports.getAllDocuments( function( res ) {
+            callback( res.collections[type] );
+        });
+    },
 
-            var promise = new Promise( function( resolve, reject ) {
-                // Generate Collections:
-                api.form( 'everything' )
-                    .ref( api.master() )
-                    .query( Prismic.Predicates.at( 'document.type', type ) )
-                    .submit( function( err, res ) {
-                        resolve( callback( res.results ) );
-                    });
-            });
-
-        }, null );
+    /*
+    ** Gets all documents ordered by tag
+    **
+    ** @param   {string}        type        :  the type of document to get tags for
+    ** @param   {function}      callback    :  function to execute on completion
+    ** @return  {object}        return      :  { tagname: [ doc, doc, doc ], tagname: [ doc, doc, doc ] }
+    */
+    getTaggedDocuments: function( type, callback ) {
+        module.exports.getAllDocuments( function( res ) {
+            callback( res.tags[type] );
+        });
     }
 };

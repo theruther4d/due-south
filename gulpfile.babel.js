@@ -114,3 +114,9 @@ gulp.task( 'serve', function() {
         }
     });
 });
+
+gulp.task( 'bozo', function( done ) {
+    prismic.getTaggedDocuments( 'articles', function( res ) {
+        done();
+    });
+});
