@@ -57,10 +57,6 @@ module.exports = {
         doc.data        = formattedData;
         doc.fragments   = formattedFragments;
 
-        console.log( '=========' );
-        console.log( formattedFragments );
-        console.log( '=========' );
-
         return doc;
     }
 };

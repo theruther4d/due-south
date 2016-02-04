@@ -1,6 +1,5 @@
 @include( 'header.ejs' )
 
-    <h1>This is an article template</h1>
-    <h2>The id is: <%= prismic.id %></h2>
+    <h1><%= prismic.fragments.title.json.blocks[0].text %></h1>
 
 @include( 'footer.ejs' )

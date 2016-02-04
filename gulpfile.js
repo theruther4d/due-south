@@ -17,10 +17,9 @@ var prismicConfig = {
                 return '#broken';
             }
 
-            return '/articles/' + doc.slug + '/index.html';
+            return '/articles/' + doc.slug;
         },
         htmlSerializer: function( elem, content ) {
-            console.log( elem.type );
             if (elem.type == "paragraph") {
                 return '<p class="test-p-class">' + content + '</p>';
             }
@@ -34,7 +33,7 @@ var prismicConfig = {
                 return '#broken'
             }
 
-            return '/my-pages/' + doc.slug + '/index.html';
+            return '/my-pages/' + doc.slug;
         }
     }
 };
@@ -52,7 +51,6 @@ var includeSettings = {
 gulp.task( 'default', ['clean'], function() {
     // Loop through each collection type:
     Object.keys( prismicConfig ).forEach( function( collectionName ) {
-        console.log( 'Request for ', collectionName );
         prismic.getDocumentsByType( collectionName, function( res ) {
             var collection          = prismicConfig[collectionName],
                 linkResolver        = collection.linkResolver || null,
