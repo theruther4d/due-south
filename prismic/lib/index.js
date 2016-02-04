@@ -1,6 +1,13 @@
 var Prismic     = require('prismic.io').Prismic;
 
 module.exports = {
+    /*
+    ** Where we'll store tags as we encounter them:
+    */
+    everything: {
+        collections: {},
+        tags: {}
+    },
 
     /*
     ** Gets all documents:
@@ -9,25 +16,38 @@ module.exports = {
     */
     getAllDocuments: function( callback ) {
         Prismic.Api( 'https://due-south.prismic.io/api', function( err, api ) {
-
             // Generate Collections:
             api.form( 'everything' )
                 .ref( api.master() )
                 .submit( function( err, res ) {
                     // Get rid of extranneous stuff:
-                    var sorted  = {};
-                        res     = res.results;
+                    res     = res.results;
 
+                    // Sort the documents:
                     res.forEach( function( doc ) {
-                        if( sorted[doc.type] ) {
-                            sorted[doc.type].push( doc );
-                        } else {
-                            sorted[doc.type] = [ doc ];
+
+                        // By Tag:
+                        if( doc.tags.length ) {
+                            doc.tags.forEach( function( tag ) {
+                                if( module.exports.everything.tags.hasOwnProperty( tag ) ) {
+                                    module.exports.everything.tags[tag].push( doc );
+                                } else {
+                                    module.exports.everything.tags[tag] = [ doc ];
+                                }
+                            });
                         }
+
+                        // By Type:
+                        if( module.exports.everything.collections.hasOwnProperty( doc.type ) ) {
+                            module.exports.everything.collections[doc.type].push( doc );
+                        } else {
+                            module.exports.everything.collections[doc.type] = [ doc ];
+                        }
+
                     });
 
-                    console.log( sorted );
-                    callback( sorted );
+                    console.log( module.exports.everything );
+                    callback( module.exports.everything );
                 });
 
         }, null );
@@ -54,9 +74,4 @@ module.exports = {
 
         }, null );
     }
-
-    // TODO:
-    // ~~~~~~
-    // - generate tag files
-    //
 };
