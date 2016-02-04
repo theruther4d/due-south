@@ -1,11 +1,9 @@
 // Get all our gulp needs:
 var gulp        = require( 'gulp' );
-var include     = require( 'gulp-file-include' );
 var rename      = require( 'gulp-rename' );
 var ejs         = require( 'gulp-ejs' );
 var del         = require( 'del' );
 var prismic     = require( './prismic' );
-var each        = require('async').each;
 
 // Prismic config:
 var prismicConfig = {
@@ -40,13 +38,6 @@ var prismicConfig = {
 
 // Path Variables:
 var templateDir = './templates';
-var partialDir = './partials';
-
-// Setup includes:
-var includeSettings = {
-    prefix: '@',
-    basepath: partialDir
-};
 
 gulp.task( 'default', ['clean'], function() {
     // Loop through each collection type:
@@ -61,7 +52,6 @@ gulp.task( 'default', ['clean'], function() {
             res.forEach( function( doc ) {
                 // Create the collection files:
                 gulp.src( templateDir + '/' + collection.template )
-                    .pipe( include( includeSettings ) )
                     .pipe( ejs({
                         doc: doc
                     }))

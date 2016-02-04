@@ -9,12 +9,10 @@
   "author": "Josh Rutherford <joshua.rutherford1@gmail.com> (http://codepen.io/the_ruther4d)",
   "license": "ISC",
   "devDependencies": {
-    "async": "^1.5.2",
     "del": "^2.2.0",
     "ejs": "^2.4.1",
     "gulp": "^3.9.0",
     "gulp-ejs": "^2.0.0",
-    "gulp-file-include": "^0.13.7",
     "gulp-rename": "^1.2.2"
   }
 }
