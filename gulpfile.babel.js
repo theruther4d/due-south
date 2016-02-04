@@ -1,11 +1,14 @@
 // Get all our gulp needs:
 var gulp        = require( 'gulp' );
 var rename      = require( 'gulp-rename' );
-var replace     = require( 'gulp-replace' );
 var ejs         = require( 'gulp-ejs' );
 var del         = require( 'del' );
 var prismic     = require( './prismic' );
 var ImgixClient = require( 'imgix-core-js' );
+var browserSync = require( 'browser-sync' ).create();
+
+// Path Variables:
+var templateDir = './templates';
 
 // Prismic config:
 var prismicConfig = {
@@ -38,17 +41,7 @@ var prismicConfig = {
     }
 };
 
-// Path Variables:
-var templateDir = './templates';
-
-function createImage( path ) {
-    var client  = new ImgixClient( 'duesouth.imgix.net', '6ih02wIhvbKTrQ9t' );
-    console.log( path );
-
-    return client.path( path ).toUrl().toString();
-}
-
-gulp.task( 'default', ['clean'], function() {
+gulp.task( 'collections', function() {
     // Loop through each collection type:
     Object.keys( prismicConfig ).forEach( function( collectionName ) {
         prismic.getDocumentsByType( collectionName, function( res ) {
@@ -66,8 +59,9 @@ gulp.task( 'default', ['clean'], function() {
                         doc: doc,
                         makeImgix: function( path ) {
                             var client  = new ImgixClient( 'duesouth.imgix.net', '6ih02wIhvbKTrQ9t' );
-
-                            return client.path( path ).toUrl().toString();
+                            var url = client.path( path ).toUrl({ w: 400, h: 100}).toString();
+                            console.log( path );
+                            return url;
                         }
                     }))
                     .pipe( rename( 'index.html' ) )
@@ -77,6 +71,22 @@ gulp.task( 'default', ['clean'], function() {
     });
 });
 
+gulp.task( 'scripts', function() {
+    return gulp.src( 'scripts/*' )
+        .pipe( gulp.dest( './_build/scripts' ) );
+});
+
 gulp.task( 'clean', function() {
     del( './_build' );
+});
+
+gulp.task( 'default', ['clean', 'collections', 'scripts'] );
+
+gulp.task( 'serve', function() {
+    browserSync.init({
+        server: {
+            baseDir: '_build',
+            directory: true
+        }
+    });
 });
