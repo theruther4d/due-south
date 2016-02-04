@@ -10,6 +10,12 @@ var browserSync = require( 'browser-sync' ).create();
 // Path Variables:
 var templateDir = './templates';
 
+function makeImgixUrl( path ) {
+    var fileName = path.substr( path.lastIndexOf( '/' ) + 1, path.length - 1 );
+
+    return `https://duesouth.imgix.net/${fileName}`;
+};
+
 // Prismic config:
 var prismicConfig = {
     articles: {
@@ -23,8 +29,8 @@ var prismicConfig = {
             return `/articles/${doc.slug}`;
         },
         htmlSerializer: function( elem, content ) {
-            if (elem.type == "paragraph") {
-                return `<p class="test-p-class">${content}</p>`;
+            if( elem.type == 'image' ) {
+                return `<img class="fluid" src="${makeImgixUrl( elem.url )}" />`;
             }
         }
     },
@@ -57,11 +63,9 @@ gulp.task( 'collections', function() {
                 gulp.src( `${templateDir}/${collection.template}` )
                     .pipe( ejs({
                         doc: doc,
-                        makeImgix: function( path ) {
-                            var fileName = path.substr( path.lastIndexOf( '/' ) + 1, path.length - 1 );
-
-                            return `https://duesouth.imgix.net/${fileName}`;
-                        }
+                        makeImgix: makeImgixUrl,
+                        linkResolver: collection.linkResolver || null,
+                        htmlSerializer: collection.htmlSerializer || null
                     }))
                     .pipe( rename( 'index.html' ) )
                     .pipe( gulp.dest( `./_build/${collection.linkResolver( null, doc, false )}` ) );
