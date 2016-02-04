@@ -47,6 +47,27 @@ var prismicConfig = {
     }
 };
 
+/*
+** Takes every file in the ./src directory and
+** passes it all documents in prismic, then
+** processes with ejs, and puts in ./_build
+*/
+gulp.task( 'src', function( done ) {
+    prismic.getAllDocuments( function( docs ) {
+        gulp.src( 'src/*' )
+            .pipe( ejs({
+                docs: docs
+            }))
+            .pipe( rename({
+                extname: 'html'
+            }))
+            .pipe( gulp.dest( './_build/' ) );
+
+        // Tell gulp that we're finished:
+        done();
+    });
+});
+
 gulp.task( 'collections', function() {
     // Loop through each collection type:
     Object.keys( prismicConfig ).forEach( function( collectionName ) {
