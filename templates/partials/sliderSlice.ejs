@@ -1,0 +1,9 @@
+<div class="slider">
+    <div class="slider__wrapper">
+        <% slice.value.value.forEach( function( slide ) { %>
+            <div class="slider__slide">
+                <img class="slider__slide__image" src="<%= slide.fragments.image.url %>" />
+            </div>
+        <% }); %>
+    </div>
+</div>

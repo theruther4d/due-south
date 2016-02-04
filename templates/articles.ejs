@@ -4,8 +4,10 @@
 
     <div class="body">
         <% ( doc.getSliceZone( 'articles.body' ).slices ).forEach( function( slice, idx ) { %>
-            // Automatic slice template includes:
-            <%- include( 'partials/' + slice.sliceType + 'Slice.ejs', { slice: slice } ); %>
+
+            <!-- Automatic slice template includes: -->
+            <%- include( 'partials/' + slice.sliceType + 'Slice.ejs', { slice: slice, doc: doc } ); %>
+
         <% }); %>
     </div>
 

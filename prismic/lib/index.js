@@ -21,7 +21,7 @@ module.exports = {
                     });
             });
 
-            }, null );
+        }, null );
     }
 
     // TODO:
