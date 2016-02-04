@@ -1,5 +1,13 @@
 @include( 'header.ejs' )
 
-    <h1><%= prismic.fragments.title.json.blocks[0].text %></h1>
+    <h1><%= doc.getText( 'articles.title' ); %></h1>
+    <!-- It's a sliceZone!! -->
+    <div class="body">
+        <% ( doc.getSliceZone( 'articles.body' ).slices ).forEach( function( ctx, idx ) { %>
+            <% if( ctx.sliceType == 'text' ) { %>
+                <% console.log( ctx.value.asHtml() ); %>
+            <% } %>
+        <% }); %>
+    </div>
 
 @include( 'footer.ejs' )
