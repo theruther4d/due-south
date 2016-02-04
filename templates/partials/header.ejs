@@ -6,20 +6,19 @@
         <title>Title</title>
         <script src="../../scripts/imgix.min.js"></script>
         <script>
-        console.log( 'im here!' );
-        imgix.onready( function() {
-            imgix.fluid({
-                fluidClass: 'fluid',
-                // updateOnResize: true,
-                // lazyLoad: true,
-                // updateOnResizeDown: true,
-                // pixelStep: 5,
-                // autoInsertCSSBestPractices: true,
-                onLoad: function( el, url ) {
-                    console.log( 'image loaded: ', url );
-                }
+            imgix.onready( function() {
+                imgix.fluid({
+                    fluidClass: 'fluid',
+                    updateOnResize: true,
+                    lazyLoad: true,
+                    updateOnResizeDown: true,
+                    pixelStep: 5,
+                    autoInsertCSSBestPractices: true,
+                    onLoad: function( el, url ) {
+                        console.log( 'image loaded: ', url );
+                    }
+                });
             });
-        });
         </script>
     </head>
     <body>

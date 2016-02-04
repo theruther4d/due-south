@@ -58,10 +58,9 @@ gulp.task( 'collections', function() {
                     .pipe( ejs({
                         doc: doc,
                         makeImgix: function( path ) {
-                            var client  = new ImgixClient( 'duesouth.imgix.net', '6ih02wIhvbKTrQ9t' );
-                            var url = client.path( path ).toUrl({ w: 400, h: 100}).toString();
-                            console.log( path );
-                            return url;
+                            var fileName = path.substr( path.lastIndexOf( '/' ) + 1, path.length - 1 );
+
+                            return `https://duesouth.imgix.net/${fileName}`;
                         }
                     }))
                     .pipe( rename( 'index.html' ) )
