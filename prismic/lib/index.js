@@ -31,9 +31,7 @@ module.exports = {
     */
     formatDoc: function( doc, linkResolver, htmlSerializer ) {
         var formattedData       = {},
-            formattedFragments  = {},
-            linkResolver        = linkResolver || null,
-            htmlSerializer      = htmlSerializer || null;
+            formattedFragments  = {};
 
         // Format the doc.data object:
         Object.keys( doc.data ).forEach( function( oldAttributeName ) {
@@ -51,7 +49,7 @@ module.exports = {
 
             formattedFragments[newFragmentName] = {
                 json: doc.fragments[oldFragmentName],
-                html: doc.fragments[oldFragmentName].asHtml()
+                html: doc.fragments[oldFragmentName].asHtml( linkResolver, htmlSerializer )
             };
         });
 

@@ -18,6 +18,12 @@ var prismicConfig = {
             }
 
             return '/articles/' + doc.slug + '/index.html';
+        },
+        htmlSerializer: function( elem, content ) {
+            console.log( elem.type );
+            if (elem.type == "paragraph") {
+                return '<p class="test-p-class">' + content + '</p>';
+            }
         }
     },
     pages: {
@@ -48,17 +54,19 @@ gulp.task( 'default', ['clean'], function() {
     Object.keys( prismicConfig ).forEach( function( collectionName ) {
         console.log( 'Request for ', collectionName );
         prismic.getDocumentsByType( collectionName, function( res ) {
-            var collection = prismicConfig[collectionName];
+            var collection          = prismicConfig[collectionName],
+                linkResolver        = collection.linkResolver || null,
+                htmlSerializer      = collection.htmlSerializer || null;
 
             // Loop through each document returned
             // for this collection type:
             res.forEach( function( doc ) {
-                
+
                 // Create the collection files:
                 gulp.src( templateDir + '/' + collection.template )
                     .pipe( include( includeSettings ) )
                     .pipe( ejs({
-                        prismic: prismic.formatDoc( doc )
+                        prismic: prismic.formatDoc( doc, linkResolver, htmlSerializer )
                     }))
                     .pipe( rename( 'index.html' ) )
                     .pipe( gulp.dest( './_build/' + collection.linkResolver( null, doc, false ) ) );
