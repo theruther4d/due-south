@@ -1,9 +1,11 @@
 // Get all our gulp needs:
 var gulp        = require( 'gulp' );
 var rename      = require( 'gulp-rename' );
+var replace     = require( 'gulp-replace' );
 var ejs         = require( 'gulp-ejs' );
 var del         = require( 'del' );
 var prismic     = require( './prismic' );
+var ImgixClient = require( 'imgix-core-js' );
 
 // Prismic config:
 var prismicConfig = {
@@ -39,6 +41,13 @@ var prismicConfig = {
 // Path Variables:
 var templateDir = './templates';
 
+function createImage( path ) {
+    var client  = new ImgixClient( 'duesouth.imgix.net', '6ih02wIhvbKTrQ9t' );
+    console.log( path );
+
+    return client.path( path ).toUrl().toString();
+}
+
 gulp.task( 'default', ['clean'], function() {
     // Loop through each collection type:
     Object.keys( prismicConfig ).forEach( function( collectionName ) {
@@ -50,12 +59,16 @@ gulp.task( 'default', ['clean'], function() {
             // Loop through each document returned
             // for this collection type:
             res.forEach( function( doc ) {
-                
+
                 // Create the collection files:
                 gulp.src( `${templateDir}/${collection.template}` )
                     .pipe( ejs({
                         doc: doc
                     }))
+                    .pipe( replace(
+                        /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g,
+                        '<img src="' + createImage( '$1' ) + '" />' // Do the imgix stuff here with the match
+                    ))
                     .pipe( rename( 'index.html' ) )
                     .pipe( gulp.dest( `./_build/${collection.linkResolver( null, doc, false )}` ) );
             });
