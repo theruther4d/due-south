@@ -1,0 +1,110 @@
+/*main*/.article {
+
+    &__header {
+        position: relative;
+        padding: 80px 0;
+        text-align: center;
+
+        &__title {
+            display: inline-block;
+            position: relative;
+            text-shadow: 2px 2px 0px #FFFFFF;
+
+            @include bp(568px) {
+                margin-bottom: 60px;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    z-index: -1;
+                    width: 100%;
+                    height: 30px;
+                    top: auto;
+                    right: 0;
+                    bottom: -100px;
+                    left: 0;
+                    margin: auto;
+                    border-top: 2px solid $primary;
+                }
+            }
+
+            &:before {
+                content: '';
+                position: absolute;
+                top: 5%;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+                width: 78%;
+                height: 70%;
+                min-height: 80px;
+                border: 2px solid $primary;
+                z-index: -1;
+
+                @include bp(568px) {
+                    width: 100%;
+                    height: 60px;
+                    min-height: 0;
+                    top: auto;
+                    bottom: -100px;
+                    border-width: 2px 0;
+                }
+            }
+        }
+
+    }
+
+    &__content {
+        max-width: 720px;
+        margin: 0 auto;
+        text-align: center;
+
+        .slice[data-slicetype="text"] > p:first-of-type:first-letter {
+            font-size: 10.0rem;
+            line-height: 3.0rem;
+            color: $primary;
+            padding-right: 10px;
+            padding-top: 39px;
+            float: left;
+        }
+
+        img {
+            box-shadow: 0 0 15px 0 rgba( $text, 0.1 ),
+                        0 30px 15px -20px rgba( $text, 0.3 ),
+                        0 20px 10px -10px rgba( $text, 0.1 );
+        }
+
+        h2 {
+            color: $primary;
+            text-align: left;
+        }
+
+        p {
+            text-align: left;
+        }
+
+        /*p*/.block-img {
+            text-align: center;
+            box-shadow: 0 0 15px 0 rgba( $text, 0.1 ),
+                        0 30px 15px -20px rgba( $text, 0.3 ),
+                        0 20px 10px -10px rgba( $text, 0.1 );
+
+            @include bp(590px) {
+                display: inline-block;
+                background: $secondary;
+
+                img {
+                    margin: 30px -30px -30px 30px;
+                }
+            }
+
+        }
+
+        h2 + /*p*/.block-img {
+            margin-top: -30px;
+            position: relative;
+            z-index: -1;
+        }
+    }
+}

@@ -1,0 +1,29 @@
+$primary: #e2bb71;
+$secondary: #bef4d9;
+$text: darken( $primary, 75 );
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Vollkorn', serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 62.5%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    color: $text;
+}
+
+html,
+body {
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.section-content {
+    @include contentContainer();
+}

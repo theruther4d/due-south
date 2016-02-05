@@ -1,14 +1,22 @@
 <%- include( 'partials/header.ejs' ) %>
+    <main class="article">
+        <header class="article__header">
+            <div class="section-content">
+                <h1 class="article__header__title"><%= doc.getText( 'articles.title' ); %></h1>
+            </div>
+        </header>
 
-    <h1><%= doc.getText( 'articles.title' ); %></h1>
+        <div class="article__content">
+            <div class="section-content">
+                <% ( doc.getSliceZone( 'articles.body' ).slices ).forEach( function( slice, idx ) { %>
 
-    <div class="body">
-        <% ( doc.getSliceZone( 'articles.body' ).slices ).forEach( function( slice, idx ) { %>
+                    <!-- Automatic slice template includes: -->
+                    <%- include( 'partials/' + slice.sliceType + 'Slice.ejs', { slice: slice, doc: doc } ); %>
 
-            <!-- Automatic slice template includes: -->
-            <%- include( 'partials/' + slice.sliceType + 'Slice.ejs', { slice: slice, doc: doc } ); %>
+                <% }); %>
+            </div>
+        </div>
 
-        <% }); %>
-    </div>
+    </main>
 
 <%- include( 'partials/footer.ejs' ) %>

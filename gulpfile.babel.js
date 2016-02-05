@@ -6,6 +6,9 @@ var del         = require( 'del' );
 var prismic     = require( './prismic' );
 var ImgixClient = require( 'imgix-core-js' );
 var browserSync = require( 'browser-sync' ).create();
+var scss        = require('gulp-sass');
+var prefix      = require('gulp-autoprefixer');
+var cssMin      = require('gulp-minify-css');
 
 // Path Variables:
 var templateDir = './templates';
@@ -67,7 +70,7 @@ gulp.task( 'src', function( done ) {
                 docs: docs
             }))
             .pipe( rename({
-                extname: 'html'
+                extname: '.html'
             }))
             .pipe( gulp.dest( './_build/' ) );
 
@@ -103,7 +106,7 @@ gulp.task( 'collections', function() {
     });
 });
 
-gulp.task( 'tags', function( done ) {
+gulp.task( 'tags', function() {
     Object.keys( prismicConfig ).forEach( function( collectionName ) {
         var collection = prismicConfig[collectionName];
 
@@ -129,17 +132,32 @@ gulp.task( 'scripts', function() {
         .pipe( gulp.dest( './_build/scripts' ) );
 });
 
+gulp.task( 'css', function() {
+    return gulp.src( './css/scss/main.scss' )
+        .pipe( scss() )
+        .pipe(prefix(['last 2 version', '> 1%', 'ie 8', 'ie 7', 'Firefox > 15'], { cascade: true }))
+        .pipe(cssMin())
+        .pipe(rename('style.css'))
+        .pipe(gulp.dest('./_build/'))
+        .pipe( browserSync.stream() );
+});
+
 gulp.task( 'clean', function() {
     del( './_build' );
 });
 
-gulp.task( 'default', ['clean', 'collections', 'scripts'] );
+gulp.task( 'default', ['clean', 'collections', 'tags', 'src', 'scripts', 'css'] );
 
-gulp.task( 'serve', function() {
-    browserSync.init({
-        server: {
-            baseDir: '_build',
-            directory: true
-        }
-    });
+gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts'], function() {
+  browserSync.init({
+    server: { baseDir: './_build' },
+    open: false,
+    notify: false
+  });
+
+  gulp.watch( "./css/scss/**/*", ['css'] );
+  gulp.watch( "./templates/**/*", ['collections', 'tags'] );
+  gulp.watch( "./src/**/*", ['src'] );
+
+  gulp.watch( "./_build/**/*!(*.css)" ).on( 'change', browserSync.reload );
 });

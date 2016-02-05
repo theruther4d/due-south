@@ -2,6 +2,13 @@
 
     <h1>Articles:</h1>
     <ul>
+        <% docs.collections.articles.forEach( function( article ) { %>
+            <li>
+                <a href="../../articles/<%= article.slug %>">
+                    <%= article.getText( 'articles.title' ); %>
+                </a>
+            </li>
+        <% }); %>
     </ul>
 
 <%- include( '../templates/partials/footer.ejs' ); %>

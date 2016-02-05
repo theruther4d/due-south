@@ -1,0 +1,19 @@
+/*
+** Pass min-width query value in px
+** Example:
+**     @include bp( 420px ) {
+**         ...
+**     }
+*/
+@mixin bp($media) {
+    @media all and (min-width: $media) {
+        @content;
+    }
+}
+
+@mixin contentContainer() {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+    margin: 0 auto;
+}
