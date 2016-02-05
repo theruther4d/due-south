@@ -1,6 +1,6 @@
 $primary: #e2bb71;
 $secondary: #bef4d9;
-$text: darken( $primary, 75 );
+$text: darken( $primary, 50 );
 
 *,
 *:before,
@@ -9,18 +9,26 @@ $text: darken( $primary, 75 );
 }
 
 html {
-    font-family: 'Vollkorn', serif;
+    // font-family: 'Vollkorn', serif;
+    font-family: system, -apple-system, BlinkMacSystemFon, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 300;
     -webkit-font-smoothing: antialiased;
     font-size: 62.5%;
     height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    color: $text;
+    background: $secondary;
 }
 
 html,
 body {
     width: 100%;
     -webkit-overflow-scrolling: touch;
+}
+
+body {
+    background: #FFFFFF;
 }
 
 .section-content {

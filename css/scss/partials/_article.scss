@@ -8,7 +8,7 @@
         &__title {
             display: inline-block;
             position: relative;
-            text-shadow: 2px 2px 0px #FFFFFF;
+            // text-shadow: 2px 2px 0px #FFFFFF;
 
             @include bp(568px) {
                 margin-bottom: 60px;
@@ -39,7 +39,8 @@
                 width: 78%;
                 height: 70%;
                 min-height: 80px;
-                border: 2px solid $primary;
+                // border: 2px solid $primary;
+                // background: $secondary;
                 z-index: -1;
 
                 @include bp(568px) {
@@ -60,51 +61,25 @@
         margin: 0 auto;
         text-align: center;
 
-        .slice[data-slicetype="text"] > p:first-of-type:first-letter {
-            font-size: 10.0rem;
-            line-height: 3.0rem;
-            color: $primary;
-            padding-right: 10px;
-            padding-top: 39px;
-            float: left;
-        }
-
         img {
-            box-shadow: 0 0 15px 0 rgba( $text, 0.1 ),
-                        0 30px 15px -20px rgba( $text, 0.3 ),
-                        0 20px 10px -10px rgba( $text, 0.1 );
+            margin-top: 10px;
+            // border-radius: 5px;
+            // box-shadow: 0 0 15px 0 rgba( $text, 0.1 ),
+                        // 0 30px 15px -20px rgba( $text, 0.3 ),
+                        // 0 20px 10px -10px rgba( $text, 0.1 );
         }
 
         h2 {
             color: $primary;
             text-align: left;
+            @include contentContainer();
+            margin-top: 20px;
         }
 
         p {
+            @include contentContainer();
             text-align: left;
-        }
-
-        /*p*/.block-img {
-            text-align: center;
-            box-shadow: 0 0 15px 0 rgba( $text, 0.1 ),
-                        0 30px 15px -20px rgba( $text, 0.3 ),
-                        0 20px 10px -10px rgba( $text, 0.1 );
-
-            @include bp(590px) {
-                display: inline-block;
-                background: $secondary;
-
-                img {
-                    margin: 30px -30px -30px 30px;
-                }
-            }
-
-        }
-
-        h2 + /*p*/.block-img {
-            margin-top: -30px;
-            position: relative;
-            z-index: -1;
+            margin-top: 20px;
         }
     }
 }

@@ -7,14 +7,12 @@
         </header>
 
         <div class="article__content">
-            <div class="section-content">
-                <% ( doc.getSliceZone( 'articles.body' ).slices ).forEach( function( slice, idx ) { %>
+            <% ( doc.getSliceZone( 'articles.body' ).slices ).forEach( function( slice, idx ) { %>
 
-                    <!-- Automatic slice template includes: -->
-                    <%- include( 'partials/' + slice.sliceType + 'Slice.ejs', { slice: slice, doc: doc } ); %>
+                <!-- Automatic slice template includes: -->
+                <%- include( 'partials/' + slice.sliceType + 'Slice.ejs', { slice: slice, doc: doc } ); %>
 
-                <% }); %>
-            </div>
+            <% }); %>
         </div>
 
     </main>
