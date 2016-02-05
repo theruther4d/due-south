@@ -16,6 +16,13 @@ function makeImgixUrl( path ) {
     return `https://duesouth.imgix.net/${fileName}`;
 };
 
+function sluggify( string ) {
+    return string
+            .toLowerCase()
+            .replace( /[^\w ]+/g, '' )
+            .replace( / +/g, '-' );
+};
+
 // Prismic config:
 var prismicConfig = {
     articles: {
@@ -106,10 +113,11 @@ gulp.task( 'tags', function( done ) {
                 Object.keys( tags ).forEach( function( tag ) {
                     gulp.src( `${templateDir}/${collection.tagTemplate}` )
                         .pipe( ejs({
+                            tag: tag,
                             docs: tags[tag]
                         }))
                         .pipe( rename( 'index.html' ) )
-                        .pipe( gulp.dest( `./_build/${collectionName}/tagged/${tag}/` ) );
+                        .pipe( gulp.dest( `./_build/${collectionName}/tagged/${sluggify( tag )}/` ) );
                 });
             });
         }

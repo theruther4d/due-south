@@ -1,5 +1,6 @@
 <%- include( 'partials/header.ejs' ); %>
 
+    <h1>Articles tagged <%= tag %>:</h1>
     <ul>
         <% docs.forEach( function( doc ) { %>
             <li><%= doc.getText( 'articles.title' ) %></li>
