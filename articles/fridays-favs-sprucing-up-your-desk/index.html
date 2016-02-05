@@ -10,18 +10,14 @@
                 imgix.fluid({
                     fluidClass: 'fluid',
                     updateOnResize: true,
-                    lazyLoad: true,
-                    updateOnResizeDown: false,
-                    pixelStep: 5,
-                    autoInsertCSSBestPractices: true,
-                    onLoad: function( el, url ) {
-                        console.log( 'image loaded: ', url );
-                    }
+                    lazyLoad: false,
+                    updateOnPinchZoom: false,
+                    updateOnResizeDown: false
                 });
             });
         </script>
         <link rel="stylesheet" href="../../style.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Vollkorn:400,400italic,700,700italic" type="text/css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700" type="text/css">
     </head>
     <body>
         <nav class="nav">
@@ -58,17 +54,15 @@
         </header>
 
         <div class="article__content">
-            <div class="section-content">
-                
+            
 
-                    <!-- Automatic slice template includes: -->
-                    <div class="text-slice">
+                <!-- Automatic slice template includes: -->
+                <div class="text-slice">
     <p>If you're like me, you've had a desk job at some point in your life. Or worse, you've worked from a cubicle - the dingy walls, the flickering fluorescents above. Even though the atmospher is totally un-inspiring, there are ways to make Monday thru Friday more bearable. </p><h2>1. Plants</h2><p></p><h2>2. Wrapping Paper</h2><p></p><h2>3. Personal Photos/Knick-Knacksd</h2><p></p><p>Decorating your space with some of these things will help you get through that 9-5 slump for sure!</p>
 </div>
 
 
-                
-            </div>
+            
         </div>
 
     </main>
