@@ -6,9 +6,9 @@ var del         = require( 'del' );
 var prismic     = require( './prismic' );
 var ImgixClient = require( 'imgix-core-js' );
 var browserSync = require( 'browser-sync' ).create();
-var scss        = require('gulp-sass');
-var prefix      = require('gulp-autoprefixer');
-var cssMin      = require('gulp-minify-css');
+var scss        = require( 'gulp-sass' );
+var prefix      = require( 'gulp-autoprefixer' );
+var cssMin      = require( 'gulp-minify-css' );
 
 // Path Variables:
 var templateDir = './templates';
