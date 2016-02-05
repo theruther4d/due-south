@@ -21,6 +21,7 @@ var prismicConfig = {
     articles: {
         template: 'articles.ejs',
         tags: true,
+        tagTemplate: 'articles-tags.ejs',
         linkResolver: function( ctx, doc, isBroken ) {
             if( isBroken ) {
                 return '#broken';
@@ -95,6 +96,26 @@ gulp.task( 'collections', function() {
     });
 });
 
+gulp.task( 'tags', function( done ) {
+    Object.keys( prismicConfig ).forEach( function( collectionName ) {
+        var collection = prismicConfig[collectionName];
+
+        if( collection.tags && collection.tagTemplate ) {
+            prismic.getTaggedDocuments( collectionName, function( tags ) {
+                // Now we've got an object containing tagname: [ documents ]
+                Object.keys( tags ).forEach( function( tag ) {
+                    gulp.src( `${templateDir}/${collection.tagTemplate}` )
+                        .pipe( ejs({
+                            docs: tags[tag]
+                        }))
+                        .pipe( rename( 'index.html' ) )
+                        .pipe( gulp.dest( `./_build/${collectionName}/tagged/${tag}/` ) );
+                });
+            });
+        }
+    });
+});
+
 gulp.task( 'scripts', function() {
     return gulp.src( 'scripts/*' )
         .pipe( gulp.dest( './_build/scripts' ) );
@@ -112,11 +133,5 @@ gulp.task( 'serve', function() {
             baseDir: '_build',
             directory: true
         }
-    });
-});
-
-gulp.task( 'bozo', function( done ) {
-    prismic.getTaggedDocuments( 'articles', function( res ) {
-        done();
     });
 });

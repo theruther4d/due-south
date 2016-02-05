@@ -1,0 +1,9 @@
+<%- include( 'partials/header.ejs' ); %>
+
+    <ul>
+        <% docs.forEach( function( doc ) { %>
+            <li><%= doc.getText( 'articles.title' ) %></li>
+        <% }); %>
+    </ul>
+
+<%- include( 'partials/footer.ejs' ); %>

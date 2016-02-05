@@ -2,14 +2,6 @@ var Prismic     = require('prismic.io').Prismic;
 
 module.exports = {
     /*
-    ** Where we'll store tags as we encounter them:
-    */
-    everything: {
-        collections: {},
-        tags: {}
-    },
-
-    /*
     ** Gets all documents:
     **
     ** @param {function}    callback    :  function to execute on completion
@@ -21,6 +13,11 @@ module.exports = {
             api.form( 'everything' )
                 .ref( api.master() )
                 .submit( function( err, res ) {
+                    // Where we'll store our results:
+                    var everything = {
+                        collections: {},
+                        tags: {}
+                    };
 
                     // Get rid of extranneous stuff:
                     res = res.results;
@@ -33,23 +30,23 @@ module.exports = {
                             doc.tags.forEach( function( tag ) {
 
                                 // If tags.articles exists
-                                if( module.exports.everything.tags.hasOwnProperty( doc.type ) ) {
+                                if( everything.tags.hasOwnProperty( doc.type ) ) {
 
                                     // If tags.articles.paint exists
-                                    if( module.exports.everything.tags[doc.type].hasOwnProperty( tag ) ) {
+                                    if( everything.tags[doc.type].hasOwnProperty( tag ) ) {
 
                                         // Put the current doc into tags.articles.paint
-                                        module.exports.everything.tags[doc.type][tag].push( doc );
+                                        everything.tags[doc.type][tag].push( doc );
                                     }
 
                                     // If tags.articles.paint doesn't exist:
                                     else {
 
                                         // Create tags.articles.paint:
-                                        module.exports.everything.tags[doc.type][tag] = {};
+                                        everything.tags[doc.type][tag] = {};
 
                                         // Put the current doc into tags.articles.paint:
-                                        module.exports.everything.tags[doc.type][tag] = [ doc ];
+                                        everything.tags[doc.type][tag] = [ doc ];
                                     }
                                 }
 
@@ -57,24 +54,24 @@ module.exports = {
                                 else {
 
                                     // Create tags.articles:
-                                    module.exports.everything.tags[doc.type] = {};
+                                    everything.tags[doc.type] = {};
 
                                     // Put the current doc into tags.articles.paint:
-                                    module.exports.everything.tags[doc.type][tag] = [ doc ];
+                                    everything.tags[doc.type][tag] = [ doc ];
                                 }
                             });
                         }
 
                         // By Type:
-                        if( module.exports.everything.collections.hasOwnProperty( doc.type ) ) {
-                            module.exports.everything.collections[doc.type].push( doc );
+                        if( everything.collections.hasOwnProperty( doc.type ) ) {
+                            everything.collections[doc.type].push( doc );
                         } else {
-                            module.exports.everything.collections[doc.type] = [ doc ];
+                            everything.collections[doc.type] = [ doc ];
                         }
 
                     });
 
-                    callback( module.exports.everything );
+                    callback( everything );
                 });
 
         }, null );
