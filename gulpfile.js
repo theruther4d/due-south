@@ -16,7 +16,7 @@ var templateDir = './templates';
 function makeImgixUrl( path ) {
     var fileName = path.substr( path.lastIndexOf( '/' ) + 1, path.length - 1 );
 
-    return `https://duesouth.imgix.net/${fileName}`;
+    return 'https://duesouth.imgix.net/' + fileName;
 };
 
 function sluggify( string ) {
@@ -37,11 +37,11 @@ var prismicConfig = {
                 return '#broken';
             }
 
-            return `/articles/${doc.slug}`;
+            return '/articles/' + doc.slug;
         },
         htmlSerializer: function( elem, content ) {
             if( elem.type == 'image' ) {
-                return `<img class="fluid" src="${makeImgixUrl( elem.url )}" />`;
+                return '<img class="fluid" src="' + makeImgixUrl( elem.url ) + '" />';
             }
         }
     },
@@ -53,7 +53,7 @@ var prismicConfig = {
                 return '#broken'
             }
 
-            return `/my-pages/${doc.slug}`;
+            return '/my-pages/' + doc.slug;
         }
     }
 };
@@ -92,7 +92,7 @@ gulp.task( 'collections', function() {
             res.forEach( function( doc ) {
 
                 // Create the collection files:
-                gulp.src( `${templateDir}/${collection.template}` )
+                gulp.src( templateDir + '/' + collection.template )
                     .pipe( ejs({
                         doc: doc,
                         makeImgix: makeImgixUrl,
@@ -100,7 +100,7 @@ gulp.task( 'collections', function() {
                         htmlSerializer: collection.htmlSerializer || null
                     }))
                     .pipe( rename( 'index.html' ) )
-                    .pipe( gulp.dest( `./_build/${collection.linkResolver( null, doc, false )}` ) );
+                    .pipe( gulp.dest( './_build/' + collection.linkResolver( null, doc, false ) ) );
             });
         });
     });
@@ -114,13 +114,13 @@ gulp.task( 'tags', function() {
             prismic.getTaggedDocuments( collectionName, function( tags ) {
                 // Now we've got an object containing tagname: [ documents ]
                 Object.keys( tags ).forEach( function( tag ) {
-                    gulp.src( `${templateDir}/${collection.tagTemplate}` )
+                    gulp.src( templateDir + '/' + collection.tagTemplate )
                         .pipe( ejs({
                             tag: tag,
                             docs: tags[tag]
                         }))
                         .pipe( rename( 'index.html' ) )
-                        .pipe( gulp.dest( `./_build/${collectionName}/tagged/${sluggify( tag )}/` ) );
+                        .pipe( gulp.dest( './_build/' + collectionName + '/tagged/' + sluggify( tag ) + '/' ) );
                 });
             });
         }
