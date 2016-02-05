@@ -63,6 +63,11 @@
 
         img {
             margin-top: 10px;
+            clip-path: polygon( 0 0, 100% 0, 100% 95%, 0 100% );
+
+            &:nth-of-type( even ) {
+                clip-path: polygon( 0 0, 100% 0, 100% 100%, 0 95% );
+            }
             // border-radius: 5px;
             // box-shadow: 0 0 15px 0 rgba( $text, 0.1 ),
                         // 0 30px 15px -20px rgba( $text, 0.3 ),
