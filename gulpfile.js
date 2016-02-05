@@ -67,6 +67,7 @@ gulp.task( 'src', function( done ) {
     prismic.getAllDocuments( function( docs ) {
         gulp.src( 'src/*' )
             .pipe( ejs({
+                sluggify: sluggify,
                 docs: docs
             }))
             .pipe( rename({
@@ -94,6 +95,7 @@ gulp.task( 'collections', function() {
                 // Create the collection files:
                 gulp.src( templateDir + '/' + collection.template )
                     .pipe( ejs({
+                        sluggify: sluggify,
                         doc: doc,
                         makeImgix: makeImgixUrl,
                         linkResolver: collection.linkResolver || null,
@@ -116,6 +118,7 @@ gulp.task( 'tags', function() {
                 Object.keys( tags ).forEach( function( tag ) {
                     gulp.src( templateDir + '/' + collection.tagTemplate )
                         .pipe( ejs({
+                            sluggify: sluggify,
                             tag: tag,
                             docs: tags[tag]
                         }))
