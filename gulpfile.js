@@ -67,6 +67,7 @@ gulp.task( 'src', function( done ) {
     prismic.getAllDocuments( function( docs ) {
         gulp.src( 'src/*' )
             .pipe( ejs({
+                makeImgix: makeImgixUrl,
                 sluggify: sluggify,
                 docs: docs
             }))
@@ -120,6 +121,7 @@ gulp.task( 'tags', function() {
                         .pipe( ejs({
                             sluggify: sluggify,
                             tag: tag,
+                            makeImgix: makeImgixUrl,
                             docs: tags[tag]
                         }))
                         .pipe( rename( 'index.html' ) )
