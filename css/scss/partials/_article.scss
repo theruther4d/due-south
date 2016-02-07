@@ -5,13 +5,26 @@
     &__header {
         position: relative;
         text-align: center;
+        height: 400px;
+        //overflow: hidden;
 
         &__image {
             width: 100%;
             height: auto;
-            position: relative;
+            position: absolute;
+            //position: relative;
             z-index: -1;
-            opacity: 0.6;
+            bottom: 0px;
+            left: 0;
+            //opacity: 0.4;
+        }
+
+        &__smudge {
+            width: 100%;
+            height: auto;
+            position: absolute;
+            bottom: 0;
+            left: 0;
         }
 
         &__title {
@@ -21,7 +34,8 @@
             left: 0;
             margin: auto;
             transform: translate3d( 0, -50%, 0 );
-            color: darken( $secondary, 75% );
+            color: #FFFFFF;
+            //color: darken( $secondary, 50% );
             //color: #FFFFFF;
 
             @include bp(568px) {
@@ -65,7 +79,6 @@
                 }
             }
         }
-
     }
 
     &__content {
