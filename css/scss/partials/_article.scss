@@ -5,18 +5,23 @@
     &__header {
         position: relative;
         text-align: center;
-        height: 400px;
+        //height: 400px;
         //overflow: hidden;
 
         &__image {
             width: 100%;
             height: auto;
-            position: absolute;
+            max-width: 500px;
+            //position: absolute;
             //position: relative;
             z-index: -1;
-            bottom: 0px;
-            left: 0;
+            //top: 0;
+            //right: 0;
+            //bottom: 0;
+            //left: 0;
+            //margin: auto;
             //opacity: 0.4;
+            margin: 0 auto;
         }
 
         &__smudge {
@@ -33,6 +38,7 @@
             right: 0;
             left: 0;
             margin: auto;
+            max-width: 500px;
             transform: translate3d( 0, -50%, 0 );
             color: #FFFFFF;
             //color: darken( $secondary, 50% );
