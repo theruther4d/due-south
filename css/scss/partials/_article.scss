@@ -33,46 +33,28 @@
             transform: translate3d( 0, -50%, 0 );
             color: #FFFFFF;
             text-shadow: 0 0 8px rgba( darken( $secondary, 80% ), 0.4 );
+            line-height: 0.9;
+            border: 0;
+            padding: 0;
+            transition: border 0.25s ease, padding 0.25s ease;
 
             @include bp(568px) {
                 margin-bottom: 60px;
-
-                &:after {
-                    content: '';
-                    position: absolute;
-                    z-index: -1;
-                    width: 100%;
-                    height: 30px;
-                    top: auto;
-                    right: 0;
-                    bottom: -100px;
-                    left: 0;
-                    margin: auto;
-                    border-top: 2px solid $primary;
-                }
             }
 
-            &:before {
+            &:after {
                 content: '';
                 position: absolute;
-                top: 5%;
+                width: 70%;
+                padding-top: 70%;
+                top: 50%;
                 right: 0;
                 bottom: 0;
                 left: 0;
                 margin: auto;
-                width: 78%;
-                height: 70%;
-                min-height: 80px;
+                transform: translateY( -50% ) rotate( 45deg );
+                border: 2px solid $primary;
                 z-index: -1;
-
-                @include bp(568px) {
-                    width: 100%;
-                    height: 60px;
-                    min-height: 0;
-                    top: auto;
-                    bottom: -100px;
-                    border-width: 2px 0;
-                }
             }
         }
     }
@@ -84,10 +66,10 @@
 
         img {
             margin-top: 10px;
-            clip-path: polygon( 0 0, 100% 0, 100% 95%, 0 100% );
+            mask: url( '../../images/mask.png' ) top left / cover;
 
             &:nth-of-type( even ) {
-                clip-path: polygon( 0 0, 100% 0, 100% 100%, 0 95% );
+                mask: url( '../../images/mask-2.png' ) top left / cover;
             }
         }
 
