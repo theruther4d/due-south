@@ -59,10 +59,21 @@
         }
     }
 
+    &__wrapper {
+        overflow: hidden;
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
     &__content {
         max-width: 720px;
         margin: 0 auto;
         text-align: center;
+
+        @include bp( 1200px ) {
+            float: left;
+            padding-top: 64px;
+        }
 
         img {
             margin-top: 10px;
@@ -88,7 +99,13 @@
     }
 
     &__sidebar {
-        margin-top: 40px;
+        max-width: 720px;
+        margin: 40px auto 0;
+
+        @include bp( 1200px ) {
+            float: left;
+            width: 240px;
+        }
 
         &__tags {
             position: relative;
@@ -103,6 +120,10 @@
                 left: 0;
                 background: linear-gradient( 90deg, rgba( 255, 255, 255, 1 ) 0%, rgba( 255, 255, 255, 1 ) 70%, rgba( 255, 255, 255, 0 ) 100% );
                 z-index: 2;
+
+                @include bp( 1200px ) {
+                    display: none;
+                }
             }
 
             &:after {
@@ -115,6 +136,10 @@
                 background: linear-gradient( 90deg, rgba( 255, 255, 255, 0 ) 0%, rgba( 255, 255, 255, 1 ) 100% );
                 z-index: 2;
                 pointer-events: none;
+
+                @include bp( 1200px ) {
+                    display: none;
+                }
             }
 
             .section-content {
@@ -125,6 +150,10 @@
                 padding-top: 10px;
                 padding-bottom: 10px;
                 padding-left: 70px;
+
+                @include bp( 1200px ) {
+                    //border: 1px solid red;
+                }
             }
 
             &__icon {
@@ -152,6 +181,13 @@
                 white-space: nowrap;
                 overflow: visible;
                 padding-right: 70px;
+
+                @include bp( 1200px ) {
+                    //border: 1px solid blue;
+                    white-space: initial;
+                    text-align: right;
+                    padding-right: 0;
+                }
             }
 
             &__tag {
@@ -161,12 +197,22 @@
                 border: 2px solid darken( $secondary, 15% );
                 margin: 5px;
 
+                @include bp( 1200px ) {
+                    display: inline-block;
+                    white-space: nowrap;
+                    margin: 5px 0 5px 5px;
+                }
+
                 &:first-of-type {
                     margin-left: 0;
                 }
 
                 &:last-of-type {
                     margin-right: 70px;
+
+                    @include bp( 1200px ) {
+                        margin: 5px 0 5px 5px;
+                    }
                 }
 
                 &__link {
@@ -184,16 +230,31 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+
+                @include bp( 1200px ) {
+                    display: block;
+                    text-align: right;
+                    //border: 1px solid blue;
+                }
             }
 
             &__author {
                 vertical-align: middle;
                 display: inline-block;
+                //border: 1px solid red;
+
+                @include bp( 1200px ) {
+                    text-align: right;
+                }
 
                 &__avatar {
                     border-radius: 50%;
                     vertical-align: middle;
                     margin-right: 10px;
+
+                    @include bp( 1200px ) {
+                        margin-right: 0;
+                    }
                 }
 
                 &__name {
@@ -201,6 +262,11 @@
                     vertical-align: middle;
                     font-size: 1.4rem;
                     font-weight: 600;
+
+                    @include bp( 1200px ) {
+                        margin-top: 10px;
+                        display: block;
+                    }
                 }
             }
 
@@ -208,6 +274,10 @@
                 display: inline-block;
                 font-size: 1.4rem;
                 font-weight: 300;
+
+                @include bp( 1200px ) {
+                    margin-top: 20px;
+                }
             }
         }
     }
