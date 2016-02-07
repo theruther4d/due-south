@@ -147,13 +147,18 @@ gulp.task( 'css', function() {
         .pipe( browserSync.stream() );
 });
 
+gulp.task( 'img', function() {
+    return gulp.src( './images/*' )
+        .pipe( gulp.dest( './_build/images/' ) );
+});
+
 gulp.task( 'clean', function() {
     del( './_build' );
 });
 
-gulp.task( 'default', ['clean', 'collections', 'tags', 'src', 'scripts', 'css'] );
+gulp.task( 'default', ['clean', 'collections', 'tags', 'src', 'scripts', 'css', 'img'] );
 
-gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts'], function() {
+gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts', 'img'], function() {
   browserSync.init({
     server: { baseDir: './_build' },
     open: false,

@@ -5,22 +5,13 @@
     &__header {
         position: relative;
         text-align: center;
-        //height: 400px;
-        //overflow: hidden;
+        margin-top: -40px;
 
         &__image {
             width: 100%;
             height: auto;
             max-width: 500px;
-            //position: absolute;
-            //position: relative;
             z-index: -1;
-            //top: 0;
-            //right: 0;
-            //bottom: 0;
-            //left: 0;
-            //margin: auto;
-            //opacity: 0.4;
             margin: 0 auto;
         }
 
@@ -41,8 +32,7 @@
             max-width: 500px;
             transform: translate3d( 0, -50%, 0 );
             color: #FFFFFF;
-            //color: darken( $secondary, 50% );
-            //color: #FFFFFF;
+            text-shadow: 0 0 8px rgba( darken( $secondary, 80% ), 0.4 );
 
             @include bp(568px) {
                 margin-bottom: 60px;
@@ -116,8 +106,11 @@
     }
 
     &__sidebar {
+        margin-top: 40px;
+
         &__tags {
             position: relative;
+            margin-top: 20px;
 
             &:before {
                 content: '';
@@ -200,6 +193,39 @@
                     font-weight: 700;
                     font-size: 1.4rem;
                 }
+            }
+        }
+
+        &__meta {
+
+            .section-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            &__author {
+                vertical-align: middle;
+                display: inline-block;
+
+                &__avatar {
+                    border-radius: 50%;
+                    vertical-align: middle;
+                    margin-right: 10px;
+                }
+
+                &__name {
+                    display: inline-block;
+                    vertical-align: middle;
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                }
+            }
+
+            &__date {
+                display: inline-block;
+                font-size: 1.4rem;
+                font-weight: 300;
             }
         }
     }
