@@ -6,15 +6,15 @@
         <title>Title</title>
         <script src="../../scripts/imgix.min.js"></script>
         <script>
-            // imgix.onready( function() {
-            //     imgix.fluid({
-            //         fluidClass: 'fluid',
-            //         updateOnResize: true,
-            //         lazyLoad: false,
-            //         updateOnPinchZoom: false,
-            //         updateOnResizeDown: false
-            //     });
-            // });
+            imgix.onready( function() {
+                imgix.fluid({
+                    fluidClass: 'fluid',
+                    updateOnResize: true,
+                    lazyLoad: false,
+                    updateOnPinchZoom: false,
+                    updateOnResizeDown: false
+                });
+            });
         </script>
         <link rel="stylesheet" href="../../style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700" type="text/css">
@@ -49,7 +49,8 @@
 </nav>
 
         <header class="article__header">
-            <img src="https://duesouth.imgix.net/2793a42eb8d557403b8ed7c0c89b4c2c0adaee59_living-room.jpg?mask=https%3A%2F%2Fprismic-io.s3.amazonaws.com%2Fdue-south%252Fa240d4db-1685-45a5-8f33-4f1682ebc3ca_mask-2.png&fm=png&fit=crop&blend=bef4d9&bm=dodge&balph=50" alt="" class="article__header__image">
+            <img src="https://duesouth.imgix.net/2554eb882db1c3fe769fc55ee50d6a9d79c05ec5_bedroom.jpg?fit=crop&blend=000000&bm=multiply&balph=35&h=400" alt="" class="article__header__image fluid">
+            <img class="article__header__smudge" src="../../images/smudge.png" alt="" />
             <h1 class="article__header__title">Friday&#39;s Favs: Sprucing Up Your Desk</h1>
         </header>
 
