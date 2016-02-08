@@ -143,21 +143,6 @@ gulp.task( 'scripts', function() {
         })
         .pipe( source( 'bundle.js'  ) )
         .pipe( gulp.dest( './_build/scripts' ) );
-    // var browserified = transform( function( filename ) {
-    //     var b = browserify( filename );
-    //
-    //     console.log( b.bundle() );
-    //     return b.bundle();
-    // });
-    //
-    // return gulp.src( './scripts/main.js' )
-    //     .pipe( browserified )
-    //     .pipe( gulp.dest( './_build/scripts' ) );
-    // var bundle = browserify( './scripts/main.js' ).bundle();
-    // console.log( 'bundle: ', bundle );
-    // return gulp.src( 'scripts/*' )
-        // .pipe( browserify( './scripts/main.js' ).bundle() )
-        // .pipe( gulp.dest( './_build/scripts' ) );
 });
 
 gulp.task( 'css', function() {
@@ -192,6 +177,7 @@ gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts', 'img'], fun
   gulp.watch( "./templates/**/*", ['collections', 'tags'] );
   gulp.watch( "./src/**/*", ['src'] );
   gulp.watch( "./scripts/**/*", ['scripts'] );
+  gulp.watch( "./images/**/*", ['img'] );
 
   gulp.watch( "./_build/**/*!(*.css)" ).on( 'change', browserSync.reload );
 });
