@@ -70,7 +70,7 @@ proto._resizeImages = function() {
         if( img.getAttribute( 'data-src' ) && !src.length ) {
             img.src = img.getAttribute( 'data-src' );
         }
-        
+
         clearTimeout( ctx._initialImageTimer );
         if( !dimensions.width || !dimensions.height ) {
             console.log( 'no width! Aborting!' );
@@ -109,6 +109,7 @@ var Main = ( function() {
     return {
         init: function() {
             document.addEventListener( 'DOMContentLoaded', function( e ) {
+                alert( 'loaded!' );
                 // Do stuff with the images:
                 var images = new imgix();
                 images._init();
