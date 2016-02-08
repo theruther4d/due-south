@@ -4,6 +4,7 @@ var Main = ( function() {
     return {
         init: function() {
             document.addEventListener( 'DOMContentLoaded', function( e ) {
+                alert( 'loaded!' );
                 // Do stuff with the images:
                 var images = new imgix();
                 images._init();
