@@ -66,6 +66,10 @@ proto._resizeImages = function() {
         clearTimeout( ctx._initialImageTimer );
         if( !dimensions.width || !dimensions.height ) {
             console.log( 'no width! Aborting!' );
+            if( img.getAttribute( 'data-src' ) && !src.length ) {
+                img.src = img.getAttribute( 'data-src' );
+            }
+
             ctx._initialImageTimer = setTimeout( function() {
                 console.log( 'recalling _resizeImages' );
                 ctx._resizeImages();
@@ -77,8 +81,8 @@ proto._resizeImages = function() {
         console.log( 'new height: ', dimensions.height );
 
         if( hasParams ) {
-            img.src = img.src.replace( 'w=' + w, 'w=' + img.getBoundingClientRect().width );
-            img.src = img.src.replace( 'h=' + w, 'h=' + img.getBoundingClientRect().height );
+            img.src = img.getAttribute( 'data-src' ).replace( 'w=' + w, 'w=' + img.getBoundingClientRect().width );
+            img.src = img.getAttribute( 'data-src' ).replace( 'h=' + w, 'h=' + img.getBoundingClientRect().height );
         } else {
             img.src = cleanedSrc + '?w=' + img.getBoundingClientRect().width;
         }
