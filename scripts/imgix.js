@@ -1,6 +1,8 @@
 function imgix() {
     this._resizeTimer;
     this._ww = window.outerWidth;
+    this._images = document.querySelectorAll( '.fluid' );
+    this._initialImageTimer;
 }
 
 var proto = imgix.prototype;
@@ -51,15 +53,28 @@ proto._parseQueryParams = function( name, url ) {
 };
 
 proto._resizeImages = function() {
-    var images = document.querySelectorAll( '.fluid' ),
-        ctx    = this;
+    var ctx    = this;
 
-    Array.prototype.slice.call( images ).forEach( function( img ) {
+    Array.prototype.slice.call( ctx._images ).forEach( function( img ) {
         var src         = img.src,
+            dimensions  = img.getBoundingClientRect(),
             hasParams   = src.indexOf( '?' ) > -1,
             cleanedSrc  = hasParams ? src.substr( 0, src.indexOf( '?' ) ) : src,
             w           = hasParams ? ctx._parseQueryParams( 'w', src ) : '',
             h           = hasParams ? ctx._parseQueryParams( 'h', src ) : '';
+
+        clearTimeout( ctx._initialImageTimer );
+        if( !dimensions.width || !dimensions.height ) {
+            console.log( 'no width! Aborting!' );
+            ctx._initialImageTimer = setTimeout( function() {
+                console.log( 'recalling _resizeImages' );
+                ctx._resizeImages();
+            }, 100 );
+            return false;
+        }
+
+        console.log( 'new width: ', dimensions.width );
+        console.log( 'new height: ', dimensions.height );
 
         if( hasParams ) {
             img.src = img.src.replace( 'w=' + w, 'w=' + img.getBoundingClientRect().width );
@@ -71,6 +86,7 @@ proto._resizeImages = function() {
 }
 
 proto._init = function() {
+    this._resizeImages();
     this._attachResize();
 };
 
