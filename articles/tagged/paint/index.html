@@ -4,21 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Title</title>
-        <script src="../../scripts/imgix.min.js"></script>
-        <script>
-            (function() {
-                imgix.onready( function() {
-                    imgix.fluid({
-                        fluidClass: 'fluid',
-                        onLoad: function( el, url ) {
-                            console.log( 'el: ', el );
-                            console.log( 'url: ', url );
-                            console.log( '=========' );
-                        }
-                    });
-                });                
-            })();
-        </script>
+        <script src="../../scripts/bundle.js"></script>
         <link rel="stylesheet" href="../../style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700" type="text/css">
     </head>
