@@ -58,7 +58,7 @@ proto._resizeImages = function() {
     console.log( 'I\'ve been updated~' );
 
     Array.prototype.slice.call( ctx._images ).forEach( function( img ) {
-        var src         = img.src,
+        var src         = img.src.length ? img.src : img.getAttribute( 'data-src' ),
             dimensions  = img.getBoundingClientRect(),
             hasParams   = src.indexOf( '?' ) > -1,
             cleanedSrc  = hasParams ? src.substr( 0, src.indexOf( '?' ) ) : src,
@@ -66,30 +66,43 @@ proto._resizeImages = function() {
             h           = hasParams ? ctx._parseQueryParams( 'h', src ) : '';
 
         // If there's no
-        if( img.getAttribute( 'data-src' ) && !src.length ) {
-            img.src = img.getAttribute( 'data-src' );
-        }
+        // if( img.getAttribute( 'data-src' ) && !src.length ) {
+        //     img.src = img.getAttribute( 'data-src' ) + '?w=' + ctx._ww;
+        // }
 
-        clearTimeout( ctx._initialImageTimer );
-        if( !dimensions.width || !dimensions.height ) {
-            console.log( 'no width! Aborting!' );
+        // clearTimeout( ctx._initialImageTimer );
+        // if( !dimensions.width || !dimensions.height ) {
 
+            // console.log( 'no width! Aborting!' );
+            //
+            //
+            // ctx._initialImageTimer = setTimeout( function() {
+            //     console.log( 'recalling _resizeImages' );
+            //     ctx._resizeImages();
+            // }, 100 );
+            // return false;
+        // }
 
-            ctx._initialImageTimer = setTimeout( function() {
-                console.log( 'recalling _resizeImages' );
-                ctx._resizeImages();
-            }, 100 );
-            return false;
-        }
-
-        console.log( 'new width: ', Math.round( dimensions.width ) );
-        console.log( 'new height: ', Math.round( dimensions.height ) );
+        // console.log( 'new width: ', Math.round( dimensions.width ) );
+        // console.log( 'new height: ', Math.round( dimensions.height ) );
 
         if( hasParams ) {
-            img.src = img.getAttribute( 'data-src' ).replace( 'w=' + w, 'w=' + Math.round( img.getBoundingClientRect().width ) );
-            img.src = img.getAttribute( 'data-src' ).replace( 'h=' + w, 'h=' + Math.round( img.getBoundingClientRect().height ) );
+            if( !dimensions.width || !dimensions.height ) {
+                console.log( 'no dimensions, making width equal to window width' );
+                img.src = src.replace( 'w=' + w, 'w=' + ctx._ww );
+            } else {
+                console.log( 'has width, checking image width' );
+                img.src = src.replace( 'w=' + w, 'w=' + Math.round( img.getBoundingClientRect().width ) );
+                img.src = src.replace( 'h=' + w, 'h=' + Math.round( img.getBoundingClientRect().height ) );                
+            }
         } else {
-            img.src = cleanedSrc + '?w=' + img.getBoundingClientRect().width;
+            if( !dimensions.width || !dimensions.height ) {
+                console.log( 'no dimensions, making width equal to window width' );
+                img.src = cleanedSrc + '?w=' + ctx._ww;
+            } else {
+                console.log( 'has width, checking image width' );
+                img.src = cleanedSrc + '?w=' + img.getBoundingClientRect().width;
+            }
         }
     });
 }
