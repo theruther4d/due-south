@@ -68,7 +68,7 @@ proto._resizeImages = function() {
         ctx._dpr    = ctx._getWindowDPR();
 
     Array.prototype.slice.call( ctx._images ).forEach( function( img ) {
-        var src         = img.src.length ? img.src : img.getAttribute( 'data-src' ),
+        var src         = img.src.length && img.src.indexOf( 'imgix' ) > -1 ? img.src : img.getAttribute( 'data-src' ),
             dimensions  = img.getBoundingClientRect(),
             hasParams   = src.indexOf( '?' ) > -1,
             w           = hasParams ? ctx._parseQueryParams( 'w', src ) : '',
