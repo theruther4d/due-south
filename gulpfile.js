@@ -9,9 +9,9 @@ var browserSync = require( 'browser-sync' ).create();
 var scss        = require( 'gulp-sass' );
 var prefix      = require( 'gulp-autoprefixer' );
 var cssMin      = require( 'gulp-minify-css' );
-var transform   = require( 'vinyl-transform' );
 var source      = require( 'vinyl-source-stream' );
 var browserify  = require( 'browserify' );
+var cheerio     = require( 'cheerio' );
 
 // Path Variables:
 var templateDir = './templates';
@@ -27,6 +27,27 @@ function sluggify( string ) {
             .toLowerCase()
             .replace( /[^\w ]+/g, '' )
             .replace( / +/g, '-' );
+};
+
+function getExcerpt( doc ) {
+    var firstTextSlice  = -1,
+        slices          = doc.getSliceZone( 'articles.body' ).slices;
+
+    slices.forEach( function( slice, idx ) {
+        if( slice.sliceType == 'text' && firstTextSlice == -1 ) {
+            firstTextSlice = idx;
+        }
+    });
+
+    if( firstTextSlice != -1 ) {
+        var text = slices[firstTextSlice].value.asHtml();
+
+        $ = cheerio.load( text );
+        return $( 'p' ).eq( 0 ).text().substr( 0, 300 ) + '..';
+
+    } else {
+        return '';
+    }
 };
 
 // Prismic config:
@@ -72,7 +93,8 @@ gulp.task( 'src', function( done ) {
             .pipe( ejs({
                 makeImgix: makeImgixUrl,
                 sluggify: sluggify,
-                docs: docs
+                docs: docs,
+                getExcerpt: getExcerpt
             }))
             .pipe( rename({
                 extname: '.html'
@@ -103,7 +125,8 @@ gulp.task( 'collections', function() {
                         doc: doc,
                         makeImgix: makeImgixUrl,
                         linkResolver: collection.linkResolver || null,
-                        htmlSerializer: collection.htmlSerializer || null
+                        htmlSerializer: collection.htmlSerializer || null,
+                        getExcerpt: getExcerpt
                     }))
                     .pipe( rename( 'index.html' ) )
                     .pipe( gulp.dest( './_build/' + collection.linkResolver( null, doc, false ) ) );
@@ -125,7 +148,8 @@ gulp.task( 'tags', function() {
                             sluggify: sluggify,
                             tag: tag,
                             makeImgix: makeImgixUrl,
-                            docs: tags[tag]
+                            docs: tags[tag],
+                            getExcerpt: getExcerpt
                         }))
                         .pipe( rename( 'index.html' ) )
                         .pipe( gulp.dest( './_build/' + collectionName + '/tagged/' + sluggify( tag ) + '/' ) );

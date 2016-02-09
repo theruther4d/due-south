@@ -1,14 +1,31 @@
 <%- include( '../templates/partials/header.ejs' ); %>
+    <%- include( '../templates/partials/nav.ejs' ); %>
 
-    <h1>Articles:</h1>
-    <ul>
-        <% docs.collections.articles.forEach( function( article ) { %>
-            <li>
-                <a href="../../articles/<%= article.slug %>">
-                    <%= article.getText( 'articles.title' ); %>
-                </a>
-            </li>
-        <% }); %>
-    </ul>
+    <main class="home">
+        <div class="section-content">
+            <% var featuredArticle = docs.collections.articles[0]; %>
+            <% var featuredImage = makeImgix( featuredArticle.getImage( 'articles.featured-image' ).main.url ); %>
 
+            <!-- featured article -->
+            <article class="featured-article">
+                <h2 class="featured-article__title"><%= featuredArticle.getText( 'articles.title' ); %></h2>
+                <img src="<%= featuredImage %>" alt="" class="featured-article__image" />
+                <p class="featured-article__excerpt"><%= getExcerpt( featuredArticle ); %></p>
+            </article>
+
+            <!-- Recent Articles -->
+            <ul class="articles">
+                <% docs.collections.articles.forEach( function( article, count ) { %>
+                    <% if( count > 0 ) { %>
+                        <li class="articles__article">
+                            <a href="../../articles/<%= article.slug %>">
+                                <%= article.getText( 'articles.title' ); %>
+                            </a>
+                        </li>
+                    <% } %>
+                <% }); %>
+            </ul>
+
+        </div>
+    </main>
 <%- include( '../templates/partials/footer.ejs' ); %>
