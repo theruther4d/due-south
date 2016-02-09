@@ -45,6 +45,7 @@
             font-weight: 700;
             vertical-align: middle;
             color: #FFFFFF;
+            color: rgba( lighten( $secondary, 20% ), 0.8 );
         }
     }
 
@@ -54,11 +55,33 @@
         transform: translate3d( 0, 40px, 0 );
         // box-shadow: 0 0 20px 0 rgba( darken( $secondary, 80% ), 0.3 );
         box-shadow: 0 30px 60px 0 rgba( darken( $secondary, 80% ), 0.4 );
+        text-align: center;
+
+        &__title {
+            text-align: left;
+        }
 
         &__excerpt {
             font-size: 1.2rem;
             line-height: 1.5;
             margin-bottom: 0;
+            text-align: left;
+        }
+
+        &__link {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: $secondary;
+            color: darken( $secondary, 40% );
+            border-radius: 100px;
+            margin-top: 20px;
+            box-shadow: 0 10px 20px 0px rgba( darken( $secondary, 45% ), 0.2 ),
+                        0 0 30px 5px rgba( $secondary, 0.8 );
+
         }
     }
 

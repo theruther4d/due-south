@@ -29,6 +29,7 @@
                     <div class="featured-article__content">
                         <h2 class="featured-article__content__title"><%= featuredArticle.getText( 'articles.title' ); %></h2>
                         <p class="featured-article__content__excerpt"><%= getExcerpt( featuredArticle ); %></p>
+                        <a href="../../articles/<%= featuredArticle.slug %>" class="featured-article__content__link">Read More</a>
                     </div>
                 </div>
             </article>
