@@ -1,12 +1,25 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 function imgix() {
     this._resizeTimer;
-    this._ww = window.outerWidth;
+    this._ww = window.outerWidth ? window.outerWidth : window.innerWidth;
     this._images = document.querySelectorAll( '.fluid' );
     this._initialImageTimer;
+    this._dpr = 1;
 }
 
 var proto = imgix.prototype;
+
+proto._getWindowDPR = function () {
+    var dpr = window.devicePixelRatio ? window.devicePixelRatio : 1;
+
+    if( dpr % 1 !== 0 ) {
+        var tmpStr  = dpr.toString();
+            tmpStr  = tmpStr.split( '.' )[1];
+            dpr     = ( tmpStr.length > 1 && tmpStr.slice( 1, 2 ) !== '0' ) ? dpr.toFixed( 2 ) : dpr.toFixed( 1 );
+    }
+
+    return dpr;
+};
 
 proto._resize = function() {
     clearTimeout( this._resizeTimer );
@@ -14,12 +27,10 @@ proto._resize = function() {
     var ctx = this;
 
     this._resizeTimer = setTimeout( function() {
-        var ww = window.outerWidth;
+        var ww = window.outerWidth ? window.outerWidth : window.innerWidth;
 
         if( ww > ctx._ww ) {
             ctx._resizeImages();
-        } else {
-            console.log( 'sizing down, no change!' );
         }
 
         ctx._ww = ww;
@@ -54,9 +65,8 @@ proto._parseQueryParams = function( name, url ) {
 };
 
 proto._resizeImages = function() {
-    var ctx    = this;
-
-    console.log( 'I\'ve been updated~' );
+    var ctx         = this;
+        ctx._dpr    = ctx._getWindowDPR();
 
     Array.prototype.slice.call( ctx._images ).forEach( function( img ) {
         var src         = img.src.length ? img.src : img.getAttribute( 'data-src' ),
@@ -64,47 +74,20 @@ proto._resizeImages = function() {
             hasParams   = src.indexOf( '?' ) > -1,
             cleanedSrc  = hasParams ? src.substr( 0, src.indexOf( '?' ) ) : src,
             w           = hasParams ? ctx._parseQueryParams( 'w', src ) : '',
-            h           = hasParams ? ctx._parseQueryParams( 'h', src ) : '';
-
-        // If there's no
-        // if( img.getAttribute( 'data-src' ) && !src.length ) {
-        //     img.src = img.getAttribute( 'data-src' ) + '?w=' + ctx._ww;
-        // }
-
-        // clearTimeout( ctx._initialImageTimer );
-        // if( !dimensions.width || !dimensions.height ) {
-
-            // console.log( 'no width! Aborting!' );
-            //
-            //
-            // ctx._initialImageTimer = setTimeout( function() {
-            //     console.log( 'recalling _resizeImages' );
-            //     ctx._resizeImages();
-            // }, 100 );
-            // return false;
-        // }
-
-        // console.log( 'new width: ', Math.round( dimensions.width ) );
-        // console.log( 'new height: ', Math.round( dimensions.height ) );
+            h           = hasParams ? ctx._parseQueryParams( 'h', src ) : '',
+            newWidth    = !dimensions.width || !dimensions.height ? ctx._ww : Math.round( dimensions.width ),
+            outputSrc   = src;
 
         if( hasParams ) {
-            if( !dimensions.width || !dimensions.height ) {
-                console.log( 'no dimensions, making width equal to window width' );
-                img.src = src.replace( 'w=' + w, 'w=' + ctx._ww );
-            } else {
-                console.log( 'has width, checking image width' );
-                img.src = src.replace( 'w=' + w, 'w=' + Math.round( img.getBoundingClientRect().width ) );
-                img.src = src.replace( 'h=' + w, 'h=' + Math.round( img.getBoundingClientRect().height ) );                
-            }
+            outputSrc = outputSrc.replace( 'w=' + w,  'w=' + newWidth );
         } else {
-            if( !dimensions.width || !dimensions.height ) {
-                console.log( 'no dimensions, making width equal to window width' );
-                img.src = cleanedSrc + '?w=' + ctx._ww;
-            } else {
-                console.log( 'has width, checking image width' );
-                img.src = cleanedSrc + '?w=' + img.getBoundingClientRect().width;
-            }
+            outputSrc += '?w=' + newWidth;
         }
+
+        outputSrc += '&dpr=' + ctx._dpr;
+
+        img.src = outputSrc;
+        console.log( 'outputSrc: ', outputSrc );
     });
 }
 
