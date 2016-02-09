@@ -10,10 +10,19 @@
     margin-bottom: 20px;
 }
 
+.h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+}
+
 h1 {
     @extend .h1;
 }
 
 h2 {
     @extend .h2;
+}
+
+h3 {
+    @extend .h3;
 }

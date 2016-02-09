@@ -114,6 +114,10 @@ gulp.task( 'collections', function() {
                 linkResolver        = collection.linkResolver || null,
                 htmlSerializer      = collection.htmlSerializer || null;
 
+            if( !res || !res.length ) {
+                return;
+            }
+
             // Loop through each document returned
             // for this collection type:
             res.forEach( function( doc ) {

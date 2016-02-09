@@ -1,11 +1,8 @@
 /*article*/.featured-article {
     position: relative;
     z-index: 1;
-    // box-shadow: 0 30px 10px -20px rgba( darken( $secondary, 80% ), 0.4 ),
-    //             0 0 20px 0 rgba( darken( $secondary, 80% ), 0.3 );
     box-shadow: 0 10px 40px 0 rgba( darken( $secondary, 80% ), 0.1 );
-    margin: 40px auto 100px;
-    max-width: 300px;
+    margin: 20px auto 100px;
 
     &__wrapper {
         padding: 0 20px;
@@ -32,8 +29,6 @@
 
         &__avatar {
             border-radius: 50%;
-            // width: 30px;
-            // height: 30px;
             vertical-align: middle;
             position: absolute;
             bottom: 0;
@@ -53,10 +48,10 @@
         background: #FFFFFF;
         padding: 20px 20px 30px;
         transform: translate3d( 0, 40px, 0 );
-        // box-shadow: 0 0 20px 0 rgba( darken( $secondary, 80% ), 0.3 );
         box-shadow: 0 30px 60px 0 rgba( darken( $secondary, 80% ), 0.4 );
         text-align: center;
-        margin-top: -20px;
+        margin: -20px auto 0;
+        max-width: 280px;
 
         &__title {
             text-align: left;
@@ -97,6 +92,5 @@
         height: 100%;
         object-fit: cover;
         z-index: -2;
-        // display: none;
     }
 }

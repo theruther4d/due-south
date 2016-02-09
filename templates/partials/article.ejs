@@ -1,0 +1,15 @@
+<%
+    var featuredImage = makeImgix( doc.getImage( 'articles.featured-image' ).main.url );
+%>
+
+<article class="article-block">
+    <div class="article-block__image-wrapper">
+        <img class="article-block__image" src="<%= featuredImage %>" alt="" />
+    </div>
+    <div class="article-block__content">
+        <div class="article-block__content__wrapper">
+            <h3 class="article-block__content__title"><%= doc.getText( 'articles.title' ); %></h3>
+            <a href="../../articles/<%= doc.slug %>" class="article-block__content__link more-link">Read More</a>
+        </div>
+    </div>
+</article>

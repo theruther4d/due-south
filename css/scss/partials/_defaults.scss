@@ -34,3 +34,23 @@ body {
 .section-content {
     @include contentContainer();
 }
+
+/*a*/.more-link {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    background: $primary;
+    color: darken( $primary, 40% );
+    border-radius: 100px;
+    margin-top: 40px;
+    box-shadow: 0 10px 20px 0px rgba( darken( $primary, 45% ), 0.2 ),
+                0 0 30px 5px rgba( $primary, 0.8 );
+}
+
+.homepage-article-header {    
+    font-size: 2.4rem;
+    margin-top: 40px;
+}
