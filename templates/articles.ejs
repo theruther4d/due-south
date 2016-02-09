@@ -16,7 +16,7 @@
         <%- include( 'partials/nav.ejs' ); %>
         <header class="article__header">
             <%# <img src="https://duesouth.imgix.net/2554eb882db1c3fe769fc55ee50d6a9d79c05ec5_bedroom.jpg?mask=https%3A%2F%2Fprismic-io.s3.amazonaws.com%2Fdue-south%252F0d497457-7a3a-45e7-83a1-e0fb8d3a2565_mask-3.png&fm=png&fit=clamp&blend=000000&bm=multiply&balph=35&h=400" alt="" class="article__header__image fluid">%>
-            <img data-src="https://duesouth.imgix.net/2793a42eb8d557403b8ed7c0c89b4c2c0adaee59_living-room.jpg?h=500&fit=crop" alt="" class="article__header__image fluid">
+            <img src="../../images/blank.png" data-src="https://duesouth.imgix.net/2793a42eb8d557403b8ed7c0c89b4c2c0adaee59_living-room.jpg?h=500&fit=crop" alt="" class="article__header__image fluid">
             <h1 class="article__header__title"><%= doc.getText( 'articles.title' ); %></h1>
         </header>
 
@@ -56,7 +56,6 @@
         </aside>
 
             <div class="article__content">
-                <h4>This has been updated</h4>
             <% ( doc.getSliceZone( 'articles.body' ).slices ).forEach( function( slice ) { %>
 
                 <!-- Automatic slice template includes: -->
