@@ -15,8 +15,6 @@
             z-index: -1;
             margin: 0 auto;
             mask: url( '../../images/mask-4.png' ) center center / 100% 100% no-repeat;
-            // transform: translate3d( 0, 25%, 0 );
-            // -webkit-filter: brightness( 60% ) contrast( 180% );
         }
 
         &__smudge {
@@ -35,42 +33,13 @@
             margin: auto;
             max-width: 300px;
             transform: translate3d( 0, -50%, 0 );
-            // color: #FFFFFF;
-            // color: $primary;
-            // color: darken( $primary, 15% );
-            // text-shadow: 0 0 4px rgba( #000000, 0.2 );
-            // line-height: 0.9;
             line-height: 1.25;
             border: 0;
             padding: 0;
             transition: border 0.25s ease, padding 0.25s ease;
-            // text-align: left;
-            // width: 350px;
-            // padding: 100px 10px;
-            // background: rgba( 255, 255, 255, 0.8 );
-            // -webkit-backdrop-filter: blur( 10px );
-            // box-shadow: 0 40px 10px -30px rgba( darken( $secondary, 75% ), 0.3 ),
-            //             0 10px 20px 0 rgba( darken( $secondary, 75% ), 0.3 );
 
             @include bp(568px) {
                 margin-bottom: 60px;
-            }
-
-            &:after {
-                // content: '';
-                position: absolute;
-                width: 40%;
-                padding-top: 40%;
-                top: 50%;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                margin: auto;
-                transform: translateY( -50% ) rotate( 45deg );
-                border: 2px solid $primary;
-                z-index: -1;
-                background: rgba( darken( $secondary, 30% ), 0.3 );
-                -webkit-backdrop-filter: blur( 10px );
             }
         }
     }
@@ -166,10 +135,6 @@
                 padding-top: 10px;
                 padding-bottom: 10px;
                 padding-left: 70px;
-
-                @include bp( 1200px ) {
-                    //border: 1px solid red;
-                }
             }
 
             &__icon {
@@ -199,7 +164,6 @@
                 padding-right: 70px;
 
                 @include bp( 1200px ) {
-                    //border: 1px solid blue;
                     white-space: initial;
                     text-align: right;
                     padding-right: 0;
@@ -250,14 +214,12 @@
                 @include bp( 1200px ) {
                     display: block;
                     text-align: right;
-                    //border: 1px solid blue;
                 }
             }
 
             &__author {
                 vertical-align: middle;
                 display: inline-block;
-                //border: 1px solid red;
 
                 @include bp( 1200px ) {
                     text-align: right;

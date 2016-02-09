@@ -1,11 +1,24 @@
 function imgix() {
     this._resizeTimer;
-    this._ww = window.outerWidth;
+    this._ww = window.outerWidth ? window.outerWidth : window.innerWidth;
     this._images = document.querySelectorAll( '.fluid' );
     this._initialImageTimer;
+    this._dpr = 1;
 }
 
 var proto = imgix.prototype;
+
+proto._getWindowDPR = function () {
+    var dpr = window.devicePixelRatio ? window.devicePixelRatio : 1;
+
+    if( dpr % 1 !== 0 ) {
+        var tmpStr  = dpr.toString();
+            tmpStr  = tmpStr.split( '.' )[1];
+            dpr     = ( tmpStr.length > 1 && tmpStr.slice( 1, 2 ) !== '0' ) ? dpr.toFixed( 2 ) : dpr.toFixed( 1 );
+    }
+
+    return dpr;
+};
 
 proto._resize = function() {
     clearTimeout( this._resizeTimer );
@@ -13,7 +26,7 @@ proto._resize = function() {
     var ctx = this;
 
     this._resizeTimer = setTimeout( function() {
-        var ww = window.outerWidth;
+        var ww = window.outerWidth ? window.outerWidth : window.innerWidth;
 
         if( ww > ctx._ww ) {
             ctx._resizeImages();
@@ -51,7 +64,8 @@ proto._parseQueryParams = function( name, url ) {
 };
 
 proto._resizeImages = function() {
-    var ctx    = this;
+    var ctx         = this;
+        ctx._dpr    = ctx._getWindowDPR();
 
     Array.prototype.slice.call( ctx._images ).forEach( function( img ) {
         var src         = img.src.length ? img.src : img.getAttribute( 'data-src' ),
@@ -59,22 +73,20 @@ proto._resizeImages = function() {
             hasParams   = src.indexOf( '?' ) > -1,
             cleanedSrc  = hasParams ? src.substr( 0, src.indexOf( '?' ) ) : src,
             w           = hasParams ? ctx._parseQueryParams( 'w', src ) : '',
-            h           = hasParams ? ctx._parseQueryParams( 'h', src ) : '';
+            h           = hasParams ? ctx._parseQueryParams( 'h', src ) : '',
+            newWidth    = !dimensions.width || !dimensions.height ? ctx._ww : Math.round( dimensions.width ),
+            outputSrc   = src;
 
         if( hasParams ) {
-            if( !dimensions.width || !dimensions.height ) {
-                img.src = src.replace( 'w=' + w, 'w=' + ctx._ww );
-            } else {
-                img.src = src.replace( 'w=' + w, 'w=' + Math.round( img.getBoundingClientRect().width ) );
-                img.src = src.replace( 'h=' + w, 'h=' + Math.round( img.getBoundingClientRect().height ) );
-            }
+            outputSrc = outputSrc.replace( 'w=' + w,  'w=' + newWidth );
         } else {
-            if( !dimensions.width || !dimensions.height ) {
-                img.src = cleanedSrc + '?w=' + ctx._ww;
-            } else {
-                img.src = cleanedSrc + '?w=' + img.getBoundingClientRect().width;
-            }
+            outputSrc += '?w=' + newWidth;
         }
+
+        outputSrc += '&dpr=' + ctx._dpr;
+
+        img.src = outputSrc;
+        console.log( 'outputSrc: ', outputSrc );
     });
 }
 
