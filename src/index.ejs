@@ -3,14 +3,34 @@
 
     <main class="home">
         <div class="section-content">
-            <% var featuredArticle = docs.collections.articles[0]; %>
-            <% var featuredImage = makeImgix( featuredArticle.getImage( 'articles.featured-image' ).main.url ); %>
+            <%
+                var featuredArticle = docs.collections.articles[0];
+                var featuredImage = makeImgix( featuredArticle.getImage( 'articles.featured-image' ).main.url );
+                var date = featuredArticle.getDate( 'articles.publicationDate' );
+                if( date ) {
+                    var publicationDate = new Date( date );
+                    var months = [ 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+                    var month = months[ date.getMonth() ];
+                    var day = date.getDay();
+                    var year = date.getFullYear();
+
+                    var outputDate = month + ' ' + day + ', ' + year;
+                }
+            %>
 
             <!-- featured article -->
             <article class="featured-article">
-                <h2 class="featured-article__title"><%= featuredArticle.getText( 'articles.title' ); %></h2>
                 <img src="<%= featuredImage %>" alt="" class="featured-article__image" />
-                <p class="featured-article__excerpt"><%= getExcerpt( featuredArticle ); %></p>
+                <div class="featured-article__meta">
+                    <img src="../../images/jess.png" alt="Jessica Rutherford" class="featured-article__meta__avatar" width="40" height="40">
+                    <span class="featured-article__meta__date"><%= outputDate %></span>
+                </div>
+                <div class="featured-article__wrapper">
+                    <div class="featured-article__content">
+                        <h2 class="featured-article__content__title"><%= featuredArticle.getText( 'articles.title' ); %></h2>
+                        <p class="featured-article__content__excerpt"><%= getExcerpt( featuredArticle ); %></p>
+                    </div>
+                </div>
             </article>
 
             <!-- Recent Articles -->
