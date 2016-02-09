@@ -93,9 +93,6 @@ proto._resizeImages = function() {
         img.src = outputSrc;
         console.log( 'outputSrc: ', outputSrc );
     });
-
-    // Try to force repaint after images are done:
-    document.body.getBoundingClientRect();
 }
 
 proto._init = function() {
