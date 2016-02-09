@@ -72,19 +72,23 @@ proto._resizeImages = function() {
         var src         = img.src.length ? img.src : img.getAttribute( 'data-src' ),
             dimensions  = img.getBoundingClientRect(),
             hasParams   = src.indexOf( '?' ) > -1,
-            cleanedSrc  = hasParams ? src.substr( 0, src.indexOf( '?' ) ) : src,
             w           = hasParams ? ctx._parseQueryParams( 'w', src ) : '',
-            h           = hasParams ? ctx._parseQueryParams( 'h', src ) : '',
             newWidth    = !dimensions.width || !dimensions.height ? ctx._ww : Math.round( dimensions.width ),
             outputSrc   = src;
 
         if( hasParams ) {
-            outputSrc = outputSrc.replace( 'w=' + w,  'w=' + newWidth );
+            if( outputSrc.indexOf( 'w=' ) > -1 ) {
+                outputSrc = outputSrc.replace( 'w=' + w,  'w=' + newWidth );
+            } else {
+                outputSrc += '&w=' + newWidth;
+            }
         } else {
             outputSrc += '?w=' + newWidth;
         }
 
-        outputSrc += '&dpr=' + ctx._dpr;
+        if( outputSrc.indexOf( '&dpr' ) < 0 ) {
+            outputSrc += '&dpr=' + ctx._dpr;
+        }
 
         img.src = outputSrc;
         console.log( 'outputSrc: ', outputSrc );

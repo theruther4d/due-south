@@ -9,42 +9,93 @@
     </head>
     <body>
 
-
-    <h1>Articles:</h1>
-    <ul>
-        
-            <li>
-                <a href="../../articles/fridays-favs-embracing-dark-spaces">
-                    Friday&#39;s Favs: Embracing Dark Spaces
-                </a>
-            </li>
-        
-            <li>
-                <a href="../../articles/fridays-favs-sprucing-up-your-desk">
-                    Friday&#39;s Favs: Sprucing Up Your Desk
-                </a>
-            </li>
-        
-            <li>
-                <a href="../../articles/this-is-brand-new">
-                    This is Brand New!!!
-                </a>
-            </li>
-        
-            <li>
-                <a href="../../articles/this-is-a-test-article">
-                    This is a Test Article
-                </a>
-            </li>
-        
-            <li>
-                <a href="../../articles/how-to-choose-a-color-scheme">
-                    How to choose a color scheme
-                </a>
-            </li>
-        
+    <nav class="nav">
+    <ul class="nav__utilities">
+        <li class="nav__utilities__item nav__utilities__item--logo">
+            <a href="/" class="nav__utilities__item__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 40" width="30" height="30" class="nav__utilities__item__icon">
+                    <polygon points="18,40 0,0 18,9 36,0 "/>
+                </svg>
+            </a>
+        </li>
+        <li class="nav__utilities__item nav__utilities__item--hamburger">
+            <a href="#" class="nav__utilities__item__link">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 24" width="30" height="30" class="nav__utilities__item__icon">
+                    <rect id="top_bun" width="33" height="4" />
+                    <rect id="burger" y="20" width="33" height="4" />
+                    <rect id="bottom_bun" x="7" y="10" width="33" height="4" />
+                </svg>
+            </a>
+        </li>
     </ul>
+    <ul class="nav__content">
+        <li class="nav__content__item">About</li>
+        <li class="nav__content__item">Blog</li>
+        <li class="nav__content__item">Contact</li>
+    </ul>
+</nav>
 
+
+    <main class="home">
+        <div class="section-content">
+            
+
+            <!-- featured article -->
+            <article class="featured-article">
+                <img src="https://duesouth.imgix.net/2554eb882db1c3fe769fc55ee50d6a9d79c05ec5_bedroom.jpg" alt="" class="featured-article__image" />
+                <div class="featured-article__meta">
+                    <img src="../../images/jess.png" alt="Jessica Rutherford" class="featured-article__meta__avatar" width="40" height="40">
+                    <span class="featured-article__meta__date">January 0, 2016</span>
+                </div>
+                <div class="featured-article__wrapper">
+                    <div class="featured-article__content">
+                        <h2 class="featured-article__content__title">Friday&#39;s Favs: Embracing Dark Spaces</h2>
+                        <p class="featured-article__content__excerpt">I&#39;ve got a bit of writer&#39;s block, so I thought it would be fun to share with you some of my favorite things. That&#39;s right...it&#39;s time for FRIDAY&#39;S FAVS!! I just imagined myself screaming that in my best Oprah Winfrey while hundreds of people cry like I&#39;ve changed their lives somehow. AAHH, the power..</p>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Recent Articles -->
+            <ul class="articles">
+                
+                    
+                
+                    
+                        <li class="articles__article">
+                            <a href="../../articles/fridays-favs-sprucing-up-your-desk">
+                                Friday&#39;s Favs: Sprucing Up Your Desk
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li class="articles__article">
+                            <a href="../../articles/this-is-brand-new">
+                                This is Brand New!!!
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li class="articles__article">
+                            <a href="../../articles/this-is-a-test-article">
+                                This is a Test Article
+                            </a>
+                        </li>
+                    
+                
+                    
+                        <li class="articles__article">
+                            <a href="../../articles/how-to-choose-a-color-scheme">
+                                How to choose a color scheme
+                            </a>
+                        </li>
+                    
+                
+            </ul>
+
+        </div>
+    </main>
         <footer>
         </footer>
         <script src="../../scripts/bundle.js"></script>
