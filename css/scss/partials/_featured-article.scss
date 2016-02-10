@@ -37,7 +37,7 @@
 
         &__date {
             font-size: 1.4rem;
-            font-weight: 700;
+            font-weight: 400;
             vertical-align: middle;
             color: #FFFFFF;
             color: rgba( lighten( $secondary, 20% ), 0.8 );
@@ -59,8 +59,8 @@
         }
 
         &__excerpt {
-            font-size: 1.4rem;
-            line-height: 1.5;
+            // font-size: 1.4rem;
+            // line-height: 1.5;
             margin-bottom: 0;
             text-align: left;
         }
