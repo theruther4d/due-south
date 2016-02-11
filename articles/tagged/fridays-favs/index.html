@@ -8,8 +8,23 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700" type="text/css">
         <script src="https://use.typekit.net/hui4dnt.js"></script>
         <script>try{Typekit.load({ async: true });}catch(e){}</script>
+        <script src="../../scripts/imgix.min.js"></script>
+        <script type="text/javascript">
+            imgix.onready( function() {
+                imgix.fluid({
+                    fluidClass: 'fluid',
+                    lazyLoad: true,
+                    onLoad: function( el, url ) {
+                        console.log( 'el: ', el );
+                        console.log( 'url: ', url );
+                        console.log( '=========' );
+                    }
+                });
+            });
+        </script>
     </head>
     <body>
+        <h1>Updated</h1>
 
 
     <h1>Articles tagged friday&#39;s favs:</h1>
@@ -23,7 +38,7 @@
 
         <footer>
         </footer>
-        <script src="../../scripts/bundle.js"></script>
+        
     </body>
 </html>
 
