@@ -43,15 +43,24 @@ body {
     font-weight: 400;
     text-transform: uppercase;
     text-decoration: none;
-    background: $primary;
-    color: darken( $primary, 40% );
     border-radius: 100px;
     margin-top: 40px;
-    box-shadow: 0 10px 20px 0px rgba( darken( $primary, 45% ), 0.2 ),
-                0 0 30px 5px rgba( $primary, 0.8 );
+    color: $primary;
+    border: 2px solid $primary;
+
+    &.featured {
+        background: $primary;
+        color: darken( $primary, 40% );
+        box-shadow: 0 10px 20px 0px rgba( darken( $primary, 45% ), 0.2 ),
+        0 0 30px 5px rgba( $primary, 0.8 );
+    }
 }
 
 .homepage-article-header {
     font-size: 2.4rem;
     margin-top: 40px;
+}
+
+/*main*/.home {
+    padding-bottom: 100px;
 }
