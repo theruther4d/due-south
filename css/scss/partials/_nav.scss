@@ -101,6 +101,20 @@ $nav-height: 40px;
 
         &__item {
             @include contentContainer();
+            opacity: 0;
+            transform: translate3d( 0, -20px, 0 );
+            transition: opacity 0.25s ease-out;
+
+            .nav--open & {
+                opacity: 1;
+                transform: translate3d( 0, 0, 0 );
+            }
+
+            @for $i from 1 through 4 {
+                &:nth-of-type( #{$i} ) {
+                    transition: opacity 0.5s #{ 0.15 + ( 0.2s * $i ) } ease-out, transform 0.5s #{ 0.15 + ( 0.2s * $i ) } ease-out;
+                }
+            }
 
             &__link {
                 padding: 20px 0 10px;
