@@ -19,7 +19,6 @@ html {
     overflow-x: hidden;
     overflow-y: scroll;
     color: $text;
-    background: $secondary;
 }
 
 html,
@@ -30,6 +29,7 @@ body {
 
 body {
     background: #FFFFFF;
+    padding-top: 45px;
 }
 
 .section-content {
