@@ -102,7 +102,7 @@ $nav-height: 40px;
         &__item {
             @include contentContainer();
             opacity: 0;
-            transform: translate3d( 0, -20px, 0 );
+            transform: translate3d( 0, -40px, 0 );
             transition: opacity 0.25s ease-out;
 
             .nav--open & {
