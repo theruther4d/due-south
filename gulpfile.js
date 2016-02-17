@@ -64,9 +64,9 @@ var prismicConfig = {
             return '/articles/' + doc.slug;
         },
         htmlSerializer: function( elem, content ) {
-            if( elem.type == 'image' ) {
-                return '<img class="fluid" src="../../images/blank.png" data-src="' + makeImgixUrl( elem.url ) + '" />';
-            }
+            // if( elem.type == 'image' ) {
+            //     return '<img class="fluid" src="../../images/blank.png" data-src="' + makeImgixUrl( elem.url ) + '" />';
+            // }
         }
     },
     pages: {
