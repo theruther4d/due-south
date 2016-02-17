@@ -1,31 +1,19 @@
 {
   "dependencies": {
-    "async": "^1.5.2",
-    "clone": "^1.0.2",
-    "debug": "^2.2.0",
-    "prismic.io": "1.4.0",
-    "underscore": "^1.8.3"
+    "prismic.io": "1.4.0"
   },
-  "description": "A Metalsmith.io plugin to integrate and pull in content from Prismic.io",
-  "devDependencies": {
-    "assert-dir-equal": "^1.0.1",
-    "handlebars": "^4.0.5",
-    "metalsmith": "^1.7.0",
-    "metalsmith-templates": "^0.7.0",
-    "mocha": "^2.4.5"
-  },
+  "description": "A plugin for prismic.io with helper functions for static-site generating.",
+  "devDependencies": {},
   "directories": {},
   "license": "MIT",
   "main": "lib/index.js",
-  "name": "metalsmith-prismic",
+  "name": "prismic-static",
   "optionalDependencies": {},
   "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mbanting/metalsmith-prismic.git"
   },
-  "scripts": {
-    "test": "mocha"
-  },
-  "version": "0.9.0"
+  "scripts": {},
+  "version": "0.0.1"
 }

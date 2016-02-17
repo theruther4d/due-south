@@ -145,6 +145,7 @@ gulp.task( 'tags', function() {
 
         if( collection.tags && collection.tagTemplate ) {
             prismic.getTaggedDocuments( collectionName, function( tags ) {
+                console.log( tags );
                 // Now we've got an object containing tagname: [ documents ]
                 Object.keys( tags ).forEach( function( tag ) {
                     gulp.src( templateDir + '/' + collection.tagTemplate )
