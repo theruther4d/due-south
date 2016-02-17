@@ -1,4 +1,5 @@
 var imgix = require( './imgix' );
+var FastClick = require( './fastClick' );
 
 var Main = ( function() {
     return {
@@ -13,10 +14,13 @@ var Main = ( function() {
             });
 
             document.addEventListener( 'DOMContentLoaded', function( e ) {
+                // Attach FastClick:
+                FastClick.attach( document.body );
+
                 // Do stuff with the images:
-                var images = new imgix();
-                images._init();
-            });
+                // var images = new imgix();
+                // images._init();
+            }, false );
         }
     }
 }());
