@@ -951,6 +951,12 @@ var Main = ( function() {
         init: function() {
             var nav = document.querySelector( '.nav' );
             var hamburger = document.querySelector( '.nav__utilities__item--hamburger' );
+            var navScreen = document.querySelector( '.nav-screen' );
+
+            navScreen.addEventListener( 'touchstart', function( e ) {
+                e.preventDefault();
+                nav.classList.remove( 'nav--open' );
+            });
 
             hamburger.addEventListener( 'click', function( e ) {
                 e.preventDefault();
