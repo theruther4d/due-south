@@ -2,7 +2,6 @@ $nav-height: 40px;
 
 .nav {
     width: 100%;
-    height: calc( 100vh - 15px );
     max-height: 60px;
     overflow: hidden;
     padding: 15px 0 5px;
@@ -15,11 +14,11 @@ $nav-height: 40px;
 
     @supports( backdrop-filter: blur( 10px ) ) {
         background: rgba( #FFFFFF, 0.7 );
-        -webkit-backdrop-filter: blur( 10px ) saturate( 60% );
+        -webkit-backdrop-filter: blur( 10px ) saturate( 160% );
     }
 
     &--open {
-        max-height: calc( 100vh - 15px );
+        max-height: 300px;
     }
 
     .nav--light & {
@@ -96,8 +95,7 @@ $nav-height: 40px;
     &__content {
         width: 400px;
         margin: 0 auto;
-        height: calc( 100vh - 55px );
-        padding: 20px 0 0;
+        padding: 20px 0 20px;
 
         &__item {
             @include contentContainer();
@@ -108,11 +106,17 @@ $nav-height: 40px;
             .nav--open & {
                 opacity: 1;
                 transform: translate3d( 0, 0, 0 );
+
+                @for $i from 1 through 4 {
+                    &:nth-of-type( #{5 - $i} ) {
+                        transition: opacity 0.5s #{ 0.05 + ( 0.1s * ( $i - 1 ) ) } ease-in-out, transform 0.5s #{ 0.05s + ( 0.1s * ( $i - 1 ) ) } ease-in-out;
+                    }
+                }
             }
 
             @for $i from 1 through 4 {
                 &:nth-of-type( #{$i} ) {
-                    transition: opacity 0.5s #{ 0.15 + ( 0.2s * $i ) } ease-out, transform 0.5s #{ 0.15 + ( 0.2s * $i ) } ease-out;
+                    transition: opacity 0.25s #{ 0.1 + ( 0.2s * ( $i - 1 ) ) } ease-out, transform 0.25s #{ 0.1s + ( 0.2s * ( $i - 1 ) ) } ease-out;
                 }
             }
 
@@ -124,6 +128,12 @@ $nav-height: 40px;
                 font-weight: 300;
                 display: block;
                 border-bottom: 1px solid $primary;
+            }
+
+            &:last-of-type {
+                .nav__content__item__link {
+                    border-bottom: 0;
+                }
             }
         }
     }

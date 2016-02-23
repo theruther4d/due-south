@@ -18,8 +18,8 @@ var Main = ( function() {
                 FastClick.attach( document.body );
 
                 // Do stuff with the images:
-                // var images = new imgix();
-                // images._init();
+                var images = new imgix();
+                images._init();
             }, false );
         }
     }
