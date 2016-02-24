@@ -2,7 +2,7 @@ $nav-height: 40px;
 
 .nav {
     width: 100%;
-    max-height: 60px;
+    max-height: 70px;
     overflow: hidden;
     padding: 15px 0 5px;
     position: absolute;
@@ -10,22 +10,31 @@ $nav-height: 40px;
     top: 0;
     left: 0;
     z-index: 10;
-    transition: max-height 0.5s ease-in-out, background 0.5s ease, -webkit-filter 0.5s ease;
+    transition: max-height 0.5s ease-in-out, background 0.5s 0.25s ease;
+
+    &:after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        width: calc( 100% - 40px );
+        margin: auto;
+        height: 1px;
+        background: rgba( 255, 255, 255, 0.4 );
+    }
 
 
     &--open {
         max-height: 300px;
         background: rgba( #FFFFFF, 0.98 );
-
-        @supports( backdrop-filter: blur( 10px ) ) {
-            background: rgba( #FFFFFF, 0.7 );
-            -webkit-backdrop-filter: blur( 10px ) saturate( 160% );
-        }
+        transition: max-height 0.5s ease-in-out, background 0.5s ease;
 
         + .nav-screen {
             background: rgba( darken( $primary, 70% ), 0.5 );
             z-index: 8;
-            transition: background 0.5s 0.25s ease, z-index 0.15s ease, background 0.5s ease, -webkit-filter 0.5s ease;
+            transition: background 0.5s 0.25s ease, z-index 0.15s ease;
         }
     }
 
@@ -86,6 +95,10 @@ $nav-height: 40px;
 
             &--hamburger {
                 right: 12px;
+
+                .nav__utilities__item__icon {
+                    width: 30px;
+                }
             }
 
             &__link {
@@ -104,13 +117,26 @@ $nav-height: 40px;
                 left: 0;
                 margin: auto;
                 fill: #FFFFFF;
+                user-select: none;
+
+                * {
+                    transition: fill 0.5s 0.25s ease;
+                }
 
                 path {
                     fill: #FFFFFF;
                 }
 
-                .nav--light & {
-                    fill: #FFFFFF;
+                .nav--open & {
+                    fill: $primary;
+
+                    path {
+                        fill: $primary;
+                    }
+
+                    * {
+                        transition: fill 0.5s ease;
+                    }
                 }
             }
         }
