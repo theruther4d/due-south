@@ -65,7 +65,8 @@ var prismicConfig = {
         },
         htmlSerializer: function( elem, content ) {
             if( elem.type == 'image' ) {
-                return '<img class="fluid" src="../../images/blank.png" data-src="' + makeImgixUrl( elem.url ) + '" />';
+                console.log( elem );
+                return '<img class="fluid" src="../../images/blank.png" data-src="' + makeImgixUrl( elem.url ) + '" width="' + elem.dimensions.width + '" height="' + elem.dimensions.height + '" />';
             }
         }
     },
