@@ -1,6 +1,6 @@
 $primary: #e2bb71;
 $secondary: #bef4d9;
-$text: darken( $primary, 50 );
+$text: darken( $primary, 60% );
 
 *,
 *:before,
@@ -9,8 +9,6 @@ $text: darken( $primary, 50 );
 }
 
 html {
-    // font-family: 'Vollkorn', serif;
-    // font-family: system, -apple-system, BlinkMacSystemFon, "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-family: "myriad-pro", sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;

@@ -1,6 +1,4 @@
 /*main*/.article {
-    //position: relative;
-    //z-index: 1;
 
     &__header {
         position: relative;
@@ -83,6 +81,11 @@
             @include contentContainer();
             text-align: left;
             margin-top: 20px;
+
+            &.block-img {
+                padding-right: 0;
+                padding-left: 0;
+            }
         }
     }
 
@@ -175,9 +178,6 @@
 
             &__tag {
                 display: inline-block;
-                padding: 5px 15px;
-                border-radius: 100px;
-                border: 2px solid darken( $secondary, 15% );
                 margin: 5px;
 
                 @include bp( 1200px ) {
@@ -203,6 +203,15 @@
                     color: darken( $secondary, 25% );
                     font-weight: 700;
                     font-size: 1.4rem;
+                    padding: 5px 15px;
+                    border-radius: 100px;
+                    border: 2px solid darken( $secondary, 15% );
+
+                    &:active {
+                        color: #FFFFFF;
+                        background: darken( $secondary, 15% );
+                        -webkit-tap-highlight-color: transparent;
+                    }
                 }
             }
         }
