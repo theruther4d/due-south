@@ -11,14 +11,21 @@
     }
     // Figure out overall color of image to determine
     // blend alpha adjustment
+    var featuredImage = doc.getImage( 'articles.featured-image' );
+    var featuredImageStyle = featuredImage ? 'style="background-image: url( ' + makeImgix( featuredImage.main.url ) + ');"' : '';
+    var featuredImageBrighness;
+
+    if( featuredImage ) {
+        return overlayImage( featuredImage.main.url, function( brightness ) {
+            featuredImageBrighness = brightness;
+        });
+    }
 %>
 
 <%- include( 'partials/header.ejs' ) %>
     <main class="article">
         <%- include( 'partials/nav.ejs' ); %>
-        <header class="article__header" style="background-image: url( 'https://duesouth.imgix.net/2793a42eb8d557403b8ed7c0c89b4c2c0adaee59_living-room.jpg?h=500&fit=crop&blend=000000&balph=30&bm=multiply'); ">
-            <%# <img src="https://duesouth.imgix.net/2554eb882db1c3fe769fc55ee50d6a9d79c05ec5_bedroom.jpg?mask=https%3A%2F%2Fprismic-io.s3.amazonaws.com%2Fdue-south%252F0d497457-7a3a-45e7-83a1-e0fb8d3a2565_mask-3.png&fm=png&fit=clamp&blend=000000&bm=multiply&balph=35&h=400" alt="" class="article__header__image fluid">%>
-            <%# <img src="../../images/blank.png" data-src="https://duesouth.imgix.net/2793a42eb8d557403b8ed7c0c89b4c2c0adaee59_living-room.jpg?h=500&fit=crop" alt="" class="article__header__image fluid">%>
+        <header class="article__header" <%- featuredImageStyle %>>
             <h1 class="article__header__title"><%= doc.getText( 'articles.title' ); %></h1>
         </header>
 
@@ -27,7 +34,7 @@
             <div class="article__sidebar__meta">
                 <div class="section-content">
                     <div class="article__sidebar__meta__author">
-                        <img src="../../images/jess.png" alt="Jessica Rutherford" class="article__sidebar__meta__author__avatar" width="40" height="40">
+                        <img src="../../images/jess.png" alt="Jessica Rutherford" class="article__sidebar__meta__author__avatar" width="40" height="40" data-brightness="<%= featuredImageBrighness %>">
                         <h4 class="article__sidebar__meta__author__name">Jessica Rutherford</h4>
                     </div>
                     <span class="article__sidebar__meta__date">

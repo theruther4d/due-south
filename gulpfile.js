@@ -12,6 +12,8 @@ var cssMin      = require( 'gulp-minify-css' );
 var source      = require( 'vinyl-source-stream' );
 var browserify  = require( 'browserify' );
 var cheerio     = require( 'cheerio' );
+var resemble = require( 'node-resemble-js' );
+// var fs = require( 'fs' );
 
 // Path Variables:
 var templateDir = './templates';
@@ -50,6 +52,13 @@ function getExcerpt( doc ) {
     }
 };
 
+function overlayImage( file, cb ) {
+    var fileData = new Buffer( file, 'base64' );
+    var api = resemble( file ).onComplete( function( data ) {
+    	cb( data.brightness );
+    });
+};
+
 // Prismic config:
 var prismicConfig = {
     articles: {
@@ -65,7 +74,6 @@ var prismicConfig = {
         },
         htmlSerializer: function( elem, content ) {
             if( elem.type == 'image' ) {
-                console.log( elem );
                 return '<img class="fluid" src="../../images/blank.png" data-src="' + makeImgixUrl( elem.url ) + '" width="' + elem.dimensions.width + '" height="' + elem.dimensions.height + '" />';
             }
         }
@@ -108,6 +116,10 @@ gulp.task( 'src', function( done ) {
 });
 
 gulp.task( 'collections', function() {
+    // overlayImage( __dirname + '/images/jess.png', function( brightness ) {
+    //     console.log( brightness );
+    // });
+    // console.log( __dirname + '/images/jess.png' );
     // Loop through each collection type:
     Object.keys( prismicConfig ).forEach( function( collectionName ) {
         prismic.getDocumentsByType( collectionName, function( res ) {
@@ -126,6 +138,7 @@ gulp.task( 'collections', function() {
                 // Create the collection files:
                 gulp.src( templateDir + '/' + collection.template )
                     .pipe( ejs({
+                        overlayImage: overlayImage,
                         sluggify: sluggify,
                         doc: doc,
                         makeImgix: makeImgixUrl,
@@ -146,7 +159,6 @@ gulp.task( 'tags', function() {
 
         if( collection.tags && collection.tagTemplate ) {
             prismic.getTaggedDocuments( collectionName, function( tags ) {
-                console.log( tags );
                 // Now we've got an object containing tagname: [ documents ]
                 Object.keys( tags ).forEach( function( tag ) {
                     gulp.src( templateDir + '/' + collection.tagTemplate )

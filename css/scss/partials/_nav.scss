@@ -119,6 +119,7 @@ $nav-height: 40px;
                 margin: auto;
                 fill: #FFFFFF;
                 user-select: none;
+                pointer-events: none;
 
                 * {
                     transition: fill 0.5s 0.25s ease;
