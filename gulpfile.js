@@ -13,7 +13,9 @@ var source      = require( 'vinyl-source-stream' );
 var browserify  = require( 'browserify' );
 var cheerio     = require( 'cheerio' );
 var resemble = require( 'node-resemble-js' );
-// var fs = require( 'fs' );
+// var http = require( 'http' );
+var request = require( 'request' );
+var fs = require( 'fs' );
 
 // Path Variables:
 var templateDir = './templates';
@@ -53,11 +55,35 @@ function getExcerpt( doc ) {
 };
 
 function overlayImage( file, cb ) {
-    var fileData = new Buffer( file, 'base64' );
+    // request.get( file, function( err, res, body ) {
+    //     if( !err && res.statusCode == 200 ) {
+    //         var fileStream = new Buffer( body )/*.toString( 'base64' )*/;
+    //         // var fileStream = new Buffer( body );
+    //         // console.log( fileStream );
+    //         var api = resemble( fileStream ).onComplete( function( data ) {
+    //             cb( data.brightness );
+    //         })
+    //     }
+    // });
+
+    // var fileStream = request( file );
+    // console.log( fileStream );
+
+    // var fileStream = request( file ).pipe( fs.createReadStream( 'bozo.jpg' ) );
+    // var api = resemble( fileStream ).onComplete( function( data ) {
+    //     cb( data.brightness );
+    // });
+
+
+    // var fileData = new Buffer( file, 'base64' );
     var api = resemble( file ).onComplete( function( data ) {
     	cb( data.brightness );
     });
 };
+
+// overlayImage( 'file:///Users/joshrutherford/due-south/images/jess.png', function( brightness ) {
+//     console.log( 'brightness: ', brightness );
+// });
 
 // Prismic config:
 var prismicConfig = {
