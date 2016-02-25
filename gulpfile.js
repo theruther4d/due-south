@@ -12,10 +12,10 @@ var cssMin      = require( 'gulp-minify-css' );
 var source      = require( 'vinyl-source-stream' );
 var browserify  = require( 'browserify' );
 var cheerio     = require( 'cheerio' );
-var resemble = require( 'node-resemble-js' );
+// var resemble = require( 'node-resemble-js' );
 // var http = require( 'http' );
-var request = require( 'request' );
-var fs = require( 'fs' );
+// var request = require( 'request' );
+// var fs = require( 'fs' );
 
 // Path Variables:
 var templateDir = './templates';
