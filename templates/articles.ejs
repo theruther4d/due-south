@@ -12,7 +12,7 @@
     // Figure out overall color of image to determine
     // blend alpha adjustment
     var featuredImage = doc.getImage( 'articles.featured-image' );
-    var featuredImageStyle = featuredImage ? 'style="background-image: url( ' + makeImgix( featuredImage.main.url ) + ');"' : '';
+    var featuredImageStyle = featuredImage ? 'style="background-image: url( ' + makeImgix( featuredImage.main.url ) + '?blend=000000&bm=multiply&balph=50);"' : '';
     var featuredImageBrighness;
 
     if( featuredImage ) {
