@@ -1,19 +1,21 @@
 // Get all our gulp needs:
-var gulp        = require( 'gulp' );
-var rename      = require( 'gulp-rename' );
-var ejs         = require( 'gulp-ejs' );
-var del         = require( 'del' );
-var prismic     = require( './prismic' );
+var gulp = require( 'gulp' );
+var rename = require( 'gulp-rename' );
+var ejs = require( 'gulp-ejs' );
+var del = require( 'del' );
+var prismicStatic = require( 'prismic-static' );
+var prismic = new prismicStatic( 'https://due-south.cdn.prismic.io/api' );
 var ImgixClient = require( 'imgix-core-js' );
 var browserSync = require( 'browser-sync' ).create();
-var scss        = require( 'gulp-sass' );
-var prefix      = require( 'gulp-autoprefixer' );
-var cssMin      = require( 'gulp-minify-css' );
-var source      = require( 'vinyl-source-stream' );
-var browserify  = require( 'browserify' );
-var cheerio     = require( 'cheerio' );
+var scss = require( 'gulp-sass' );
+var prefix = require( 'gulp-autoprefixer' );
+var cssMin = require( 'gulp-minify-css' );
+var source = require( 'vinyl-source-stream' );
+var browserify = require( 'browserify' );
+// var cheerio = require( 'cheerio' );
 // var resemble = require( 'node-resemble-js' );
 // var http = require( 'http' );
+// var https = require( 'https' );
 // var request = require( 'request' );
 // var fs = require( 'fs' );
 
@@ -54,35 +56,33 @@ function getExcerpt( doc ) {
     }
 };
 
-function overlayImage( file, cb ) {
-    // request.get( file, function( err, res, body ) {
-    //     if( !err && res.statusCode == 200 ) {
-    //         var fileStream = new Buffer( body )/*.toString( 'base64' )*/;
-    //         // var fileStream = new Buffer( body );
-    //         // console.log( fileStream );
-    //         var api = resemble( fileStream ).onComplete( function( data ) {
-    //             cb( data.brightness );
-    //         })
-    //     }
-    // });
-
-    // var fileStream = request( file );
-    // console.log( fileStream );
-
-    // var fileStream = request( file ).pipe( fs.createReadStream( 'bozo.jpg' ) );
-    // var api = resemble( fileStream ).onComplete( function( data ) {
-    //     cb( data.brightness );
-    // });
-
-
-    // var fileData = new Buffer( file, 'base64' );
-    var api = resemble( file ).onComplete( function( data ) {
-    	cb( data.brightness );
+function download( url, dest, cb ) {
+    var file = fs.createWriteStream( dest );
+    var request = https.get( url, function( response ) {
+        response.pipe( file );
+        file.on( 'finish', function() {
+            file.close( function() {
+                cb( file );
+            });
+        });
+    }).on( 'error', function( err ) {
+        fs.unlink( dest );
+        if( cb ) {
+            cb( err.message );
+        }
     });
 };
 
-// overlayImage( 'file:///Users/joshrutherford/due-south/images/jess.png', function( brightness ) {
-//     console.log( 'brightness: ', brightness );
+function overlayImage( url, cb ) {
+    download( url, __dirname + '/images/tmp.png', function( file ) {
+        resemble( __dirname + '/images/tmp.png' ).onComplete( function( data ) {
+        	cb( data.brightness );
+        });
+    });
+};
+
+// overlayImage( 'https://duesouth.imgix.net/b9388512530afd883a150143b0c1118915876070_photo-1422036306541-00138cae4dbc.jpeg?blend=000000&bm=multiply&balph=50', function( brightness ) {
+//     console.log( brightness );
 // });
 
 // Prismic config:

@@ -24,6 +24,7 @@
     "gulp-sass": "^2.2.0",
     "imgix-core-js": "^0.2.4",
     "node-resemble-js": "0.0.5",
+    "prismic-static": "0.0.2",
     "request": "^2.69.0",
     "vinyl-source-stream": "^1.1.0"
   }
