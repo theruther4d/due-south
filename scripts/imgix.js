@@ -29,6 +29,8 @@ proto._resize = function() {
     this._resizeTimer = setTimeout( function() {
         var ww = window.outerWidth ? window.outerWidth : window.innerWidth;
 
+        // Only resize if going to larger
+        // resolution
         if( ww > ctx._ww ) {
             ctx._resizeImages();
             ctx._resizeBgImages();
@@ -108,30 +110,24 @@ proto._resizeBgImages = function() {
         var dpr = ctx._parseQueryParams( 'dpr', src );
         var updatedSrc = src;
 
+        function replaceParam( paramName, param, replacement ) {
+            if( param ) {
+                var paramString = paramName + '=';
+                updatedSrc = updatedSrc.replace( paramString + param, paramString + replacement );
+            } else {
+                updatedSrc += '&' + paramName + '=' + replacement;
+            }
+        };
+
         if( !hasParams ) {
-            updatedSrc = src + '?w=' + dimensions.width + '&h=' + dimensions.height;
+            updatedSrc += '?w=' + dimensions.width + '&h=' + dimensions.height;
             updatedSrc += '&dpr=' + ctx._dpr;
         } else {
-            if( w ) {
-                updatedSrc = src.replace( 'w=' + w, 'w=' + dimensions.width );
-            } else {
-                updatedSrc += '&w=' + dimensions.width;
-            }
-
-            if( h ) {
-                updatedSrc = src.replace( 'h=' + h, 'h=' + dimensions.height );
-            } else {
-                updatedSrc += '&h=' + dimensions.height;
-            }
-
-            if( dpr ) {
-                updatedSrc = src.replace( 'dpr=' + dpr, 'dpr=' + ctx._dpr );
-            } else {
-                updatedSrc += '&dpr=' + ctx._dpr;
-            }
+            replaceParam( 'w', w, dimensions.width );
+            replaceParam( 'h', h, dimensions.height );
+            replaceParam( 'dpr', dpr, ctx._dpr );
         }
 
-        console.log( updatedSrc );
         img.style.backgroundImage = 'url(' + updatedSrc + ')';
     });
 };
