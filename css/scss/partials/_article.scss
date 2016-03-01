@@ -203,9 +203,9 @@
                 &__link {
                     text-decoration: none;
                     color: darken( $secondary, 25% );
-                    font-weight: 700;
+                    font-weight: 600;
                     font-size: 1.4rem;
-                    padding: 5px 15px;
+                    padding: 5px 15px 7px;
                     border-radius: 100px;
                     border: 2px solid darken( $secondary, 15% );
 
@@ -257,8 +257,9 @@
                 &__name {
                     display: inline-block;
                     vertical-align: middle;
-                    font-size: 1.4rem;
-                    font-weight: 600;
+                    font-size: 1.6rem;
+                    font-weight: 300;
+                    // letter-spacing: 0.05rem;
 
                     @include bp( 1200px ) {
                         margin-top: 10px;
@@ -269,7 +270,7 @@
 
             &__date {
                 display: inline-block;
-                font-size: 1.4rem;
+                font-size: 1.6rem;
                 font-weight: 300;
 
                 @include bp( 1200px ) {
