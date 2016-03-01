@@ -13,11 +13,13 @@ var cssMin = require( 'gulp-minify-css' );
 var source = require( 'vinyl-source-stream' );
 var browserify = require( 'browserify' );
 var cheerio = require( 'cheerio' );
-// var resemble = require( 'node-resemble-js' );
+var resemble = require( 'node-resemble-js' );
 // var http = require( 'http' );
-// var https = require( 'https' );
+var path = require( 'path' );
+var https = require( 'https' );
 // var request = require( 'request' );
-// var fs = require( 'fs' );
+var fs = require( 'fs' );
+var gm = require( 'gm' );
 
 // Path Variables:
 var templateDir = './templates';
@@ -60,29 +62,40 @@ function download( url, dest, cb ) {
     var file = fs.createWriteStream( dest );
     var request = https.get( url, function( response ) {
         response.pipe( file );
-        file.on( 'finish', function() {
-            file.close( function() {
-                cb( file );
-            });
-        });
-    }).on( 'error', function( err ) {
-        fs.unlink( dest );
-        if( cb ) {
-            cb( err.message );
-        }
-    });
-};
-
-function overlayImage( url, cb ) {
-    download( url, __dirname + '/images/tmp.png', function( file ) {
-        resemble( __dirname + '/images/tmp.png' ).onComplete( function( data ) {
-        	cb( data.brightness );
+        file.on('finish', function() {
+            gm( file ).setFormat( 'png' ).write( __dirname + '/bozo.png', function( err ) {
+                console.log( 'stuff' );
+                file.close( cb );
+            })
+            // console.log( 'file finished' );
         });
     });
 };
 
-// overlayImage( 'https://duesouth.imgix.net/b9388512530afd883a150143b0c1118915876070_photo-1422036306541-00138cae4dbc.jpeg?blend=000000&bm=multiply&balph=50', function( brightness ) {
-//     console.log( brightness );
+function convertToPng( file ) {
+    // var converted = __dirname + '/bozo.png';
+    // var writeStream = fs.createWriteStream( file );
+
+    // console.log( writeStream );
+
+    gm( file ).setFormat( 'png' ).write( __dirname + '/bozo.png', function( err ) {
+        console.log( arguments );
+        console.log( 'finished ', err );
+    });
+    // gm( file ).setFormat( 'png' ).pipe( writeStream );
+
+    // writeStream.on( 'finish', function() {
+    //     console.log( 'converted is finished' );
+    //     file.close();
+    // });
+};
+
+// download( 'https://duesouth.imgix.net/2554eb882db1c3fe769fc55ee50d6a9d79c05ec5_bedroom.jpg', __dirname + '/images/bozo.jpg', function() {
+//     // convertToPng( __dirname + '/images/bozo.jpg' );
+//     // console.log( arguments );
+//     // resemble( __dirname + '/images/bozo.png' ).onComplete( function( data ) {
+//     //     cb( data.brightness );
+//     // });
 // });
 
 // Prismic config:
@@ -142,10 +155,6 @@ gulp.task( 'src', function( done ) {
 });
 
 gulp.task( 'collections', function() {
-    // overlayImage( __dirname + '/images/jess.png', function( brightness ) {
-    //     console.log( brightness );
-    // });
-    // console.log( __dirname + '/images/jess.png' );
     // Loop through each collection type:
     Object.keys( prismicConfig ).forEach( function( collectionName ) {
         prismic.getDocumentsByType( collectionName, function( res ) {
@@ -164,7 +173,7 @@ gulp.task( 'collections', function() {
                 // Create the collection files:
                 gulp.src( templateDir + '/' + collection.template )
                     .pipe( ejs({
-                        overlayImage: overlayImage,
+                        // overlayImage: overlayImage,
                         sluggify: sluggify,
                         doc: doc,
                         makeImgix: makeImgixUrl,

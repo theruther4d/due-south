@@ -92,6 +92,10 @@ $nav-height: 40px;
 
             &--logo {
                 left: 10px;
+
+                .nav__utilities__item__icon {
+                    width: 24px;
+                }
             }
 
             &--hamburger {
