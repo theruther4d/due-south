@@ -32,10 +32,10 @@ $nav-height: 40px;
         background: rgba( #FFFFFF, 0.98 );
         transition: max-height 0.5s ease-in-out, background 0.5s ease, backdrop-filter 0.5s ease;
 
-        @supports( -webkit-backdrop-filter: blur( 10px ) ) {
-            background: rgba( #FFFFFF, 0.94 );
-            backdrop-filter: blur( 10px ) brightness( 300% ) saturate( 150% );
-        }
+        // @supports( -webkit-backdrop-filter: blur( 10px ) ) {
+        //     background: rgba( #FFFFFF, 0.94 );
+        //     backdrop-filter: blur( 10px ) brightness( 300% ) saturate( 150% );
+        // }
 
         + .nav-screen {
             background: rgba( darken( $primary, 70% ), 0.5 );
@@ -85,27 +85,26 @@ $nav-height: 40px;
                 }
 
                 /*path*/.hamburger-line {
-                    transition: fill 0.5s 0.25s ease, transform 0.5s ease, opacity 0.5s ease !important;
+                    transition: fill 0.5s 0.25s ease, transform 0.3s ease, opacity 0.3s ease !important;
                     transform-style: preserve-3d;
                     transform-origin: right center;
 
                     .nav--open & {
-                        transition: fill 0.5s ease, transform 0.5s ease, opacity 0.5s ease !important;
+                        transition: fill 0.5s ease, transform 0.3s ease, opacity 0.3s 0.15s ease !important;
 
                         &-1 {
-                            transform: rotate( 45deg ) translate3d( 40px, 40px, 0 );
+                            transform: rotate( 135deg ) translate3d( 83px, 3px, 0 );
                         }
 
                         &-2 {
-                            transform: translate3d( -50px, 0, 0 );
+                            transform: translate3d( -100px, 0, 0 );
                             opacity: 0;
                         }
 
                         &-3 {
-                            transform: rotate( -45deg ) translate3d( 15px, 15px, 0 );
+                            transform: rotate( -135deg ) translate3d( -57px, 54px, 0 );
                             transform-origin: left center;
                         }
-
                     }
                 }
             }
