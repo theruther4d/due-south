@@ -6,6 +6,7 @@
         padding: 30px 0;
         min-height: 500px;
         mask: url( '../../images/mask.png' ) bottom left / 500px repeat-x;
+        background-color: #000000;
         background-size: cover;
         background-repeat: no-repeat;
 
@@ -67,11 +68,11 @@
 
         img {
             margin-top: 10px;
-            mask: url( '../../images/mask.png' ) top left / cover;
+            // mask: url( '../../images/mask.png' ) top left / cover;
 
-            &:nth-of-type( even ) {
-                mask: url( '../../images/mask-2.png' ) top left / cover;
-            }
+            // &:nth-of-type( even ) {
+            //     mask: url( '../../images/mask-2.png' ) top left / cover;
+            // }
         }
 
         h2 {

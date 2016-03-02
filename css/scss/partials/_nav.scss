@@ -40,7 +40,7 @@ $nav-height: 40px;
         + .nav-screen {
             background: rgba( darken( $primary, 70% ), 0.5 );
             z-index: 8;
-            transition: background 0.5s 0.25s ease, z-index 0.15s ease;
+            transition: background 0.5s 0.25s ease, z-index 0.15s step-start;
         }
     }
 
@@ -50,9 +50,10 @@ $nav-height: 40px;
         right: 0;
         bottom: 0;
         left: 0;
+        height: 300%;   // To prevent seeing the edge when scrolling to dismiss
         background: rgba( 0, 0, 0, 0 );
         z-index: -1;
-        transition: background 0.2s 0 ease, z-index 0.15s ease;
+        transition: background 0.2s 0 ease, z-index 0.15s step-end;
     }
 
     .nav--light & {
