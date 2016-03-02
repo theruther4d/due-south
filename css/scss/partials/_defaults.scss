@@ -17,6 +17,7 @@ html {
     overflow-x: hidden;
     overflow-y: scroll;
     color: $text;
+    text-rendering: optimizeLegibility;
 }
 
 html,

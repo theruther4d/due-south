@@ -56,33 +56,6 @@ $nav-height: 40px;
         transition: background 0.2s 0 ease, z-index 0.15s step-end;
     }
 
-    .nav--light & {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 2;
-    }
-
-    &:before {
-        //content: '';
-        position: absolute;
-        width: 100%;
-        height: 10px;
-        top: 0;
-        right: 0;
-        left: 0;
-        background: $secondary;
-		clip-path: polygon( 0px 0px, 100% 0px, 100% 30%, 0px 70%);
-
-        .nav--light & {
-            display: none;
-        }
-
-        @include bp(768px) {
-            display: none;
-        }
-    }
-
     &__utilities {
         position: relative;
         height: 40px;
@@ -110,13 +83,37 @@ $nav-height: 40px;
                 .nav__utilities__item__icon {
                     width: 30px;
                 }
+
+                /*path*/.hamburger-line {
+                    transition: fill 0.5s 0.25s ease, transform 0.5s ease, opacity 0.5s ease !important;
+                    transform-style: preserve-3d;
+                    transform-origin: right center;
+
+                    .nav--open & {
+                        transition: fill 0.5s ease, transform 0.5s ease, opacity 0.5s ease !important;
+
+                        &-1 {
+                            transform: rotate( 45deg ) translate3d( 40px, 40px, 0 );
+                        }
+
+                        &-2 {
+                            transform: translate3d( -50px, 0, 0 );
+                            opacity: 0;
+                        }
+
+                        &-3 {
+                            transform: rotate( -45deg ) translate3d( 15px, 15px, 0 );
+                            transform-origin: left center;
+                        }
+
+                    }
+                }
             }
 
             &__link {
                 width: 100%;
                 height: 100%;
                 display: block;
-                //background: rgba( 255, 0, 0, 0.3 );
             }
 
             &__icon {
@@ -127,16 +124,24 @@ $nav-height: 40px;
                 bottom: 0;
                 left: 0;
                 margin: auto;
-                fill: #FFFFFF;
                 user-select: none;
                 pointer-events: none;
+                fill: $primary;
 
                 * {
                     transition: fill 0.5s 0.25s ease;
                 }
 
                 path {
+                    fill: $primary;
+                }
+
+                .nav--light & {
                     fill: #FFFFFF;
+
+                    path {
+                        fill: #FFFFFF;
+                    }
                 }
 
                 .nav--open & {
