@@ -2,9 +2,9 @@ $nav-height: 40px;
 
 .nav {
     width: 100%;
-    max-height: 53px;
+    max-height: 64px;
     overflow: hidden;
-    padding: 6px 0 0;
+    padding: 6px 0;
     position: absolute;
     background: transparent;
     top: 0;
@@ -57,17 +57,17 @@ $nav-height: 40px;
     }
 
     &__utilities {
-        position: relative;
-        height: 40px;
         @include contentContainer();
+        position: relative;
+        height: 52px;
 
         &__item {
             display: block;
             position: absolute;
             top: 0;
             bottom: 0;
-            width: 40px;
-            height: 40px;
+            width: 52px;
+            height: 52px;
 
             &--logo {
                 left: 10px;
@@ -78,13 +78,19 @@ $nav-height: 40px;
             }
 
             &--logo-text {
-                top: 10px;
+                top: 8px;
                 right: 0;
+                bottom: 0;
                 left: 0;
                 margin: auto;
-                width: 80px;
+                width: 130px;
+                fill: $text !important;
 
-                .nav__utilities__item__icon {
+                .nav--light & {
+                    fill: #FFFFFF !important;
+                }
+
+                .nav--open & {
                     fill: $text !important;
                 }
             }
