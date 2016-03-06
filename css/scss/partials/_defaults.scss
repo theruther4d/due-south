@@ -14,8 +14,10 @@ html {
     -webkit-font-smoothing: antialiased;
     font-size: 62.5%;
     height: 100%;
+    // height: 100%;
     overflow-x: hidden;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     color: $text;
     text-rendering: optimizeLegibility;
 }
@@ -23,10 +25,11 @@ html {
 html,
 body {
     width: 100%;
-    -webkit-overflow-scrolling: touch;
 }
 
 body {
+    position: relative;
+    overflow: hidden;
     background: #FFFFFF;
 }
 
@@ -60,7 +63,7 @@ body {
 }
 
 /*main*/.home {
-    padding-bottom: 100px;
+    // padding-bottom: 100px;
 }
 
 strong {

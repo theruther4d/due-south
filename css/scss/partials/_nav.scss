@@ -50,6 +50,7 @@ $nav-height: 40px;
         right: 0;
         bottom: 0;
         left: 0;
+        width: 100%;
         height: 300%;   // To prevent seeing the edge when scrolling to dismiss
         background: rgba( 0, 0, 0, 0 );
         z-index: -1;
@@ -73,7 +74,7 @@ $nav-height: 40px;
                 left: 10px;
 
                 svg {
-                    width: 24px;
+                    width: 22px;
                 }
             }
 
@@ -99,7 +100,7 @@ $nav-height: 40px;
             &--hamburger {
                 right: 12px;
 
-                .nav__utilities__item__icon {
+                svg {
                     width: 30px;
                 }
 
