@@ -13,10 +13,10 @@
         flex-direction: row;
         overflow: hidden;
         position: relative;
-        clip-path: polygon( 0 0, 100% 0, 70% 100%, 0 100% );
+        mask: url( '../images/article-mask-1.png' ) center center / 100% 100% no-repeat;
 
         .article-block:nth-of-type( even ) & {
-            clip-path: polygon( 0 0, 100% 0, 100% 100%, 30% 100% );
+            mask: url( '../images/article-mask-2.png' ) center center / 100% 100% no-repeat;
         }
     }
 
