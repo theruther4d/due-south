@@ -1,9 +1,11 @@
-var imgix = require( './imgix' );
-var FastClick = require( './fastClick' );
+import imgix from './imgix';
+import attachFastclick from 'fastClick';
+import ScrollMonitor from './ScrollMonitor';
 
 var Main = ( function() {
     return {
         init: function() {
+            window.scrollMonitor = new ScrollMonitor();
             var nav = document.querySelector( '.nav' );
             var hamburger = document.querySelector( '.nav__utilities__item--hamburger' );
             // var navScreen = document.querySelector( '.nav-screen' );
@@ -34,7 +36,7 @@ var Main = ( function() {
 
             document.addEventListener( 'DOMContentLoaded', function( e ) {
                 // Attach FastClick:
-                FastClick.attach( document.body );
+                attachFastclick( document.body );
 
                 // Do stuff with the images:
                 var images = new imgix();

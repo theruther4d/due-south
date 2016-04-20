@@ -10,12 +10,16 @@
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.4.5",
+    "babel-plugin-syntax-object-rest-spread": "^6.5.0",
+    "babel-plugin-transform-object-rest-spread": "^6.6.5",
     "babel-preset-es2015": "^6.3.13",
+    "babelify": "^7.2.0",
     "browser-sync": "^2.11.1",
     "browserify": "^13.0.0",
     "cheerio": "^0.20.0",
     "del": "^2.2.0",
     "ejs": "^2.4.1",
+    "fastclick": "^1.0.6",
     "gm": "^1.21.1",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
@@ -27,6 +31,11 @@
     "node-resemble-js": "0.0.5",
     "prismic-static": "0.0.2",
     "request": "^2.69.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "dependencies": {
+    "gulp-babel": "^6.1.2"
   }
 }
