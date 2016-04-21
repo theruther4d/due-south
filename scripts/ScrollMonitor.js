@@ -12,6 +12,10 @@ class ScrollMonitor extends Emitter {
         this._bindScroll();
     }
 
+    get scrollY() {
+        return this._lastScroll;
+    }
+
     _bindScroll() {
         window.addEventListener( 'scroll', this._onScroll.bind( this ), false );
     }
@@ -31,7 +35,6 @@ class ScrollMonitor extends Emitter {
 
     _update() {
         this._ticking = false;
-        console.log( `scrolling: ${this._lastScroll}` );
         this.trigger( 'update', this._lastScroll );
     }
 

@@ -1,12 +1,16 @@
 import imgix from './imgix';
 import attachFastclick from 'fastClick';
 import ScrollMonitor from './ScrollMonitor';
+import ScrollMonitorItem from './ScrollMonitorItem';
 
 var Main = ( function() {
     return {
         init: function() {
             window.scrollMonitor = new ScrollMonitor();
             var nav = document.querySelector( '.nav' );
+            var navMonitor = new ScrollMonitorItem( document.querySelector( '.featured-article + .homepage-article-header' ), scrollMonitor, ( scrollY ) => {
+                console.log( 'ScrollMonitorItem scrollY!', scrollY );
+            });
             var hamburger = document.querySelector( '.nav__utilities__item--hamburger' );
             // var navScreen = document.querySelector( '.nav-screen' );
             var navOpen = false;
@@ -27,7 +31,7 @@ var Main = ( function() {
             function closeNavOnScroll( e ) {
                 e.preventDefault();
 
-                console.log( 'closeNavOnScroll' );
+                // console.log( 'closeNavOnScroll' );
                 nav.classList.remove( 'nav--open' );
                 navOpen = false;
 
