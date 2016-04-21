@@ -1,48 +1,41 @@
 import imgix from './imgix';
 import attachFastclick from 'fastClick';
 import ScrollMonitor from './ScrollMonitor';
-import ScrollMonitorItem from './ScrollMonitorItem';
 
 var Main = ( function() {
     return {
-        init: function() {
+        init: () => {
             window.scrollMonitor = new ScrollMonitor();
-            var nav = document.querySelector( '.nav' );
-            var navMonitor = new ScrollMonitorItem( document.querySelector( '.featured-article + .homepage-article-header' ), scrollMonitor, ( scrollY ) => {
-                console.log( 'ScrollMonitorItem scrollY!', scrollY );
+            const nav = document.querySelector( '.nav' );
+            const hamburger = document.querySelector( '.nav__utilities__item--hamburger' );
+            const parallax = document.querySelector( '#VqqoSyQAAJ0ddSja img.article-block__image' );
+            let navOpen = false;
+            const articleImages = Array.from( document.querySelectorAll( 'img.article-block__image' ) );
+
+            articleImages.forEach( ( image ) => {
+                scrollMonitor.addItem( image, -50, 50, ( progress ) => {
+                    image.style.transform = `translate3d( 0, ${progress}px, 0 )`;
+                });
             });
-            var hamburger = document.querySelector( '.nav__utilities__item--hamburger' );
-            // var navScreen = document.querySelector( '.nav-screen' );
-            var navOpen = false;
 
-            hamburger.addEventListener( 'click', function( e ) {
+            hamburger.addEventListener( 'click', ( e ) => {
                 e.preventDefault();
-
                 navOpen = !navOpen;
-
-                var navClass = navOpen ? 'add' : 'remove';
-                var eventName = navOpen ? 'addEventListener' : 'removeEventListener';
-                // console.log( eventName );
+                const navClass = navOpen ? 'add' : 'remove';
+                const eventName = navOpen ? 'addEventListener' : 'removeEventListener';
                 nav.classList[navClass]( 'nav--open' );
-
                 window[eventName]( 'scroll', closeNavOnScroll );
             });
 
             function closeNavOnScroll( e ) {
                 e.preventDefault();
-
-                // console.log( 'closeNavOnScroll' );
                 nav.classList.remove( 'nav--open' );
                 navOpen = false;
-
                 window.removeEventListener( 'scroll', closeNavOnScroll );
             };
 
             document.addEventListener( 'DOMContentLoaded', function( e ) {
-                // Attach FastClick:
                 attachFastclick( document.body );
-
-                // Do stuff with the images:
                 var images = new imgix();
                 images._init();
             }, false );

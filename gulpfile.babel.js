@@ -238,13 +238,18 @@ gulp.task( 'img', () => {
         .pipe( gulp.dest( './_build/images/' ) );
 });
 
+gulp.task( 'workers', () => {
+    return gulp.src( './workers/*.js' )
+        .pipe( gulp.dest( './_build/workers' ) );
+});
+
 gulp.task( 'clean', () => {
     del( './_build' );
 });
 
-gulp.task( 'default', ['clean', 'collections', 'tags', 'src', 'scripts', 'css', 'img'] );
+gulp.task( 'default', ['clean', 'collections', 'tags', 'src', 'scripts', 'css', 'img', 'workers'] );
 
-gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts', 'img'], () => {
+gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts', 'img', 'workers'], () => {
   browserSync.init({
     server: { baseDir: './_build' },
     open: false,
@@ -256,6 +261,7 @@ gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts', 'img'], () 
   gulp.watch( "./src/**/*", ['src'] );
   gulp.watch( "./scripts/**/*", ['scripts'] );
   gulp.watch( "./images/**/*", ['img'] );
+  gulp.watch( "./workers/**.js", ['workers'] );
 
   gulp.watch( "./_build/**/*!(*.css)" ).on( 'change', browserSync.reload );
 });

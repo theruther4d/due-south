@@ -2,7 +2,7 @@
     var featuredImage = makeImgix( doc.getImage( 'articles.featured-image' ).main.url );
 %>
 
-<article class="article-block">
+<article class="article-block" id="<%= doc.id %>">
     <div class="article-block__image-wrapper">
         <img class="article-block__image" src="<%= featuredImage %>" alt="" />
     </div>
