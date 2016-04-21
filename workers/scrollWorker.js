@@ -45,6 +45,8 @@ function update( scrollY ) {
             return;
         }
 
+        console.log( `item ${id} in view` );
+
         var normalized = scrollY < item.topBound ? item.topBound : scrollY;
         normalized = scrollY > item.bottomBound ? item.bottomBound : scrollY;
         var delta = ( normalized - item.topBound ) / ( item.bottomBound - item.topBound );

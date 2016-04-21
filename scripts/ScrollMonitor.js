@@ -13,6 +13,7 @@ class ScrollMonitor extends Emitter {
         this._bindScroll();
         this._createWorker()
         this._items = {};
+        this._update( window.scrollY );
     }
 
     /**

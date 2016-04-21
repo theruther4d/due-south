@@ -1,22 +1,27 @@
 import imgix from './imgix';
 import attachFastclick from 'fastClick';
 import ScrollMonitor from './ScrollMonitor';
+import ParallaxVideo from './ParallaxVideo';
 
 var Main = ( function() {
     return {
-        init: () => {
+        init: function() {
             window.scrollMonitor = new ScrollMonitor();
+
+            this.video();
+            this.navSetup();
+            this.images();
+        },
+
+        video: function() {
+            console.log( 'creating ParallaxVideo' );
+            const splat = new ParallaxVideo( document.getElementById( 'videoCanvas' ), 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/2887672.mp4', scrollMonitor );
+        },
+
+        navSetup: function() {
             const nav = document.querySelector( '.nav' );
             const hamburger = document.querySelector( '.nav__utilities__item--hamburger' );
-            const parallax = document.querySelector( '#VqqoSyQAAJ0ddSja img.article-block__image' );
             let navOpen = false;
-            const articleImages = Array.from( document.querySelectorAll( 'img.article-block__image' ) );
-
-            articleImages.forEach( ( image ) => {
-                scrollMonitor.addItem( image, -50, 50, ( progress ) => {
-                    image.style.transform = `translate3d( 0, ${progress}px, 0 )`;
-                });
-            });
 
             hamburger.addEventListener( 'click', ( e ) => {
                 e.preventDefault();
@@ -33,7 +38,9 @@ var Main = ( function() {
                 navOpen = false;
                 window.removeEventListener( 'scroll', closeNavOnScroll );
             };
+        },
 
+        images: function() {
             document.addEventListener( 'DOMContentLoaded', function( e ) {
                 attachFastclick( document.body );
                 var images = new imgix();

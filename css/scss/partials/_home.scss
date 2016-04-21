@@ -1,3 +1,14 @@
 /*main*/.home {
     padding-top: 40px;
 }
+
+/*ul*/.articles {
+    position: relative;
+}
+
+#videoCanvas {
+    position: absolute;
+    top: 0;
+    right: -300px;
+    z-index: -2;
+}
