@@ -1,15 +1,7 @@
 <%- include( '../templates/partials/header.ejs' ); %>
 
-    <main class="home">
+    <main class="home" style="font-size: 0;">
         <% for( var i = 0; i < 99; i++ ) { %>
-            <% if( i === 0 ) { %>
-                <div class="row" style="border: 5px solid green; font-size: 0;">
-            <% } else if( i % 3 === 0 ) { %>
-                </div>
-                <div class="row" style="border: 5px solid green; font-size: 0;">
-            <% } else if( i === 99 ) { %>
-                </div>
-            <% }%>
             <span style="width: 33.33%; display: inline-block; text-align: center; height: 200px; line-height: 200px; font-size: 24px; border: 1px solid blue;" class="testVideoCanvas" id='<%= i + 1 %>'><%= i + 1 %></span>
         <% } %>
     </main>

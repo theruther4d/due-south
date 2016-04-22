@@ -32,7 +32,9 @@ class ParallaxVideo {
             // this._ctx.fillStyle = gradient;
 
             // console.log( 'parallaxVideo adding item' );
+            console.log( 'will add item' );
             this._scrollMonitor.addItem( this._canvas, 0, this.duration * 1000, ( progress ) => {
+                console.log( 'adding item!' );
                 // @TODO: SOMETHING IN HERE IS CAUSING THE ISSUE
                 let position = progress / 1000;
                 position = position > this.duration * 1000 ? this.duration * 1000 : position;
@@ -41,7 +43,7 @@ class ParallaxVideo {
                 if( this._node.currentTime === position ) {
                     return;
                 }
-                console.log( 'position: ', position );
+                // console.log( 'position: ', position );
                 // this._node.currentTime = progress / 1000;
                 this._node.currentTime = position;
                 this._ctx.drawImage( this._node, 0, 0, this.width, this.height );

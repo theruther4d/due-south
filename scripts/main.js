@@ -16,10 +16,11 @@ var Main = ( function() {
 
         testVideos: function() {
             const canvases = Array.from( document.querySelectorAll( '.testVideoCanvas' ) );
-            // const vidSrc = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/2887672.mp4';
+            const vidSrc = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/2887672.mp4';
             //
             canvases.forEach( ( canvas, idx ) => {
                 scrollMonitor.addItem( canvas, 0, 1000, ( progress ) => {
+                    // console.log( 'onmessage callback: ', progress / 1000 );
                     canvas.style.backgroundColor = `rgba( 255, 0, 0, ${progress / 1000})`;
                 });
                 // window[`testCanvas${idx + 1}`] = new ParallaxVideo( canvas, vidSrc, scrollMonitor );

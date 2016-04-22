@@ -9,6 +9,7 @@ onmessage = function( e ) {
     } else if( message.type === 'removeItem' ) {
         removeItem( message.item.id );
     } else if( message.type === 'update' ) {
+        console.log( `worker received update mandate with scrollY: ${message.scrollY}` );
         update( message.scrollY );
     } else if( message.type === 'windowHeight' ) {
         windowHeight = message.windowHeight;
@@ -27,6 +28,7 @@ function addItem( id, topBound, bottomBound, min, max ) {
         min: min,
         max: max
     };
+    console.log( items[id] );
 };
 
 function removeItem( id ) {

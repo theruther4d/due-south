@@ -12,8 +12,13 @@ class ScrollMonitor extends Emitter {
         this._ticking = false;
         this._bindScroll();
         this._createWorker()
+        // this.worker.onmessage = ( e ) => {
+            // console.log( 'PREMATURE MESSAGE RECEIVED' );
+            // console.log( e.data );
+        // };
         this._items = {};
-        this._update( window.scrollY );
+        // this._update( window.scrollY );
+        this._addUpdateTimer = false;
     }
 
     /**
@@ -23,10 +28,9 @@ class ScrollMonitor extends Emitter {
      * @param { number } max - The highest possible callback value (when the item is just about to leave the viewport).
      * @param { function } callBack - Executed when the scroll position has changed, while the item is still in the viewport.
      */
-    addItem( el, min = 0, max = 1, callBack ) {
+    addItem( el,  min = 0, max = 1, callBack ) {
         const itemId = performance.now();
-        this._items[itemId] = new ScrollMonitorItem( itemId, el, callBack );
-        // console.log( 'add item called' );
+        this._items[itemId] = new ScrollMonitorItem( itemId, el, scrollY, callBack );
 
         if( this.workerSupported ) {
             this._items[itemId].on( 'ready', () => {
@@ -40,6 +44,15 @@ class ScrollMonitor extends Emitter {
                         max: max
                     }
                 });
+
+                if( this._addUpdateTimer ) {
+                    clearTimeout( this._addUpdateTimer );
+                }
+
+                this._addUpdateTimer = setTimeout( () => {
+                    this._onScroll();
+                    // this._update();
+                }, 0 );
             });
         }
     }
@@ -66,6 +79,7 @@ class ScrollMonitor extends Emitter {
             type: 'windowHeight',
             windowHeight: BrowserWindow.height
         });
+
     }
 
     /**
@@ -79,7 +93,6 @@ class ScrollMonitor extends Emitter {
      * Executed inside the scroll handler.
      */
     _onScroll() {
-        this._lastScroll = window.scrollY;
         this.worker.postMessage({
             type: 'update',
             scrollY: this._lastScroll
@@ -92,7 +105,9 @@ class ScrollMonitor extends Emitter {
      */
     _requestTick() {
         if( !this._ticking ) {
+            // console.log( '- - - - - RAF - - - - -' );
             requestAnimationFrame( this._update.bind( this ) );
+            // console.log( '/- - - - - RAF - - - - -/' );
         }
 
         this._ticking = true;
@@ -102,18 +117,26 @@ class ScrollMonitor extends Emitter {
      * The actual work that gets done. Fires when scrolling and during an animation frame.
      */
     _update() {
+        this._lastScroll = window.scrollY;
+        // console.log( '- - - - - RAF - - - - -' );
         // console.log( 'updated' );
         this._ticking = false;
 
         this.worker.onmessage = ( e ) => {
-            if( !this._items.hasOwnProperty( e.data.id ) ) {
-                return;
-            }
+            // console.log( 'SCROLLMONITOR RECEIVED MESSAGE FROM WORKER' );
+            // if( !this._items.hasOwnProperty( e.data.id ) ) {
+                // console.log( 'bailing, no data' );
+                // return;
+            // }
+
+            // console.log( 'worker.onmessage progress: ', e.data.progress );
 
             this._items[e.data.id].trigger( 'update', e.data.progress );
         }
 
         this.trigger( 'update', this._lastScroll );
+        // console.log( `triggering update with ${this._lastScroll}` );
+        // console.log( '- - - - - /RAF - - - - -' );
     }
 
     /**
@@ -124,6 +147,7 @@ class ScrollMonitor extends Emitter {
         this._ticking = null;
         this._items = null;
         this.workerSupported = null;
+        this._addUpdateTimer = null;
         window.removeEventListener( 'scroll', this._onScroll.bind( this ), false );
     }
 };

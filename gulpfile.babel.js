@@ -6,7 +6,7 @@ import ejs from 'gulp-ejs';
 import del from 'del';
 import prismicStatic from 'prismic-static';
 import ImgixClient from 'imgix-core-js';
-import browserSync from 'browser-sync';
+// import browserSync from 'browser-sync';
 import scss from 'gulp-sass';
 import prefix from 'gulp-autoprefixer';
 import cssMin from 'gulp-minify-css';
@@ -21,7 +21,7 @@ import fs from 'fs';
 import gm from 'gm';
 
 const prismic = new prismicStatic( 'https://due-south.cdn.prismic.io/api' );
-browserSync.create();
+// browserSync.create();
 
 // Path Variables:
 const templateDir = './templates';
@@ -229,8 +229,8 @@ gulp.task( 'css', () => {
         .pipe( prefix( ['last 2 version', '> 1%', 'ie 8', 'ie 7', 'Firefox > 15'], { cascade: true } ) )
         .pipe( cssMin() )
         .pipe( rename( 'style.css' ) )
-        .pipe( gulp.dest( './_build/' ) )
-        .pipe( browserSync.stream() );
+        .pipe( gulp.dest( './_build/' ) );
+        // .pipe( browserSync.stream() );
 });
 
 gulp.task( 'img', () => {
@@ -250,11 +250,11 @@ gulp.task( 'clean', () => {
 gulp.task( 'default', ['clean', 'collections', 'tags', 'src', 'scripts', 'css', 'img', 'workers'] );
 
 gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts', 'img', 'workers'], () => {
-  browserSync.init({
-    server: { baseDir: './_build' },
-    open: false,
-    notify: false
-  });
+  // browserSync.init({
+  //   server: { baseDir: './_build' },
+  //   open: false,
+  //   notify: false
+  // });
 
   gulp.watch( "./css/scss/**/*", ['css'] );
   gulp.watch( "./templates/**/*", ['collections', 'tags'] );
@@ -263,5 +263,5 @@ gulp.task( 'serve', ['css', 'collections', 'tags', 'src', 'scripts', 'img', 'wor
   gulp.watch( "./images/**/*", ['img'] );
   gulp.watch( "./workers/**.js", ['workers'] );
 
-  gulp.watch( "./_build/**/*!(*.css)" ).on( 'change', browserSync.reload );
+  // gulp.watch( "./_build/**/*!(*.css)" ).on( 'change', browserSync.reload );
 });

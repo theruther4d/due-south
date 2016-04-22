@@ -7,12 +7,13 @@ import Emitter from './Emitter';
  * @param callBack { function } - Fired when the element is in the viewport. Passed a number between 0 & 1 representing the progress of the scroll range.
  */
 class ScrollMonitorItem extends Emitter {
-    constructor( id, el, callBack ) {
+    constructor( id, el, scrollY, callBack ) {
         super();
         this._id = id;
         this._el = el;
         this._callBack = callBack;
         this._windowHeight = BrowserWindow.height;
+        this._scrollY = scrollY;
         requestAnimationFrame( this._getDimensions.bind( this ) );
         this.on( 'update', this._update.bind( this ) );
     }
@@ -22,8 +23,9 @@ class ScrollMonitorItem extends Emitter {
      */
     _getDimensions() {
         const dimensions = this._el.getBoundingClientRect();
-        this._topBound = dimensions.top - this._windowHeight;
+        this._topBound = dimensions.top + this._scrollY - this._windowHeight;
         this._bottomBound = dimensions.bottom;
+        // console.log( { top: this._topBound, bottom: this._bottomBound } );
         this.trigger( 'ready' );
     }
 
