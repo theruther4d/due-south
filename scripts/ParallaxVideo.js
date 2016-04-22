@@ -5,23 +5,31 @@ class ParallaxVideo {
         this._node = document.createElement( 'video' );
         this._src = url;
         this._scrollMonitor = scrollMonitor;
+        this._hasInitted = false;
 
         this._addVideoListeners( this._node );
         this._node.setAttribute( 'src', this._src );
-        console.log( 'created parallaxVideo' );
+        // console.log( 'created parallaxVideo' );
+        // console.log( this );
     }
 
     _addVideoListeners( video ) {
-        console.log( 'addVideoListners called' );
+        // console.log( 'addVideoListners called' );
         this._node.addEventListener( 'canplay', () => {
-            console.log( 'canplay' );
-            this._ctx.globalCompositeOperation = 'lighter';
+            if( this._hasInitted ) {
+                return;
+            }
 
-            const largestSide = Math.max( this.width, this.height );
-            const gradient = this._ctx.createRadialGradient( this.width / 2, this.height / 2, largestSide, largestSide, largestSide, 0 );
-            gradient.addColorStop( 0, '#2bff93' );
-            gradient.addColorStop( 1, '#bef4d9' );
-            this._ctx.fillStyle = gradient;
+            this._hasInitted = true;
+            // document.querySelector( 'ul.articles' ).insertBefore( this._node, this._canvas );
+            // console.log( 'canplay' );
+            // this._ctx.globalCompositeOperation = 'lighter';
+            //
+            // const largestSide = Math.max( this.width, this.height );
+            // const gradient = this._ctx.createRadialGradient( this.width / 2, this.height / 2, largestSide, largestSide, largestSide, 0 );
+            // gradient.addColorStop( 0, '#2bff93' );
+            // gradient.addColorStop( 1, '#bef4d9' );
+            // this._ctx.fillStyle = gradient;
 
             // console.log( 'parallaxVideo adding item' );
             this._scrollMonitor.addItem( this._canvas, 0, this.duration * 1000, ( progress ) => {
@@ -33,15 +41,16 @@ class ParallaxVideo {
                 if( this._node.currentTime === position ) {
                     return;
                 }
-                // console.log( 'position: ', position );
+                console.log( 'position: ', position );
                 // this._node.currentTime = progress / 1000;
                 this._node.currentTime = position;
                 this._ctx.drawImage( this._node, 0, 0, this.width, this.height );
-                this._ctx.fillRect( 0, 0, this.width, this.height );
+                // this._ctx.fillRect( 0, 0, this.width, this.height );
             });
         });
 
         this._node.addEventListener( 'loadedmetadata', () => {
+            // console.log( 'metadata loaded' );
             this.width = this._node.videoWidth;
             this.height = this._node.videoHeight;
             this._canvas.width = this.width;
@@ -59,6 +68,7 @@ class ParallaxVideo {
         this.height = null;
         this.progress = null;
         this._scrollMonitor = null;
+        this._hasInitted = null;
     }
 };
 

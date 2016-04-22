@@ -24,8 +24,9 @@ class ScrollMonitor extends Emitter {
      * @param { function } callBack - Executed when the scroll position has changed, while the item is still in the viewport.
      */
     addItem( el, min = 0, max = 1, callBack ) {
-        const itemId = Date.now();
+        const itemId = performance.now();
         this._items[itemId] = new ScrollMonitorItem( itemId, el, callBack );
+        // console.log( 'add item called' );
 
         if( this.workerSupported ) {
             this._items[itemId].on( 'ready', () => {
@@ -79,6 +80,10 @@ class ScrollMonitor extends Emitter {
      */
     _onScroll() {
         this._lastScroll = window.scrollY;
+        this.worker.postMessage({
+            type: 'update',
+            scrollY: this._lastScroll
+        });
         this._requestTick();
     }
 
@@ -97,11 +102,8 @@ class ScrollMonitor extends Emitter {
      * The actual work that gets done. Fires when scrolling and during an animation frame.
      */
     _update() {
+        // console.log( 'updated' );
         this._ticking = false;
-        this.worker.postMessage({
-            type: 'update',
-            scrollY: this._lastScroll
-        });
 
         this.worker.onmessage = ( e ) => {
             if( !this._items.hasOwnProperty( e.data.id ) ) {

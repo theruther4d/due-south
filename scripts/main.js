@@ -8,14 +8,27 @@ var Main = ( function() {
         init: function() {
             window.scrollMonitor = new ScrollMonitor();
 
-            this.video();
-            this.navSetup();
-            this.images();
+            // this.video();
+            // this.navSetup();
+            // this.images();
+            this.testVideos();
+        },
+
+        testVideos: function() {
+            const canvases = Array.from( document.querySelectorAll( '.testVideoCanvas' ) );
+            // const vidSrc = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/2887672.mp4';
+            //
+            canvases.forEach( ( canvas, idx ) => {
+                scrollMonitor.addItem( canvas, 0, 1000, ( progress ) => {
+                    canvas.style.backgroundColor = `rgba( 255, 0, 0, ${progress / 1000})`;
+                });
+                // window[`testCanvas${idx + 1}`] = new ParallaxVideo( canvas, vidSrc, scrollMonitor );
+            });
         },
 
         video: function() {
             console.log( 'creating ParallaxVideo' );
-            const splat = new ParallaxVideo( document.getElementById( 'videoCanvas' ), 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/2887672.mp4', scrollMonitor );
+            window.splat = new ParallaxVideo( document.getElementById( 'videoCanvas' ), 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/2887672.mp4', scrollMonitor );
         },
 
         navSetup: function() {

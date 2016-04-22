@@ -20,6 +20,7 @@ function hasItem( id ) {
 };
 
 function addItem( id, topBound, bottomBound, min, max ) {
+    console.log( 'add Item received' );
     items[id] = {
         topBound: topBound,
         bottomBound: bottomBound,
@@ -45,7 +46,7 @@ function update( scrollY ) {
             return;
         }
 
-        console.log( `item ${id} in view` );
+        // console.log( `item ${id} in view` );
 
         var normalized = scrollY < item.topBound ? item.topBound : scrollY;
         normalized = scrollY > item.bottomBound ? item.bottomBound : scrollY;
