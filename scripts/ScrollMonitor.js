@@ -60,9 +60,9 @@ class ScrollMonitor extends Emitter {
     /**
      * Returns the current scroll position.
      */
-    get scrollY() {
-        return this._lastScroll;
-    }
+    // get scrollY() {
+    //     return this._lastScroll;
+    // }
 
     /**
      * Creates a worker to handle scroll monitoring (if possible).
@@ -80,6 +80,22 @@ class ScrollMonitor extends Emitter {
             windowHeight: BrowserWindow.height
         });
 
+        this.worker.onmessage = ( e ) => {
+            const message = e.data;
+            const type = message.type;
+
+            if( type === 'itemEnter' ) {
+                console.log( 'item ENTERING' );
+            } else if( type === 'itemCenter' ) {
+                console.log( 'item CENTERED' );
+            } else if( type === 'itemExit' ) {
+                console.log( 'item EXITING' );
+            } else if( type === 'itemInView' ) {
+                this._items[message.id].trigger( 'update', message.progress );
+            }
+
+        }
+
     }
 
     /**
@@ -92,11 +108,8 @@ class ScrollMonitor extends Emitter {
     /**
      * Executed inside the scroll handler.
      */
-    _onScroll() {
-        this.worker.postMessage({
-            type: 'update',
-            scrollY: this._lastScroll
-        });
+    _onScroll( e ) {
+        this._lastScroll = window.scrollY;
         this._requestTick();
     }
 
@@ -117,22 +130,17 @@ class ScrollMonitor extends Emitter {
      * The actual work that gets done. Fires when scrolling and during an animation frame.
      */
     _update() {
-        this._lastScroll = window.scrollY;
+        // this._lastScroll = window.scrollY;
         // console.log( '- - - - - RAF - - - - -' );
         // console.log( 'updated' );
         this._ticking = false;
 
-        this.worker.onmessage = ( e ) => {
-            // console.log( 'SCROLLMONITOR RECEIVED MESSAGE FROM WORKER' );
-            // if( !this._items.hasOwnProperty( e.data.id ) ) {
-                // console.log( 'bailing, no data' );
-                // return;
-            // }
+        this.worker.postMessage({
+            type: 'update',
+            scrollY: this._lastScroll
+        });
 
-            // console.log( 'worker.onmessage progress: ', e.data.progress );
-
-            this._items[e.data.id].trigger( 'update', e.data.progress );
-        }
+        // console.log( 'updating' );
 
         this.trigger( 'update', this._lastScroll );
         // console.log( `triggering update with ${this._lastScroll}` );

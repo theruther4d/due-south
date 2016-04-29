@@ -8,6 +8,37 @@ $text: darken( $primary, 60% );
     box-sizing: border-box;
 }
 
+.testVideoCanvas {
+    width: 33.33%;
+    display: block;
+    text-align: center;
+    height: 200px;
+    line-height: 200px;
+    font-size: 24px;
+    background: blue;
+    // transition: transform 0.1s ease;
+    // border: 1px solid blue;
+    position: absolute;
+    top: 0;
+
+    &:first-of-type {
+        left: 0;
+    }
+
+    &:nth-of-type( 2 ) {
+        left: 33.33%;
+    }
+
+    &:nth-of-type( 3 ) {
+        left: 66.66%;
+    }
+}
+
+.test-wrapper {
+    position: relative;
+    height: 200px;
+}
+
 html {
     font-family: "myriad-pro", sans-serif;
     font-weight: 400;

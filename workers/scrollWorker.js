@@ -9,7 +9,6 @@ onmessage = function( e ) {
     } else if( message.type === 'removeItem' ) {
         removeItem( message.item.id );
     } else if( message.type === 'update' ) {
-        console.log( `worker received update mandate with scrollY: ${message.scrollY}` );
         update( message.scrollY );
     } else if( message.type === 'windowHeight' ) {
         windowHeight = message.windowHeight;
@@ -21,14 +20,12 @@ function hasItem( id ) {
 };
 
 function addItem( id, topBound, bottomBound, min, max ) {
-    console.log( 'add Item received' );
     items[id] = {
         topBound: topBound,
         bottomBound: bottomBound,
         min: min,
         max: max
     };
-    console.log( items[id] );
 };
 
 function removeItem( id ) {
@@ -41,19 +38,51 @@ function removeItem( id ) {
 
 function update( scrollY ) {
     Object.keys( items ).forEach( function( id ) {
+        var fudge = 10;
         var item = items[id];
         var inView = ( scrollY + windowHeight ) >= item.topBound && scrollY <= item.bottomBound;
+        var itemEnter = scrollY + windowHeight >= item.topBound + fudge || scrollY + windowHeight >=item.topBound - fudge;
+        var itemExit = scrollY >= item.bottomBound + fudge || scrollY >= item.bottomBound - fudge;
+        var itemCenter = scrollY + windowHeight === ( item.topBound - item.bottomBound ) / 2;
 
         if( !inView ) {
             return;
         }
 
-        // console.log( `item ${id} in view` );
-
         var normalized = scrollY < item.topBound ? item.topBound : scrollY;
         normalized = scrollY > item.bottomBound ? item.bottomBound : scrollY;
         var delta = ( normalized - item.topBound ) / ( item.bottomBound - item.topBound );
         var progress = Math.round( ( delta * ( item.max - item.min ) ) + item.min );
+
+        if( itemEnter && !item.hasEntered ) {
+            item.hasEntered = true;
+
+            postMessage({
+                type: 'itemEnter',
+                id: id,
+                progress: progress
+            })
+        }
+
+        if( itemExit && !item.hasExited ) {
+            item.hasExited = true;
+
+            postMessage({
+                type: 'itemExit',
+                id: id,
+                progress: progress
+            });
+        }
+
+        if( itemCenter && !item.hasCentered ) {
+            item.hasCentered = true;
+
+            postMessage({
+                type: 'itemCenter',
+                id: id,
+                progress: progress
+            });
+        }
 
         postMessage({
             type: 'itemInView',
